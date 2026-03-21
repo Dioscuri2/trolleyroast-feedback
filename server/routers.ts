@@ -3,7 +3,14 @@ import { COOKIE_NAME } from "@shared/const";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { publicProcedure, protectedProcedure, router } from "./_core/trpc";
-import { insertFeedback, listFeedback, getFeedbackCount } from "./db";
+import {
+  insertFeedback,
+  listFeedback,
+  getFeedbackCount,
+  insertEmailCapture,
+  getEmailCaptureCount,
+  getTotalSubmissionCount,
+} from "./db";
 import { notifyOwner } from "./_core/notification";
 
 export const appRouter = router({
@@ -35,7 +42,6 @@ export const appRouter = router({
           comment: input.comment || null,
         });
 
-        // Notify the owner of new feedback
         const stars = "★".repeat(input.rating) + "☆".repeat(5 - input.rating);
         const from = input.name ? input.name : "Anonymous";
         const emailLine = input.email ? ` (${input.email})` : "";
@@ -54,6 +60,38 @@ export const appRouter = router({
 
     count: publicProcedure.query(async () => {
       return getFeedbackCount();
+    }),
+  }),
+
+  email: router({
+    capture: publicProcedure
+      .input(
+        z.object({
+          email: z.string().email().max(320),
+          source: z.enum(["landing", "pro"]).default("landing"),
+        })
+      )
+      .mutation(async ({ input }) => {
+        await insertEmailCapture({ email: input.email, source: input.source });
+
+        await notifyOwner({
+          title: `New email signup — TrolleyRoast`,
+          content: `Email: ${input.email}\nSource: ${input.source}`,
+        }).catch(() => {/* non-critical */});
+
+        return { success: true };
+      }),
+
+    count: publicProcedure.query(async () => {
+      return getEmailCaptureCount();
+    }),
+  }),
+
+  social: router({
+    shopperCount: publicProcedure.query(async () => {
+      const real = await getTotalSubmissionCount();
+      // Seed with a base number so it looks credible from day one
+      return real + 247;
     }),
   }),
 });

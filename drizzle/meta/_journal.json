@@ -15,6 +15,13 @@
       "when": 1774083354731,
       "tag": "0001_married_vampiro",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1774084004426,
+      "tag": "0002_old_giant_man",
+      "breakpoints": true
     }
   ]
 }

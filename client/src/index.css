@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
@@ -28,11 +28,7 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
+  --color-gold: var(--gold);
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -44,76 +40,52 @@
 }
 
 :root {
-  /* TrolleyRoast brand palette */
-  --radius: 0.65rem;
-  /* Cream background */
-  --background: oklch(96.5% 0.012 88);
-  --foreground: oklch(22% 0.04 160);
-  /* Card: slightly lighter cream */
-  --card: oklch(98.5% 0.007 88);
-  --card-foreground: oklch(22% 0.04 160);
-  --popover: oklch(98.5% 0.007 88);
-  --popover-foreground: oklch(22% 0.04 160);
-  /* Primary: forest green #1B3A2D */
-  --primary: oklch(28% 0.07 160);
-  --primary-foreground: oklch(97% 0.008 90);
-  /* Secondary: warm gold */
-  --secondary: oklch(93% 0.015 88);
-  --secondary-foreground: oklch(28% 0.07 160);
-  --muted: oklch(93% 0.01 88);
-  --muted-foreground: oklch(50% 0.025 150);
-  --accent: oklch(93% 0.01 88);
-  --accent-foreground: oklch(22% 0.04 160);
+  /* ── TrolleyRoast Design System ── */
+  --radius: 0.75rem;
+
+  /* Background: #FAF8F3 */
+  --background: oklch(98.2% 0.009 88);
+  /* Text: #1C1A17 */
+  --foreground: oklch(14.5% 0.012 65);
+
+  /* Card: slightly lighter than bg */
+  --card: oklch(99.5% 0.004 88);
+  --card-foreground: oklch(14.5% 0.012 65);
+  --popover: oklch(99.5% 0.004 88);
+  --popover-foreground: oklch(14.5% 0.012 65);
+
+  /* Primary: #1B3A2D forest green */
+  --primary: oklch(28.5% 0.072 160);
+  --primary-foreground: oklch(98.2% 0.009 88);
+
+  /* Secondary: warm tinted surface */
+  --secondary: oklch(94% 0.014 88);
+  --secondary-foreground: oklch(28.5% 0.072 160);
+
+  --muted: oklch(94% 0.01 88);
+  --muted-foreground: oklch(48% 0.022 150);
+
+  --accent: oklch(94% 0.01 88);
+  --accent-foreground: oklch(14.5% 0.012 65);
+
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(88% 0.018 88);
-  --input: oklch(88% 0.018 88);
-  --ring: oklch(28% 0.07 160);
-  /* Gold accent for stars */
-  --gold: oklch(72% 0.14 75);
-  --sidebar: oklch(96.5% 0.012 88);
-  --sidebar-foreground: oklch(22% 0.04 160);
-  --sidebar-primary: oklch(28% 0.07 160);
-  --sidebar-primary-foreground: oklch(97% 0.008 90);
-  --sidebar-accent: oklch(93% 0.01 88);
-  --sidebar-accent-foreground: oklch(22% 0.04 160);
-  --sidebar-border: oklch(88% 0.018 88);
-  --sidebar-ring: oklch(28% 0.07 160);
-}
 
-.dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.85 0.005 65);
-  --card: oklch(0.21 0.006 285.885);
-  --card-foreground: oklch(0.85 0.005 65);
-  --popover: oklch(0.21 0.006 285.885);
-  --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
-  --secondary-foreground: oklch(0.7 0.005 65);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
-  --destructive: oklch(0.704 0.191 22.216);
-  --destructive-foreground: oklch(0.985 0 0);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --border: oklch(89% 0.016 88);
+  --input: oklch(89% 0.016 88);
+  --ring: oklch(28.5% 0.072 160);
+
+  /* Gold: #C9A96E */
+  --gold: oklch(72% 0.12 75);
+
+  --sidebar: oklch(98.2% 0.009 88);
+  --sidebar-foreground: oklch(14.5% 0.012 65);
+  --sidebar-primary: oklch(28.5% 0.072 160);
+  --sidebar-primary-foreground: oklch(98.2% 0.009 88);
+  --sidebar-accent: oklch(94% 0.01 88);
+  --sidebar-accent-foreground: oklch(14.5% 0.012 65);
+  --sidebar-border: oklch(89% 0.016 88);
+  --sidebar-ring: oklch(28.5% 0.072 160);
 }
 
 @layer base {
@@ -122,7 +94,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-family: 'Outfit', ui-sans-serif, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   .font-display {
     font-family: 'Cormorant Garamond', Georgia, serif;
@@ -141,44 +115,28 @@
 }
 
 @layer components {
-  /**
-   * Custom container utility that centers content and adds responsive padding.
-   *
-   * This overrides Tailwind's default container behavior to:
-   * - Auto-center content (mx-auto)
-   * - Add responsive horizontal padding
-   * - Set max-width for large screens
-   *
-   * Usage: <div className="container">...</div>
-   *
-   * For custom widths, use max-w-* utilities directly:
-   * <div className="max-w-6xl mx-auto px-4">...</div>
-   */
   .container {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* 16px - mobile padding */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
-
   .flex {
     min-height: 0;
     min-width: 0;
   }
-
   @media (min-width: 640px) {
     .container {
-      padding-left: 1.5rem; /* 24px - tablet padding */
+      padding-left: 1.5rem;
       padding-right: 1.5rem;
     }
   }
-
   @media (min-width: 1024px) {
     .container {
-      padding-left: 2rem; /* 32px - desktop padding */
+      padding-left: 2rem;
       padding-right: 2rem;
-      max-width: 1280px; /* Standard content width */
+      max-width: 1280px;
     }
   }
 }

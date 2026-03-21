@@ -38,3 +38,13 @@ export const feedback = mysqlTable("feedback", {
 
 export type Feedback = typeof feedback.$inferSelect;
 export type InsertFeedback = typeof feedback.$inferInsert;
+
+export const emailCaptures = mysqlTable("email_captures", {
+  id: int("id").autoincrement().primaryKey(),
+  email: varchar("email", { length: 320 }).notNull(),
+  source: varchar("source", { length: 64 }).default("landing").notNull(), // 'landing' | 'pro'
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type EmailCapture = typeof emailCaptures.$inferSelect;
+export type InsertEmailCapture = typeof emailCaptures.$inferInsert;
