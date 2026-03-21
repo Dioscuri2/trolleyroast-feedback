@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "wouter";
-import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { CheckCircle2, Star, ArrowLeft } from "lucide-react";
+
+const SUPABASE_ENDPOINT =
+  "https://czmvyblgviwgczfzxhsr.supabase.co/functions/v1/submit-feedback";
 
 // ─── Star Rating ──────────────────────────────────────────────────────────────
 function StarRating({ value, onChange }: { value: number; onChange: (v: number) => void }) {
@@ -67,7 +69,11 @@ function ThankYou({ rating, onReset }: { rating: number; onReset: () => void }) 
           Your feedback helps us make TrolleyRoast better for everyone. We genuinely appreciate you taking the time.
         </p>
       </div>
-      <div className="text-2xl tracking-widest" style={{ color: "#C9A96E" }} aria-label={`You rated ${rating} out of 5 stars`}>
+      <div
+        className="text-2xl tracking-widest"
+        style={{ color: "#C9A96E" }}
+        aria-label={`You rated ${rating} out of 5 stars`}
+      >
         {stars}
       </div>
       <button
@@ -87,37 +93,72 @@ export default function FeedbackPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [comment, setComment] = useState("");
+  const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submittedRating, setSubmittedRating] = useState(0);
 
-  const submitMutation = trpc.feedback.submit.useMutation({
-    onSuccess: () => {
-      setSubmittedRating(rating);
-      setSubmitted(true);
-    },
-    onError: () => {
-      toast.error("Something went wrong. Please try again.");
-    },
-  });
-
   function handleReset() {
-    setRating(0); setName(""); setEmail(""); setComment("");
-    setSubmitted(false); setSubmittedRating(0);
+    setRating(0);
+    setName("");
+    setEmail("");
+    setComment("");
+    setSubmitted(false);
+    setSubmittedRating(0);
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (rating === 0) { toast.error("Please select a star rating before submitting."); return; }
-    submitMutation.mutate({ rating, name, email, comment });
+    if (rating === 0) {
+      toast.error("Please select a star rating before submitting.");
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch(SUPABASE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          rating,
+          feedback_text: comment,
+          name: name || null,
+          email: email || null,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      setSubmittedRating(rating);
+      setSubmitted(true);
+    } catch (err) {
+      console.error("Feedback submission error:", err);
+      toast.error(
+        "We couldn't send your feedback right now. Please check your connection and try again."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
     <div className="min-h-screen" style={{ background: "#FAF8F3" }}>
       {/* Header */}
-      <header className="sticky top-0 z-10 border-b" style={{ background: "rgba(250,248,243,0.9)", backdropFilter: "blur(8px)", borderColor: "#E8E2D6" }}>
+      <header
+        className="sticky top-0 z-10 border-b"
+        style={{
+          background: "rgba(250,248,243,0.9)",
+          backdropFilter: "blur(8px)",
+          borderColor: "#E8E2D6",
+        }}
+      >
         <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
           <Link href="/">
-            <button className="flex items-center gap-1.5 text-sm hover:opacity-70 transition-opacity" style={{ color: "#6B6860" }}>
+            <button
+              className="flex items-center gap-1.5 text-sm hover:opacity-70 transition-opacity"
+              style={{ color: "#6B6860" }}
+            >
               <ArrowLeft size={15} />
               Back
             </button>
@@ -127,7 +168,9 @@ export default function FeedbackPage() {
             TrolleyRoast
           </span>
           <span style={{ color: "#D4CFC6" }}>·</span>
-          <span className="text-sm font-medium" style={{ color: "#9B9790" }}>Feedback</span>
+          <span className="text-sm font-medium" style={{ color: "#9B9790" }}>
+            Feedback
+          </span>
         </div>
       </header>
 
@@ -135,23 +178,37 @@ export default function FeedbackPage() {
         <div className="w-full max-w-lg">
           {/* Context banner */}
           <div className="rounded-xl p-5 mb-7" style={{ background: "#1B3A2D" }}>
-            <h1 className="font-display text-xl sm:text-2xl font-semibold mb-1 leading-snug" style={{ color: "#FAF8F3" }}>
+            <h1
+              className="font-display text-xl sm:text-2xl font-semibold mb-1 leading-snug"
+              style={{ color: "#FAF8F3" }}
+            >
               What does your shop really cost?
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,243,0.75)" }}>
-              TrolleyRoast scans your receipt and instantly shows what the same basket costs at Tesco, Asda, Sainsbury's, Morrisons, Aldi, and Lidl — free. We're in early development and your feedback shapes what we build next.
+              TrolleyRoast scans your receipt and instantly shows what the same basket costs at
+              Tesco, Asda, Sainsbury's, Morrisons, Aldi, and Lidl — free. We're in early
+              development and your feedback shapes what we build next.
             </p>
           </div>
 
           {/* Form card */}
-          <div className="rounded-2xl overflow-hidden" style={{ background: "#FFFFFF", border: "1px solid #E8E2D6" }}>
+          <div
+            className="rounded-2xl overflow-hidden"
+            style={{ background: "#FFFFFF", border: "1px solid #E8E2D6" }}
+          >
             {submitted ? (
               <ThankYou rating={submittedRating} onReset={handleReset} />
             ) : (
               <form onSubmit={handleSubmit} noValidate>
                 {/* Star section */}
-                <div className="px-6 pt-7 pb-5 text-center" style={{ borderBottom: "1px solid #E8E2D6" }}>
-                  <h2 className="font-display text-2xl font-semibold mb-1" style={{ color: "#1C1A17" }}>
+                <div
+                  className="px-6 pt-7 pb-5 text-center"
+                  style={{ borderBottom: "1px solid #E8E2D6" }}
+                >
+                  <h2
+                    className="font-display text-2xl font-semibold mb-1"
+                    style={{ color: "#1C1A17" }}
+                  >
                     Share your experience
                   </h2>
                   <p className="text-sm mb-5" style={{ color: "#9B9790" }}>
@@ -163,8 +220,15 @@ export default function FeedbackPage() {
                 {/* Fields */}
                 <div className="px-6 py-5 flex flex-col gap-4">
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="comment" className="text-sm font-medium" style={{ color: "#1C1A17" }}>
-                      Your thoughts <span className="font-normal" style={{ color: "#9B9790" }}>(optional)</span>
+                    <Label
+                      htmlFor="comment"
+                      className="text-sm font-medium"
+                      style={{ color: "#1C1A17" }}
+                    >
+                      Your thoughts{" "}
+                      <span className="font-normal" style={{ color: "#9B9790" }}>
+                        (optional)
+                      </span>
                     </Label>
                     <Textarea
                       id="comment"
@@ -178,15 +242,27 @@ export default function FeedbackPage() {
                     />
                   </div>
 
-                  <div className="flex items-center gap-3" style={{ color: "rgba(155,151,144,0.5)" }}>
+                  <div className="flex items-center gap-3">
                     <div className="flex-1 h-px" style={{ background: "#E8E2D6" }} />
-                    <span className="text-xs uppercase tracking-widest" style={{ color: "#9B9790" }}>About you</span>
+                    <span
+                      className="text-xs uppercase tracking-widest"
+                      style={{ color: "#9B9790" }}
+                    >
+                      About you
+                    </span>
                     <div className="flex-1 h-px" style={{ background: "#E8E2D6" }} />
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="name" className="text-sm font-medium" style={{ color: "#1C1A17" }}>
-                      Name <span className="font-normal" style={{ color: "#9B9790" }}>(optional)</span>
+                    <Label
+                      htmlFor="name"
+                      className="text-sm font-medium"
+                      style={{ color: "#1C1A17" }}
+                    >
+                      Name{" "}
+                      <span className="font-normal" style={{ color: "#9B9790" }}>
+                        (optional)
+                      </span>
                     </Label>
                     <Input
                       id="name"
@@ -201,8 +277,15 @@ export default function FeedbackPage() {
                   </div>
 
                   <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="email" className="text-sm font-medium" style={{ color: "#1C1A17" }}>
-                      Email <span className="font-normal" style={{ color: "#9B9790" }}>(optional)</span>
+                    <Label
+                      htmlFor="email"
+                      className="text-sm font-medium"
+                      style={{ color: "#1C1A17" }}
+                    >
+                      Email{" "}
+                      <span className="font-normal" style={{ color: "#9B9790" }}>
+                        (optional)
+                      </span>
                     </Label>
                     <Input
                       id="email"
@@ -221,11 +304,11 @@ export default function FeedbackPage() {
 
                   <Button
                     type="submit"
-                    disabled={submitMutation.isPending}
+                    disabled={submitting}
                     className="w-full mt-1 h-11 text-sm font-semibold"
                     style={{ background: "#1B3A2D", color: "#FAF8F3" }}
                   >
-                    {submitMutation.isPending ? "Submitting…" : "Submit Feedback"}
+                    {submitting ? "Submitting…" : "Submit Feedback"}
                   </Button>
 
                   <p className="text-center text-xs pb-1" style={{ color: "#9B9790" }}>

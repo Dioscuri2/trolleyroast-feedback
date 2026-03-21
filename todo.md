@@ -26,3 +26,10 @@
 - [x] Build Social proof row with dynamic submission count
 - [x] Wire landing page route (separate from /feedback form)
 - [x] Write vitest tests for emailCapture procedure
+
+## Supabase Integration
+
+- [x] Update FeedbackPage to POST directly to Supabase endpoint (no tRPC)
+- [x] Remove tRPC feedback.submit dependency from frontend
+- [x] Keep owner notification on server side (optional, low priority)
+- [x] Verify test submission lands in Supabase
