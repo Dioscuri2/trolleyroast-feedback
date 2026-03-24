@@ -33,3 +33,16 @@
 - [x] Remove tRPC feedback.submit dependency from frontend
 - [x] Keep owner notification on server side (optional, low priority)
 - [x] Verify test submission lands in Supabase
+
+## Research-Driven Landing Page Improvements (Trolley.co.uk Playbook)
+
+- [x] Hero: sharpen value prop to "Supermarket Truth-Teller" framing + cost-of-living angle
+- [x] Hero badge: add "No sign-up needed" + mobile-first signal
+- [x] Add "You could have saved £X" loss-framing stat to hero subtext
+- [x] Add Receipt Challenge / TikTok social section with influencer channel callouts
+- [x] Add "Why TrolleyRoast wins vs. item-by-item search" differentiator section
+- [x] Strengthen savings card copy: "Share on WhatsApp, Instagram, TikTok" explicit CTA
+- [x] Add community/referral nudge: r/UKFrugal, MoneySavingExpert framing
+- [x] Update social proof row: add "No login for first scan" trust signal
+- [x] Add SEO-friendly static text block: basket comparison keywords
+- [x] Footer: add brief mission statement ("Built to cut through supermarket noise")
