@@ -131,7 +131,7 @@ Each monthly entry contains:
 ```
 
 ### Current data
-Three months of seeded data are live: January, February, and March 2026. All show Aldi as the cheapest supermarket, with savings of £15–£17 vs. Tesco.
+Three months of seeded data are live: January, February, and March 2026. All show Aldi as the cheapest supermarket, with savings of £15–£17 vs. Tesco and £28–£29 vs. Waitrose. All 8 supermarkets are included in the data.
 
 ### How to update monthly
 New entries are inserted directly into the `receipt_index` database table. An admin UI for this is planned but not yet built — currently requires a direct SQL insert or the Database panel in the Manus management UI.
@@ -146,7 +146,7 @@ The app is the primary data source for this index. Once real scan data is availa
 ### What the website shows
 The landing page features a static mockup of the savings card with placeholder data:
 - "You overpaid by £14.30 vs. shopping at Aldi this week"
-- Horizontal bar chart comparing Tesco (£68.40), Aldi (£54.10), Lidl (£56.20), Asda (£61.80)
+- Horizontal bar chart comparing all 8 supermarkets sorted cheapest to most expensive — e.g. Aldi (£54.10), Lidl (£56.20), Asda (£61.80), Tesco (£68.40), Co-op (£74.20), Waitrose (£82.10)
 - Footer: "21 items compared · trolleyroast.app"
 
 ### What the app should produce
@@ -173,7 +173,7 @@ The following copy has been tested and used consistently across the website. The
 > "The UK's supermarket truth-teller."
 
 ### Hero subtext
-> "TrolleyRoast compares your entire basket across Tesco, Asda, Sainsbury's, Morrisons, Aldi and Lidl — instantly. No item-by-item searching. Just the truth."
+> "TrolleyRoast compares your entire basket across Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose and Co-op — instantly. No item-by-item searching. Just the truth."
 
 ### Loss-framing stat (hero)
 > "The average UK shopper overpays £1,000+ a year by not comparing supermarkets. Your receipt has the answer."

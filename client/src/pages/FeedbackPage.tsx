@@ -186,8 +186,8 @@ export default function FeedbackPage() {
             </h1>
             <p className="text-sm leading-relaxed" style={{ color: "rgba(250,248,243,0.75)" }}>
               TrolleyRoast scans your receipt and instantly shows what the same basket costs at
-              Tesco, Asda, Sainsbury's, Morrisons, Aldi, and Lidl — free. We're in early
-              development and your feedback shapes what we build next.
+              Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose, and Co-op — free.
+              We're in early development and your feedback shapes what we build next.
             </p>
           </div>
 

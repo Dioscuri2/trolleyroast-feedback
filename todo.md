@@ -57,3 +57,10 @@
 - [x] Add /receipt-index route to App.tsx
 - [x] Add Receipt Index link to LandingPage nav and footer
 - [x] Write vitest tests for index procedures
+
+## Add Waitrose & Co-op (8 supermarkets total)
+
+- [ ] Update LandingPage: logos strip, how-it-works copy, savings card mockup, SEO copy
+- [ ] Update ReceiptIndexPage: SUPERMARKET_COLORS, SUPERMARKET_DISPLAY maps
+- [ ] Update Receipt Index DB seed data with Waitrose and Co-op columns
+- [ ] Update HANDOVER.md supermarket list

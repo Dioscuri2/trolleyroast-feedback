@@ -24,6 +24,8 @@ const SUPERMARKETS = [
   { name: "Morrisons", color: "#FDB913", letter: "M" },
   { name: "Aldi", color: "#003882", letter: "A" },
   { name: "Lidl", color: "#0050AA", letter: "L" },
+  { name: "Waitrose", color: "#007B40", letter: "W" },
+  { name: "Co-op", color: "#00B1A9", letter: "C" },
 ];
 
 // ─── How It Works steps ───────────────────────────────────────────────────────
@@ -38,7 +40,7 @@ const STEPS = [
     icon: BarChart3,
     step: "02",
     title: "We compare your whole basket",
-    desc: "Every item is priced across Tesco, Asda, Sainsbury's, Morrisons, Aldi & Lidl simultaneously.",
+    desc: "Every item is priced across Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose & Co-op simultaneously.",
   },
   {
     icon: Zap,
@@ -784,10 +786,10 @@ export default function LandingPage() {
       <div className="sr-only">
         <p>
           TrolleyRoast is a free UK supermarket price comparison app. Compare your whole
-          basket across Tesco, Asda, Sainsbury's, Morrisons, Aldi and Lidl by scanning your
-          receipt. Find the cheapest supermarket for a family of four, compare basket costs
-          across UK supermarkets, and see Tesco vs Aldi price comparisons instantly. No
-          item-by-item searching required.
+          basket across Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose and Co-op
+          by scanning your receipt. Find the cheapest supermarket for a family of four,
+          compare basket costs across UK supermarkets, and see Tesco vs Aldi vs Waitrose
+          price comparisons instantly. No item-by-item searching required.
         </p>
       </div>
     </div>

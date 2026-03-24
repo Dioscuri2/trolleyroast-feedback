@@ -30,10 +30,13 @@ const SUPERMARKET_COLORS: Record<string, string> = {
   Morrisons: "#FDB913",
   Aldi: "#003882",
   Lidl: "#0050AA",
+  Waitrose: "#007B40",
+  Coop: "#00B1A9",
 };
 
 const SUPERMARKET_DISPLAY: Record<string, string> = {
   Sainsburys: "Sainsbury's",
+  Coop: "Co-op",
 };
 
 function displayName(key: string) {
@@ -539,16 +542,17 @@ export default function ReceiptIndexPage() {
               where would my weekly shop actually be cheapest?
             </p>
             <p className="leading-relaxed mb-4">
-              Our data consistently shows that <strong style={{ color: "#1B3A2D" }}>Aldi and Lidl</strong> offer
-              the lowest total basket costs for UK families, with savings of £15–£20 per week
-              compared to Tesco or Sainsbury's. Over a year, that's a potential saving of
-              £780–£1,040 — simply by switching supermarkets.
+          Our data consistently shows that <strong style={{ color: "#1B3A2D" }}>Aldi and Lidl</strong> offer
+            the lowest total basket costs for UK families, with savings of £15–£20 per week
+            compared to Tesco or Sainsbury's. Waitrose and Co-op consistently sit at the
+            premium end, making the gap even wider for shoppers who switch. Over a year,
+            that's a potential saving of £780–£1,040 — simply by switching supermarkets.
             </p>
             <p className="leading-relaxed">
-              The index covers six major UK supermarkets — Tesco, Asda, Sainsbury's, Morrisons,
-              Aldi, and Lidl — and breaks down costs by category including dairy, meat, fruit
-              and vegetables, bread, cupboard staples, and drinks. Updated every month using
-              data from thousands of real UK shoppers who scan their receipts with TrolleyRoast.
+              The index covers eight major UK supermarkets — Tesco, Asda, Sainsbury's, Morrisons,
+            Aldi, Lidl, Waitrose, and Co-op — and breaks down costs by category including
+            dairy, meat, fruit and vegetables, bread, cupboard staples, and drinks. Updated every month using
+            data from thousands of real UK shoppers who scan their receipts with TrolleyRoast.
             </p>
           </div>
         </div>
