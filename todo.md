@@ -46,3 +46,14 @@
 - [x] Update social proof row: add "No login for first scan" trust signal
 - [x] Add SEO-friendly static text block: basket comparison keywords
 - [x] Footer: add brief mission statement ("Built to cut through supermarket noise")
+
+## Monthly Receipt Index Page
+
+- [x] Add receipt_index DB table (month, year, winner, basket categories with prices per supermarket)
+- [x] Generate and apply DB migration SQL
+- [x] Seed 3 months of realistic index data (Jan, Feb, Mar 2026)
+- [x] Add index.list and index.latest tRPC procedures
+- [x] Build /receipt-index page with monthly rankings, bar charts, category breakdown, SEO copy
+- [x] Add /receipt-index route to App.tsx
+- [x] Add Receipt Index link to LandingPage nav and footer
+- [x] Write vitest tests for index procedures

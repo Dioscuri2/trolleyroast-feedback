@@ -1,6 +1,6 @@
 import { count, desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertEmailCapture, InsertFeedback, InsertUser, emailCaptures, feedback, users } from "../drizzle/schema";
+import { InsertEmailCapture, InsertFeedback, InsertReceiptIndex, InsertUser, emailCaptures, feedback, receiptIndex, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -90,6 +90,33 @@ export async function getUserByOpenId(openId: string) {
 }
 
 // TODO: add feature queries here as your schema grows.
+
+export async function listReceiptIndex(limit = 12) {
+  const db = await getDb();
+  if (!db) return [];
+  return db
+    .select()
+    .from(receiptIndex)
+    .orderBy(desc(receiptIndex.year), desc(receiptIndex.month))
+    .limit(limit);
+}
+
+export async function getLatestReceiptIndex() {
+  const db = await getDb();
+  if (!db) return undefined;
+  const rows = await db
+    .select()
+    .from(receiptIndex)
+    .orderBy(desc(receiptIndex.year), desc(receiptIndex.month))
+    .limit(1);
+  return rows[0];
+}
+
+export async function insertReceiptIndex(data: InsertReceiptIndex) {
+  const db = await getDb();
+  if (!db) throw new Error("DB unavailable");
+  await db.insert(receiptIndex).values(data);
+}
 
 export async function insertFeedback(data: InsertFeedback): Promise<void> {
   const db = await getDb();

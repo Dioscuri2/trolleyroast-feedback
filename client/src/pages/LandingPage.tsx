@@ -342,6 +342,14 @@ export default function LandingPage() {
             TrolleyRoast
           </span>
           <div className="flex items-center gap-3">
+            <Link href="/receipt-index">
+              <span
+                className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity hidden sm:inline"
+                style={{ color: "#6B6860" }}
+              >
+                Price Index
+              </span>
+            </Link>
             <Link href="/feedback">
               <span
                 className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity"
@@ -758,6 +766,9 @@ export default function LandingPage() {
             >
               App
             </a>
+            <Link href="/receipt-index">
+              <span className="hover:underline cursor-pointer">Price Index</span>
+            </Link>
             <Link href="/feedback">
               <span className="hover:underline cursor-pointer">Feedback</span>
             </Link>

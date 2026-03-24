@@ -1,0 +1,9 @@
+{
+  "query": "CREATE TABLE `receipt_index` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`monthLabel` varchar(32) NOT NULL,\n\t`year` int NOT NULL,\n\t`month` int NOT NULL,\n\t`winner` varchar(64) NOT NULL,\n\t`basketTotals` json NOT NULL,\n\t`categoryBreakdown` json NOT NULL,\n\t`receiptCount` int NOT NULL DEFAULT 0,\n\t`summary` text,\n\t`publishedAt` timestamp NOT NULL DEFAULT (now()),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\tCONSTRAINT `receipt_index_id` PRIMARY KEY(`id`)\n);",
+  "command": "mysql --batch --raw --column-names --default-character-set=utf8mb4 --host gateway04.us-east-1.prod.aws.tidbcloud.com --port 4000 --user 2KYnf9LoYCyHdGS.root --database 5zzsSKezzwbNJuSFDZcvhL --execute CREATE TABLE `receipt_index` (\n\t`id` int AUTO_INCREMENT NOT NULL,\n\t`monthLabel` varchar(32) NOT NULL,\n\t`year` int NOT NULL,\n\t`month` int NOT NULL,\n\t`winner` varchar(64) NOT NULL,\n\t`basketTotals` json NOT NULL,\n\t`categoryBreakdown` json NOT NULL,\n\t`receiptCount` int NOT NULL DEFAULT 0,\n\t`summary` text,\n\t`publishedAt` timestamp NOT NULL DEFAULT (now()),\n\t`createdAt` timestamp NOT NULL DEFAULT (now()),\n\tCONSTRAINT `receipt_index_id` PRIMARY KEY(`id`)\n);",
+  "rows": [],
+  "messages": [],
+  "stdout": "",
+  "stderr": "",
+  "execution_time_ms": 554
+}

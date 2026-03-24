@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import LandingPage from "./pages/LandingPage";
 import FeedbackPage from "./pages/FeedbackPage";
 import ProPage from "./pages/ProPage";
+import ReceiptIndexPage from "./pages/ReceiptIndexPage";
 
 function Router() {
   return (
@@ -14,6 +15,7 @@ function Router() {
       <Route path={"/"} component={LandingPage} />
       <Route path={"/feedback"} component={FeedbackPage} />
       <Route path={"/pro"} component={ProPage} />
+      <Route path={"/receipt-index"} component={ReceiptIndexPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

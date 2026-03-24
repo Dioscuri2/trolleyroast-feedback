@@ -1,4 +1,4 @@
-import { int, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
+import { decimal, int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
 
 /**
  * Core user table backing auth flow.
@@ -48,3 +48,27 @@ export const emailCaptures = mysqlTable("email_captures", {
 
 export type EmailCapture = typeof emailCaptures.$inferSelect;
 export type InsertEmailCapture = typeof emailCaptures.$inferInsert;
+
+// Monthly Receipt Index — one row per month, stores basket prices per supermarket
+export const receiptIndex = mysqlTable("receipt_index", {
+  id: int("id").autoincrement().primaryKey(),
+  // e.g. "March 2026"
+  monthLabel: varchar("monthLabel", { length: 32 }).notNull(),
+  year: int("year").notNull(),
+  month: int("month").notNull(), // 1-12
+  // Winning supermarket name
+  winner: varchar("winner", { length: 64 }).notNull(),
+  // Average basket total per supermarket (JSON: { Tesco: 68.40, Aldi: 54.10, ... })
+  basketTotals: json("basketTotals").notNull(),
+  // Category breakdown (JSON: [{ category: "Dairy", Tesco: 12.40, Aldi: 9.80, ... }])
+  categoryBreakdown: json("categoryBreakdown").notNull(),
+  // Number of real receipts used to compile this index
+  receiptCount: int("receiptCount").notNull().default(0),
+  // Short editorial summary for SEO
+  summary: text("summary"),
+  publishedAt: timestamp("publishedAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type ReceiptIndex = typeof receiptIndex.$inferSelect;
+export type InsertReceiptIndex = typeof receiptIndex.$inferInsert;
