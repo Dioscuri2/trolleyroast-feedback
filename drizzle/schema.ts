@@ -1,74 +1,40 @@
-import { decimal, int, json, mysqlEnum, mysqlTable, text, timestamp, varchar } from "drizzle-orm/mysql-core";
-
-/**
- * Core user table backing auth flow.
- * Extend this file with additional tables as your product grows.
- * Columns use camelCase to match both database fields and generated types.
- */
-export const users = mysqlTable("users", {
-  /**
-   * Surrogate primary key. Auto-incremented numeric value managed by the database.
-   * Use this for relations between tables.
-   */
-  id: int("id").autoincrement().primaryKey(),
-  /** Manus OAuth identifier (openId) returned from the OAuth callback. Unique per user. */
+import { integer, jsonb, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
+export const users = pgTable("users", {
+  id: integer("id").generatedAlwaysAsIdentity().primaryKey(),
   openId: varchar("openId", { length: 64 }).notNull().unique(),
   name: text("name"),
   email: varchar("email", { length: 320 }),
   loginMethod: varchar("loginMethod", { length: 64 }),
-  role: mysqlEnum("role", ["user", "admin"]).default("user").notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().onUpdateNow().notNull(),
-  lastSignedIn: timestamp("lastSignedIn").defaultNow().notNull(),
+  role: userRoleEnum("role").default("user").notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
+  updatedAt: timestamp("updatedAt", { mode: "date" }).defaultNow().notNull(),
+  lastSignedIn: timestamp("lastSignedIn", { mode: "date" }).defaultNow().notNull(),
 });
-
-export type User = typeof users.$inferSelect;
-export type InsertUser = typeof users.$inferInsert;
-
-// TODO: Add your tables here
-
-export const feedback = mysqlTable("feedback", {
-  id: int("id").autoincrement().primaryKey(),
-  rating: int("rating").notNull(), // 1-5
+export const feedback = pgTable("feedback", {
+  id: integer("id").generatedAlwaysAsIdentity().primaryKey(),
+  rating: integer("rating").notNull(),
   name: varchar("name", { length: 255 }),
   email: varchar("email", { length: 320 }),
   comment: text("comment"),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
-
-export type Feedback = typeof feedback.$inferSelect;
-export type InsertFeedback = typeof feedback.$inferInsert;
-
-export const emailCaptures = mysqlTable("email_captures", {
-  id: int("id").autoincrement().primaryKey(),
+export const emailCaptures = pgTable("email_captures", {
+  id: integer("id").generatedAlwaysAsIdentity().primaryKey(),
   email: varchar("email", { length: 320 }).notNull(),
-  source: varchar("source", { length: 64 }).default("landing").notNull(), // 'landing' | 'pro'
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  source: varchar("source", { length: 64 }).default("landing").notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
-
-export type EmailCapture = typeof emailCaptures.$inferSelect;
-export type InsertEmailCapture = typeof emailCaptures.$inferInsert;
-
-// Monthly Receipt Index — one row per month, stores basket prices per supermarket
-export const receiptIndex = mysqlTable("receipt_index", {
-  id: int("id").autoincrement().primaryKey(),
-  // e.g. "March 2026"
+export const receiptIndex = pgTable("receipt_index", {
+  id: integer("id").generatedAlwaysAsIdentity().primaryKey(),
   monthLabel: varchar("monthLabel", { length: 32 }).notNull(),
-  year: int("year").notNull(),
-  month: int("month").notNull(), // 1-12
-  // Winning supermarket name
+  year: integer("year").notNull(),
+  month: integer("month").notNull(),
   winner: varchar("winner", { length: 64 }).notNull(),
-  // Average basket total per supermarket (JSON: { Tesco: 68.40, Aldi: 54.10, ... })
-  basketTotals: json("basketTotals").notNull(),
-  // Category breakdown (JSON: [{ category: "Dairy", Tesco: 12.40, Aldi: 9.80, ... }])
-  categoryBreakdown: json("categoryBreakdown").notNull(),
-  // Number of real receipts used to compile this index
-  receiptCount: int("receiptCount").notNull().default(0),
-  // Short editorial summary for SEO
+  basketTotals: jsonb("basketTotals").notNull(),
+  categoryBreakdown: jsonb("categoryBreakdown").notNull(),
+  receiptCount: integer("receiptCount").notNull().default(0),
   summary: text("summary"),
-  publishedAt: timestamp("publishedAt").defaultNow().notNull(),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
+  publishedAt: timestamp("publishedAt", { mode: "date" }).defaultNow().notNull(),
+  createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
-
-export type ReceiptIndex = typeof receiptIndex.$inferSelect;
-export type InsertReceiptIndex = typeof receiptIndex.$inferInsert;
