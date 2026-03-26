@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import { CheckCircle2, Star } from "lucide-react";
+import { CheckCircle2, Star, ChevronRight, Globe, AppWindow, ShieldCheck } from "lucide-react";
 
 // ─── Star Rating Component ───────────────────────────────────────────────────
 function StarRating({
@@ -19,8 +19,8 @@ function StarRating({
   const labels = ["", "Poor", "Fair", "Good", "Very Good", "Excellent"];
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <div className="flex gap-1" role="group" aria-label="Star rating">
+    <div className="flex flex-col items-center gap-4">
+      <div className="flex gap-2" role="group" aria-label="Star rating">
         {[1, 2, 3, 4, 5].map((star) => {
           const active = star <= (hovered || value);
           return (
@@ -31,14 +31,14 @@ function StarRating({
               onClick={() => onChange(star)}
               onMouseEnter={() => setHovered(star)}
               onMouseLeave={() => setHovered(0)}
-              className="p-1 transition-transform duration-100 hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
+              className="group p-1 transition-all duration-200 hover:scale-110 active:scale-95 focus:outline-none focus-visible:ring-4 focus-visible:ring-primary/20 rounded-full"
             >
               <Star
-                size={36}
-                className={`transition-colors duration-100 ${
+                size={42}
+                className={`transition-all duration-300 drop-shadow-sm ${
                   active
-                    ? "fill-[oklch(72%_0.14_75)] text-[oklch(72%_0.14_75)]"
-                    : "fill-transparent text-border"
+                    ? "fill-[#FFC107] text-[#FFC107] scale-105"
+                    : "fill-transparent text-[#E5E7EB] group-hover:text-[#FFC107]/40"
                 }`}
                 strokeWidth={1.5}
               />
@@ -46,8 +46,8 @@ function StarRating({
           );
         })}
       </div>
-      <span className="text-sm text-muted-foreground h-5 transition-all">
-        {hovered ? labels[hovered] : value ? labels[value] : "Tap to rate"}
+      <span className="text-sm font-bold tracking-tight text-[#4B5563] bg-[#F3F4F6] px-3 py-1 rounded-full min-h-[28px] flex items-center justify-center transition-all">
+        {hovered ? labels[hovered] : value ? labels[value] : "How are we doing?"}
       </span>
     </div>
   );
@@ -55,27 +55,34 @@ function StarRating({
 
 // ─── Thank You Screen ─────────────────────────────────────────────────────────
 function ThankYou({ rating, onReset }: { rating: number; onReset: () => void }) {
-  const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+  const stars = Array(5).fill(0).map((_, i) => (
+    <Star 
+      key={i} 
+      size={24} 
+      className={i < rating ? "fill-[#FFC107] text-[#FFC107]" : "text-[#E5E7EB]"} 
+      strokeWidth={1.5}
+    />
+  ));
+
   return (
-    <div className="flex flex-col items-center text-center gap-6 py-8 px-4">
-      <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-        <CheckCircle2 size={36} className="text-primary" strokeWidth={1.5} />
+    <div className="flex flex-col items-center text-center gap-8 py-12 px-6 animate-in fade-in zoom-in duration-500">
+      <div className="w-20 h-20 rounded-full bg-[#E0F2FE] flex items-center justify-center border-4 border-white shadow-lg">
+        <CheckCircle2 size={42} className="text-[#0066FF]" strokeWidth={1.5} />
       </div>
-      <div>
-        <h2 className="font-display text-3xl font-semibold text-primary mb-2">
+      <div className="space-y-3">
+        <h2 className="font-display text-4xl font-extrabold text-[#111827] tracking-tight">
           Thank you!
         </h2>
-        <p className="text-muted-foreground leading-relaxed max-w-xs mx-auto">
-          Your feedback helps us make TrolleyRoast better for everyone. We
-          genuinely appreciate you taking the time.
+        <p className="text-[#4B5563] text-lg font-medium leading-relaxed max-w-sm mx-auto">
+          We genuinely appreciate your time. Your feedback is what builds the future of TrolleyRoast.
         </p>
       </div>
-      <div className="text-2xl tracking-widest text-[oklch(72%_0.14_75)]" aria-label={`You rated ${rating} out of 5 stars`}>
+      <div className="flex gap-1.5 p-3 bg-[#F9FAFB] rounded-2xl border border-[#F3F4F6]">
         {stars}
       </div>
       <button
         onClick={onReset}
-        className="text-sm text-muted-foreground underline underline-offset-4 hover:text-foreground transition-colors"
+        className="text-sm font-bold text-[#0066FF] hover:underline underline-offset-8 transition-all"
       >
         Submit another response
       </button>
@@ -122,145 +129,149 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex flex-col font-sans">
-      {/* ── Header ── */}
-      <header className="border-b border-gray-200 bg-white sticky top-0 z-10">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo placeholder - mirroring the blue accent from trolley.co.uk */}
-            <div className="w-8 h-8 bg-[#0066FF] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">T</span>
+    <div className="min-h-screen bg-[#F9FAFB] flex flex-col font-sans text-[#111827]">
+      {/* ── Navbar ── */}
+      <nav className="border-b border-gray-100 bg-white sticky top-0 z-50 shadow-[0_1px_2px_rgba(0,0,0,0.02)]">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-2.5 group cursor-pointer">
+            <div className="w-10 h-10 bg-[#0066FF] rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/10 group-hover:scale-105 transition-transform">
+              <span className="text-white font-black text-2xl tracking-tighter">T</span>
             </div>
-            <span className="text-2xl font-bold text-[#1A1A1A] tracking-tight">
+            <span className="text-2xl font-black text-[#111827] tracking-[-0.03em]">
               TrolleyRoast
             </span>
           </div>
-          <div className="hidden sm:flex items-center gap-6">
-            <span className="text-sm font-semibold text-gray-500 hover:text-[#0066FF] cursor-pointer">Feedback</span>
-            <span className="text-sm font-semibold text-gray-500 hover:text-[#0066FF] cursor-pointer">Prices</span>
-            <Button size="sm" className="bg-[#0066FF] text-white hover:bg-[#0052CC] font-bold rounded-lg">
-              Download App
+          <div className="hidden md:flex items-center gap-10">
+            <a href="#" className="text-sm font-bold text-[#4B5563] hover:text-[#0066FF] transition-colors">How it works</a>
+            <a href="#" className="text-sm font-bold text-[#4B5563] hover:text-[#0066FF] transition-colors">Pricing</a>
+            <a href="#" className="text-sm font-bold text-[#0066FF] flex items-center gap-1">Support <ChevronRight size={14} /></a>
+            <Button size="lg" className="bg-[#0066FF] text-white hover:bg-[#0052CC] font-bold rounded-2xl px-7 h-12 shadow-md shadow-blue-500/10 active:scale-95 transition-all">
+              Launch App
             </Button>
           </div>
         </div>
-      </header>
+      </nav>
 
-      {/* ── Main Content ── */}
-      <main className="flex-1 flex flex-col items-center justify-start px-4 py-12 sm:py-20">
+      {/* ── Hero ── */}
+      <main className="flex-1 flex flex-col items-center justify-start px-6 pt-16 pb-24">
         <div className="w-full max-w-2xl">
-
-          {/* ── Hero Section ── */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A1A] mb-6 tracking-tight">
-              Compare Supermarket Prices
+          <div className="text-center space-y-4 mb-14">
+            <div className="inline-flex items-center gap-2 bg-[#0066FF]/5 text-[#0066FF] px-4 py-1.5 rounded-full text-xs font-black uppercase tracking-widest border border-[#0066FF]/10">
+              <Globe size={14} /> Global Price Index
+            </div>
+            <h1 className="text-5xl md:text-6xl font-black text-[#111827] tracking-[-0.04em] leading-[0.95]">
+              Help us shape the<br />future of <span className="text-[#0066FF]">savings.</span>
             </h1>
-            <p className="text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto font-medium">
-              We're building the fastest way to save on your weekly shop. 
-              Help us refine the experience with your feedback.
+            <p className="text-xl text-[#4B5563] font-semibold leading-relaxed max-w-lg mx-auto">
+              We're building the fastest supermarket price comparison engine. Tell us how we can make it even better for you.
             </p>
           </div>
 
           {/* ── Form Card ── */}
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
+          <div className="bg-white rounded-[2rem] border border-gray-100 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.03)] overflow-hidden">
             {submitted ? (
               <ThankYou rating={submittedRating} onReset={handleReset} />
             ) : (
-              <form onSubmit={handleSubmit} noValidate>
-                {/* Star Rating Section */}
-                <div className="px-8 pt-10 pb-8 text-center bg-white">
-                  <h2 className="text-2xl font-bold text-[#1A1A1A] mb-2">
-                    Rate your experience
+              <form onSubmit={handleSubmit} noValidate className="space-y-0">
+                <div className="bg-[#F9FAFB]/50 px-8 py-12 text-center border-b border-gray-100">
+                  <h2 className="text-3xl font-black text-[#111827] mb-3 tracking-tight">
+                    Quick Feedback
                   </h2>
-                  <p className="text-[#6C757D] mb-8 font-medium">
-                    How are we doing? Your rating helps us prioritize features.
+                  <p className="text-[#6B7280] font-bold text-sm mb-8 uppercase tracking-widest">
+                    Takes less than 30 seconds
                   </p>
                   <StarRating value={rating} onChange={setRating} />
                 </div>
 
-                {/* Form Fields */}
-                <div className="px-8 pb-10 flex flex-col gap-6">
-                  {/* Comment */}
-                  <div className="flex flex-col gap-2">
-                    <Label htmlFor="comment" className="text-sm font-bold text-[#1A1A1A]">
-                      Your feedback
+                <div className="p-10 space-y-8">
+                  <div className="space-y-3">
+                    <Label htmlFor="comment" className="text-base font-black text-[#111827] tracking-tight">
+                      What's on your mind?
                     </Label>
                     <Textarea
                       id="comment"
-                      placeholder="What could we improve?"
+                      placeholder="Ideas, bugs, or things you love..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       rows={4}
-                      className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl text-base"
+                      className="bg-gray-50/50 border-gray-100 focus:bg-white focus:border-[#0066FF] focus:ring-4 focus:ring-[#0066FF]/5 rounded-2xl text-lg font-medium p-5 transition-all min-h-[140px]"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    {/* Name */}
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="name" className="text-sm font-bold text-[#1A1A1A]">
-                        Name (optional)
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-3">
+                      <Label htmlFor="name" className="text-sm font-black text-[#111827] tracking-tight uppercase">
+                        Your Name (optional)
                       </Label>
                       <Input
                         id="name"
-                        type="text"
-                        placeholder="e.g. John Doe"
+                        placeholder="John Wick"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl"
+                        className="h-14 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#0066FF]/5 rounded-xl px-5 text-base font-bold"
                       />
                     </div>
-
-                    {/* Email */}
-                    <div className="flex flex-col gap-2">
-                      <Label htmlFor="email" className="text-sm font-bold text-[#1A1A1A]">
-                        Email (optional)
+                    <div className="space-y-3">
+                      <Label htmlFor="email" className="text-sm font-black text-[#111827] tracking-tight uppercase">
+                        Your Email (optional)
                       </Label>
                       <Input
                         id="email"
                         type="email"
-                        placeholder="john@example.com"
+                        placeholder="wick@high-table.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl"
+                        className="h-14 bg-gray-50/50 border-gray-100 focus:bg-white focus:ring-4 focus:ring-[#0066FF]/5 rounded-xl px-5 text-base font-bold"
                       />
                     </div>
                   </div>
 
-                  {/* Submit */}
-                  <Button
-                    type="submit"
-                    disabled={submitMutation.isPending}
-                    className="w-full h-14 text-lg font-bold bg-[#0066FF] text-white hover:bg-[#0052CC] rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98]"
-                  >
-                    {submitMutation.isPending ? "Submitting…" : "Send Feedback"}
-                  </Button>
+                  <div className="pt-4">
+                    <Button
+                      type="submit"
+                      disabled={submitMutation.isPending}
+                      className="w-full h-16 text-xl font-black bg-[#111827] text-white hover:bg-[#0066FF] rounded-2xl transition-all shadow-xl shadow-gray-200 active:scale-[0.98] flex items-center justify-center gap-2"
+                    >
+                      {submitMutation.isPending ? "SENDING..." : "SUBMIT FEEDBACK"}
+                      {!submitMutation.isPending && <ChevronRight size={20} />}
+                    </Button>
+                  </div>
 
-                  <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest">
-                    SECURE & ANONYMOUS
-                  </p>
+                  <div className="flex items-center justify-center gap-6 pt-2">
+                    <div className="flex items-center gap-1.5 text-[10px] font-black text-gray-400 uppercase tracking-tighter">
+                      <ShieldCheck size={14} className="text-green-500" /> Fully Anonymous
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[10px] font-black text-gray-400 uppercase tracking-tighter">
+                      <AppWindow size={14} className="text-blue-500" /> Developer Priority
+                    </div>
+                  </div>
                 </div>
               </form>
             )}
           </div>
 
-          {/* ── Quick Stats Section ── */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
+          {/* ── Proof Points ── */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 mt-16">
              {[
-               { label: "Supermarkets", val: "10+" },
-               { label: "Price Checks", val: "Daily" },
-               { label: "Cost Savings", val: "Up to 30%" }
+               { label: "UK Supermarkets", val: "12+" },
+               { label: "Price Checks", val: "Hourly" },
+               { label: "Development", val: "Active" }
              ].map((stat, i) => (
-               <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 text-center">
-                 <div className="text-xl font-bold text-[#0066FF]">{stat.val}</div>
-                 <div className="text-xs font-bold text-gray-500 uppercase">{stat.label}</div>
+               <div key={i} className="bg-white p-6 rounded-3xl border border-gray-50 text-center shadow-sm">
+                 <div className="text-2xl font-black text-[#0066FF] tracking-tighter">{stat.val}</div>
+                 <div className="text-[10px] font-black text-gray-400 uppercase tracking-widest mt-1">{stat.label}</div>
                </div>
              ))}
           </div>
 
-          {/* ── Footer ── */}
-          <footer className="mt-16 text-center border-t border-gray-200 pt-8">
-            <p className="text-sm font-semibold text-gray-500">
-              © 2026 TrolleyRoast. All rights reserved.
+          {/* ── Final Footer ── */}
+          <footer className="mt-24 text-center">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+              <span className="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">All Systems Operational</span>
+            </div>
+            <p className="text-xs font-bold text-gray-300">
+              © 2026 TROLLEYROAST GLOBAL LTD. ALL RIGHTS RESERVED.
             </p>
           </footer>
         </div>
