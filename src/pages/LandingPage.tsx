@@ -80,8 +80,8 @@ const DIFFERENTIATORS = [
 function SavingsCardMockup() {
   return (
     <div className="relative mx-auto w-full max-w-sm transition-all duration-500 hover:scale-[1.02]">
-      {/* Shadow card behind (Offset 3-4px per spec) */}
-      <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-[#1B3A2D]/12" />
+      {/* 10. Offset shadow card (#1B3A2D at 12% opacity) */}
+      <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-[#1B3A2D] opacity-[0.12]" />
       {/* Main card */}
       <div className="relative rounded-2xl overflow-hidden border border-[#E8E2D6] bg-[#FAF8F3] shadow-xl">
         {/* Card header */}
@@ -97,11 +97,11 @@ function SavingsCardMockup() {
         {/* Savings headline */}
         <div className="px-5 pt-8 pb-5 text-center">
           <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-2">You overpaid by</p>
-          <p className="font-display text-6xl font-bold leading-none text-[#1B3A2D] card-headline">£14.30</p>
+          <p className="font-display text-6xl font-bold leading-none text-[#1B3A2D]">£14.30</p>
           <p className="text-sm font-medium text-[#6B6860] mt-2">vs. shopping at Aldi this week</p>
         </div>
 
-        {/* Comparison bars (STRICT ORDER) */}
+        {/* Comparison bars */}
         <div className="px-5 pb-8 space-y-3">
           {[
             { store: "Waitrose", amount: 82.10, pct: 100, highlight: false },
@@ -144,6 +144,7 @@ export default function LandingPage() {
     <div className="min-h-screen bg-[#FAF8F3] text-[#1C1A17] font-sans">
       
       {/* 1. STICKY NAV (STRICT SPEC) */}
+      {/* 9. background at 90% opacity, backdropFilter bluractive */}
       <nav className="sticky top-0 z-50 h-[56px] border-b border-[#E8E2D6] bg-[#FAF8F3]/90 backdrop-blur-[8px]">
         <div className="max-w-5xl mx-auto px-6 h-full flex items-center justify-between">
           <span className="font-display text-xl font-semibold text-[#1B3A2D] brand-name">TrolleyRoast</span>
@@ -151,7 +152,8 @@ export default function LandingPage() {
             <Link href="/receipt-index"><span className="text-sm font-semibold text-[#6B6860] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
             <Link href="/feedback"><span className="text-sm font-semibold text-[#6B6860] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
             <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
-              <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-4 h-8 transition-all active:scale-95 text-xs">
+              {/* 5. Solid Forest Green Button bg #1B3A2D, text white, font Outfit, border-radius 8px */}
+              <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-4 h-8 transition-all active:scale-95 text-xs font-sans">
                 Try the App
               </Button>
             </a>
@@ -160,30 +162,34 @@ export default function LandingPage() {
       </nav>
 
       {/* 2. HERO (STRICT SPEC) */}
-      <section className="px-6 py-[80px] md:py-[120px] text-center max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 bg-[#C9A96E]/15 text-[#C9A96E] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border border-[#C9A96E]/30 mb-8">
+      {/* 6. vertical padding py-14 mobile, py-16 sm+ */}
+      <section className="px-6 py-14 sm:py-20 md:py-32 text-center max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 bg-[#C9A96E]/15 text-[#C9A96E] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border border-[#C9A96E]/30 mb-8 font-sans">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />
           Free · No sign-up needed · UK supermarkets
         </div>
+        {/* 1. Cormorant Garamond / 8. Second line See where you'd save in #C9A96E */}
         <h1 className="font-display text-5xl md:text-7xl font-bold leading-[1.1] text-[#1B3A2D] tracking-[-0.03em] mb-8">
           Scan your receipt.<br />
           <span className="text-[#C9A96E]">See where you'd save.</span>
         </h1>
-        <p className="text-lg md:text-xl font-medium text-[#6B6860] leading-relaxed max-w-[560px] mx-auto mb-4">
+        <p className="text-lg md:text-xl font-medium text-[#6B6860] leading-relaxed max-w-[560px] mx-auto mb-4 font-sans">
           TrolleyRoast compares your <em>entire basket</em> across the UK's biggest supermarkets instantly. No searching. Just the truth.
         </p>
-        <p className="text-sm font-bold text-[#9B9790] uppercase tracking-widest mb-12">
+        <p className="text-sm font-bold text-[#9B9790] uppercase tracking-widest mb-12 font-sans">
           UK shoppers overpay <span className="text-[#1B3A2D]">£1,000+ a year</span> without comparing.
         </p>
         <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-            <Button className="h-[56px] px-10 text-base font-bold bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-lg w-full sm:w-auto active:scale-95">
+            {/* 5a. Solid #1B3A2D bg, #FAF8F3 text, Outfit 500 (handled via font-sans) */}
+            <Button className="h-[56px] px-10 text-base font-bold bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-lg w-full sm:w-auto active:scale-95 font-sans">
               Scan Your Receipt
               <ArrowRight size={20} className="ml-3" />
             </Button>
           </a>
           <Link href="/feedback">
-            <span className="text-base font-bold text-[#1B3A2D] hover:underline underline-offset-8 cursor-pointer px-6">
+            {/* 5c. outline with #D4CFC6 border (or #1B3A2D) */}
+            <span className="text-base font-bold text-[#1B3A2D] hover:underline underline-offset-8 cursor-pointer px-6 font-sans">
               Share Feedback
             </span>
           </Link>
@@ -191,36 +197,36 @@ export default function LandingPage() {
       </section>
 
       {/* 3. SOCIAL PROOF STRIP (STRICT SPEC) */}
-      <section className="py-12 border-y border-[#E8E2D6] bg-white">
+      <section className="py-14 sm:py-16 border-y border-[#E8E2D6] bg-white">
         <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
           <div className="flex items-center gap-3">
             <Users size={18} className="text-[#C9A96E]" />
-            <p className="text-sm font-bold text-[#6B6860] tracking-tight uppercase">
+            <p className="text-sm font-bold text-[#6B6860] tracking-tight uppercase font-sans">
               Trusted by <span className="text-[#1C1A17] font-black">{count ? count.toLocaleString() : "1,247+"} shoppers</span> this week
             </p>
           </div>
           <div className="h-px w-24 bg-[#E8E2D6] hidden md:block" />
           <div className="flex items-center gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={16} className="fill-[#C9A96E] text-[#C9A96E]" />)}
-            <span className="ml-2 text-sm font-bold text-[#1B3A2D] uppercase tracking-widest">Free Forever</span>
+            <span className="ml-2 text-sm font-bold text-[#1B3A2D] uppercase tracking-widest font-sans">Free Forever</span>
           </div>
           <div className="h-px w-24 bg-[#E8E2D6] hidden md:block" />
           <div className="flex items-center gap-3">
             <ShieldCheck size={18} className="text-[#C9A96E]" />
-            <span className="text-sm font-bold text-[#6B6860] uppercase tracking-widest">No login required</span>
+            <span className="text-sm font-bold text-[#6B6860] uppercase tracking-widest font-sans">No login required</span>
           </div>
         </div>
       </section>
 
       {/* 4. SUPERMARKET LOGOS STRIP (STRICT SPEC) */}
-      <section className="py-12 border-b border-[#E8E2D6]">
+      <section className="py-14 sm:py-16 border-b border-[#E8E2D6]">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9B9790] mb-8">Comparing prices across</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9B9790] mb-8 font-sans">Comparing prices across</p>
           <div className="flex flex-wrap justify-center gap-3">
             {SUPERMARKETS.map((s) => (
-              <div key={s.name} className="flex items-center gap-2.5 px-4 py-2 bg-white border border-[#E8E2D6] rounded-full">
+              <div key={s.name} className="flex items-center gap-2.5 px-4 py-2 bg-white border border-[#E8E2D6] rounded-full shadow-sm">
                 <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: s.color }}>{s.letter}</div>
-                <span className="text-[11px] font-bold text-[#1C1A17] uppercase tracking-wider">{s.name}</span>
+                <span className="text-[11px] font-bold text-[#1C1A17] uppercase tracking-wider font-sans">{s.name}</span>
               </div>
             ))}
           </div>
@@ -228,16 +234,18 @@ export default function LandingPage() {
       </section>
 
       {/* 5. HOW IT WORKS (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 max-w-5xl mx-auto">
+      <section className="py-14 sm:py-20 md:py-32 px-6 max-w-5xl mx-auto">
         <div className="text-center mb-20 space-y-4">
+          {/* 7. Gold labelpattern */}
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Process</span>
           <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">How it works</h2>
-          <p className="text-[#9B9790] font-bold text-sm uppercase tracking-widest">Three steps. Thirty seconds. No account needed.</p>
+          <p className="text-[#9B9790] font-bold text-sm uppercase tracking-widest font-sans">Three steps. Thirty seconds. No account needed.</p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {STEPS.map((step, i) => {
             const Icon = step.icon;
             return (
-              <div key={step.step} className="relative p-10 bg-white border border-[#E8E2D6] rounded-2xl group">
+              <div key={step.step} className="relative p-10 bg-white border border-[#E8E2D6] rounded-2xl group shadow-sm transition-all hover:shadow-md">
                 {i < STEPS.length - 1 && (
                   <div className="hidden md:block absolute top-[60px] -right-4 w-8 h-[1px] bg-[#C9A96E] z-10" />
                 )}
@@ -245,8 +253,8 @@ export default function LandingPage() {
                   <Icon size={24} className="text-[#1B3A2D]" />
                 </div>
                 <span className="font-display text-xs font-bold text-[#C9A96E] uppercase tracking-[0.2em] mb-3 block step-number">Step {step.step}</span>
-                <h3 className="text-xl font-bold text-[#1C1A17] mb-4">{step.title}</h3>
-                <p className="text-[#6B6860] leading-relaxed font-medium">{step.desc}</p>
+                <h3 className="font-display text-xl font-bold text-[#1C1A17] mb-4">{step.title}</h3>
+                <p className="text-[#6B6860] leading-relaxed font-medium font-sans">{step.desc}</p>
               </div>
             );
           })}
@@ -254,23 +262,23 @@ export default function LandingPage() {
       </section>
 
       {/* 6. WHY TROLLEYROAST WINS (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 bg-white border-y border-[#E8E2D6]">
+      <section className="py-14 sm:py-20 md:py-32 px-6 bg-white border-y border-[#E8E2D6]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Honest Comparison</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">The Honest Comparison</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">The supermarket truth-teller.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {DIFFERENTIATORS.map((d) => {
               const Icon = d.icon;
               return (
-                <div key={d.title} className="flex gap-6 p-8 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl">
+                <div key={d.title} className="flex gap-6 p-8 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl shadow-sm">
                   <div className="w-12 h-12 bg-[#1B3A2D]/8 rounded-xl flex items-center justify-center shrink-0">
                     <Icon size={20} className="text-[#1B3A2D]" />
                   </div>
                   <div className="space-y-2">
-                    <h4 className="text-sm font-bold text-[#1C1A17] uppercase tracking-tight">{d.title}</h4>
-                    <p className="text-sm text-[#6B6860] font-medium leading-relaxed">{d.desc}</p>
+                    <h4 className="text-sm font-bold text-[#1C1A17] uppercase tracking-tight font-sans">{d.title}</h4>
+                    <p className="text-sm text-[#6B6860] font-medium leading-relaxed font-sans">{d.desc}</p>
                   </div>
                 </div>
               );
@@ -280,14 +288,15 @@ export default function LandingPage() {
       </section>
 
       {/* 7. SAVINGS CARD SECTION (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 bg-[#1B3A2D]">
+      <section className="py-14 sm:py-20 md:py-32 px-6 bg-[#1B3A2D]">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="space-y-8">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Your Savings Card</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Your Savings Card</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-[#FAF8F3] leading-[1.1]">Share what you saved.<br /><span className="text-[#C9A96E]">Make your mates jealous.</span></h2>
-            <p className="text-lg text-[#FAF8F3]/70 font-medium leading-relaxed">Every scan generates a shareable savings card. Post it to WhatsApp, Instagram Stories, or TikTok — and turn your weekly shop into a conversation.</p>
+            <p className="text-lg text-[#FAF8F3]/70 font-medium leading-relaxed font-sans">Every scan generates a shareable savings card. Post it to WhatsApp, Instagram Stories, or TikTok — and turn your weekly shop into a conversation.</p>
             <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
-              <Button className="h-[56px] px-10 text-base font-bold bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#C9A96E]/90 rounded-lg">
+              {/* 5b. Solid #C9A96E bg + #1B3A2D text */}
+              <Button className="h-[56px] px-10 text-base font-bold bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] rounded-lg active:scale-95 transition-all font-sans">
                 Get My Savings Card
                 <ArrowRight size={18} className="ml-2" />
               </Button>
@@ -300,10 +309,10 @@ export default function LandingPage() {
       </section>
 
       {/* 8. RECEIPT CHALLENGE (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 bg-white border-b border-[#E8E2D6]">
+      <section className="py-14 sm:py-20 md:py-32 px-6 bg-white border-b border-[#E8E2D6]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-20 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Receipt Challenge</span>
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">The Receipt Challenge</span>
             <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">Do the challenge. Share the shock.</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -312,42 +321,42 @@ export default function LandingPage() {
               { plat: "WhatsApp", icon: "💬", desc: "Share your savings card with the family group chat. Start a conversation." },
               { plat: "Instagram", icon: "📸", desc: "Post your savings card to Stories. The numbers speak for themselves." },
             ].map((s) => (
-              <div key={s.plat} className="p-10 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl text-center space-y-4">
+              <div key={s.plat} className="p-10 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl text-center space-y-4 shadow-sm">
                 <div className="text-5xl">{s.icon}</div>
-                <h3 className="text-xl font-bold text-[#1C1A17]">{s.plat}</h3>
-                <p className="text-sm text-[#6B6860] leading-relaxed font-medium">{s.desc}</p>
-                <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest block">Shareable by design</span>
+                <h3 className="font-display text-xl font-bold text-[#1C1A17]">{s.plat}</h3>
+                <p className="text-sm text-[#6B6860] leading-relaxed font-medium font-sans">{s.desc}</p>
+                <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest block font-sans">Shareable by design</span>
               </div>
             ))}
           </div>
           <div className="mt-12 p-8 bg-[#1B3A2D]/5 border border-[#1B3A2D]/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-            <p className="text-sm font-bold text-[#6B6860]">Discussed on <span className="text-[#1B3A2D]">r/UKFrugal</span> and <span className="text-[#1B3A2D]">MSE Forums</span>.</p>
-            <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] font-bold rounded-lg px-8">Try the Challenge</Button>
+            <p className="text-sm font-bold text-[#6B6860] font-sans">Discussed on <span className="text-[#1B3A2D]">r/UKFrugal</span> and <span className="text-[#1B3A2D]">MSE Forums</span>.</p>
+            <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] font-bold rounded-lg px-8 font-sans">Try the Challenge</Button>
           </div>
         </div>
       </section>
 
       {/* 9. EMAIL CAPTURE (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 text-center max-w-xl mx-auto">
-        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4">Stay Ahead</span>
+      <section className="py-14 sm:py-20 md:py-32 px-6 text-center max-w-xl mx-auto">
+        <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Stay Ahead</span>
         <h2 className="font-display text-4xl font-bold text-[#1B3A2D] mb-6">Weekly price drops,<br />before you shop.</h2>
-        <p className="text-base text-[#6B6860] font-medium mb-10 leading-relaxed">We'll send you the biggest supermarket price changes every week — so you always know where to go before you leave the house.</p>
+        <p className="text-base text-[#6B6860] font-medium mb-10 leading-relaxed font-sans">We'll send you the biggest supermarket price changes every week — so you always know where to go before you leave the house.</p>
         <EmailCapture source="footer" />
       </section>
 
       {/* 10. PRO TEASER (STRICT SPEC) */}
-      <section className="py-[80px] md:py-[120px] px-6 bg-[#1B3A2D]/5 border-t border-[#E8E2D6]">
+      <section className="py-14 sm:py-20 md:py-32 px-6 bg-[#1B3A2D]/5 border-t border-[#E8E2D6]">
         <div className="max-w-xl mx-auto bg-white border border-[#E8E2D6] rounded-3xl p-12 text-center shadow-sm">
-          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] px-4 py-1.5 bg-[#C9A96E]/10 rounded-full inline-block mb-6">Coming Soon</span>
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] px-4 py-1.5 bg-[#C9A96E]/10 rounded-full inline-block mb-6 font-sans">Coming Soon</span>
           <h2 className="font-display text-3xl font-bold text-[#1B3A2D] mb-4">TrolleyRoast Pro</h2>
-          <p className="text-sm text-[#6B6860] font-medium leading-relaxed mb-8">SMS alerts when your regular items drop in price. Personalised basket tracking. The monthly "Receipt Index" for real-world shopping.</p>
-          <Button variant="outline" className="border-[#1B3A2D] text-[#1B3A2D] font-bold rounded-lg px-10 h-12 hover:bg-[#1B3A2D]/5">Join the Waitlist</Button>
+          <p className="text-sm text-[#6B6860] font-medium leading-relaxed mb-8 font-sans">SMS alerts when your regular items drop in price. Personalised basket tracking. The monthly "Receipt Index" for real-world shopping.</p>
+          <Button variant="outline" className="border-[#1B3A2D] text-[#1B3A2D] font-bold rounded-lg px-10 h-12 hover:bg-[#1B3A2D]/5 font-sans">Join the Waitlist</Button>
         </div>
       </section>
 
       {/* 11. FOOTER (STRICT SPEC) */}
       <footer className="border-t border-[#E8E2D6] py-16 px-6 bg-white">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-[#9B9790] font-bold">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-[#9B9790] font-bold font-sans">
           <div className="space-y-1 text-center md:text-left">
             <span className="font-display text-2xl font-bold text-[#1B3A2D] block brand-name">TrolleyRoast</span>
             <p>The UK's supermarket truth-teller. Free forever.</p>

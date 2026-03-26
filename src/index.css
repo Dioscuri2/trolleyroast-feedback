@@ -51,7 +51,7 @@
   }
 
   /* font-display applies to Hero h1, Section h2, Brand, Savings card headline, Step numbers */
-  h1, h2, .font-display, .brand-name, .card-headline, .step-number {
+  h1, h2, h3, h4, h5, h6, .font-display, .brand-name, .card-headline, .step-number {
     font-family: 'Cormorant Garamond', Georgia, serif !important;
     @apply font-semibold tracking-tight;
   }
@@ -72,5 +72,26 @@
     background-color: var(--color-card);
     border: 1px solid var(--color-border);
     @apply rounded-2xl shadow-sm transition-all duration-300;
+  }
+
+  /* Solid Forest Green Button */
+  .btn-primary {
+    @apply bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#1B3A2D]/10;
+  }
+
+  /* Solid Gold Button */
+  .btn-gold {
+    @apply bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#C9A96E]/10;
+  }
+
+  /* Outline Button */
+  .btn-outline {
+    @apply border-[#1B3A2D] text-[#1B3A2D] hover:bg-[#1B3A2D]/5 font-bold rounded-lg px-6 h-11 transition-all active:scale-95;
+  }
+
+  /* Section Gold Label */
+  .gold-label {
+    @apply text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4;
+    font-family: 'Outfit', sans-serif;
   }
 }
