@@ -41,12 +41,25 @@
   
   body {
     @apply bg-[#F9FAFB] text-[#111827] antialiased selection:bg-[#0066FF]/10 selection:text-[#0066FF];
-    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-family: 'Outfit', sans-serif;
   }
   
-  h1, h2, h3, h4, .font-display {
+  h1, h2, h3, h4, h5, h6, 
+  .font-display, 
+  .font-serif,
+  [data-price],
+  .price-figure {
+    font-family: 'Cormorant Garamond', serif !important;
+    @apply tracking-tight font-medium;
+  }
+
+  h1 { @apply text-6xl font-semibold leading-[1.1]; }
+  h2 { @apply text-4xl font-semibold; }
+  h3 { @apply text-2xl font-semibold; }
+
+  /* Ensure all UI elements use Outfit */
+  button, nav, label, input, textarea, span, p, div:not(.font-display) {
     font-family: 'Outfit', sans-serif;
-    @apply tracking-[-0.02em];
   }
 }
 
