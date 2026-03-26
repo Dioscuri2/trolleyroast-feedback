@@ -14,18 +14,18 @@ import {
   TrendingDown,
   ShieldCheck,
   Smartphone,
+  ChevronRight,
+  Globe,
 } from "lucide-react";
 
 // ─── Supermarket data ─────────────────────────────────────────────────────────
 const SUPERMARKETS = [
-  { name: "Tesco", color: "#00539F", letter: "T" },
-  { name: "Asda", color: "#78BE20", letter: "A" },
-  { name: "Sainsbury's", color: "#F06C00", letter: "S" },
-  { name: "Morrisons", color: "#FDB913", letter: "M" },
-  { name: "Aldi", color: "#003882", letter: "A" },
-  { name: "Lidl", color: "#0050AA", letter: "L" },
-  { name: "Waitrose", color: "#007B40", letter: "W" },
-  { name: "Co-op", color: "#00B1A9", letter: "C" },
+  { name: "Tesco", color: "#00539F" },
+  { name: "Asda", color: "#78BE20" },
+  { name: "Sainsbury's", color: "#F06C00" },
+  { name: "Morrisons", color: "#FDB913" },
+  { name: "Aldi", color: "#003882" },
+  { name: "Lidl", color: "#0050AA" },
 ];
 
 // ─── How It Works steps ───────────────────────────────────────────────────────
@@ -50,7 +50,7 @@ const STEPS = [
   },
 ];
 
-// ─── Differentiators vs item-by-item search ───────────────────────────────────
+// ─── Differentiators ─────────────────────────────────────────────────────────
 const DIFFERENTIATORS = [
   {
     icon: ShieldCheck,
@@ -77,721 +77,244 @@ const DIFFERENTIATORS = [
 // ─── Savings Card Mockup ──────────────────────────────────────────────────────
 function SavingsCardMockup() {
   return (
-    <div className="relative mx-auto w-full max-w-sm">
-      {/* Shadow card behind */}
-      <div
-        className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl"
-        style={{ background: "#1B3A2D", opacity: 0.12 }}
-      />
-      {/* Main card */}
-      <div
-        className="relative rounded-2xl overflow-hidden shadow-xl"
-        style={{ background: "#FAF8F3", border: "1px solid #E8E2D6" }}
-      >
-        {/* Card header */}
-        <div
-          className="px-5 py-4 flex items-center justify-between"
-          style={{ background: "#1B3A2D" }}
-        >
-          <span
-            className="font-display text-xl font-semibold tracking-tight"
-            style={{ color: "#FAF8F3" }}
-          >
-            TrolleyRoast
-          </span>
-          <span
-            className="text-xs font-medium px-2 py-0.5 rounded-full"
-            style={{ background: "rgba(201,169,110,0.25)", color: "#C9A96E" }}
-          >
-            Your Savings
-          </span>
+    <div className="relative mx-auto w-full max-w-sm transition-all duration-500 hover:scale-[1.02]">
+      <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl bg-[#1B3A2D]/5" />
+      <div className="relative rounded-3xl overflow-hidden border border-[#E8E3D9] bg-white shadow-[0_20px_50px_-12px_rgba(27,58,45,0.08)]">
+        <div className="px-6 py-5 bg-[#1B3A2D] flex items-center justify-between">
+          <span className="font-display text-xl font-semibold text-[#FAF8F3]">TrolleyRoast</span>
+          <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-[#C9A96E]/20 text-[#C9A96E]">Analysis</span>
         </div>
-
-        {/* Savings headline */}
-        <div className="px-5 pt-5 pb-3 text-center">
-          <p
-            className="text-xs font-medium uppercase tracking-widest mb-1"
-            style={{ color: "#C9A96E" }}
-          >
-            You overpaid by
-          </p>
-          <p
-            className="font-display text-6xl font-bold leading-none"
-            style={{ color: "#1B3A2D" }}
-          >
-            £14.30
-          </p>
-          <p className="text-sm mt-1" style={{ color: "#6B6860" }}>
-            vs. shopping at Aldi this week
-          </p>
+        <div className="px-8 py-10 text-center">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-2">Total Potential Saving</p>
+          <p className="font-display text-7xl font-bold text-[#1B3A2D] leading-none mb-2 tracking-tighter">£14.30</p>
+          <p className="text-sm font-medium text-[#7A7570]">on your weekly shop</p>
         </div>
-
-        {/* Comparison bars */}
-        <div className="px-5 pb-5 space-y-2.5">
+        <div className="px-8 pb-8 space-y-4">
           {[
             { store: "Your shop (Tesco)", amount: 68.40, pct: 100, highlight: false },
             { store: "Aldi", amount: 54.10, pct: 79, highlight: true },
             { store: "Lidl", amount: 56.20, pct: 82, highlight: false },
-            { store: "Asda", amount: 61.80, pct: 90, highlight: false },
           ].map((row) => (
-            <div key={row.store}>
-              <div className="flex justify-between items-center mb-1">
-                <span
-                  className="text-xs font-medium"
-                  style={{ color: row.highlight ? "#1B3A2D" : "#6B6860" }}
-                >
-                  {row.store}
-                </span>
-                <span
-                  className="text-xs font-semibold"
-                  style={{ color: row.highlight ? "#1B3A2D" : "#6B6860" }}
-                >
-                  £{row.amount.toFixed(2)}
-                </span>
+            <div key={row.store} className="space-y-1.5">
+              <div className="flex justify-between items-center text-[11px] font-bold uppercase tracking-tight">
+                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#7A7570]"}>{row.store}</span>
+                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#7A7570]"}>£{row.amount.toFixed(2)}</span>
               </div>
-              <div
-                className="h-2 rounded-full overflow-hidden"
-                style={{ background: "#EDE8DF" }}
-              >
-                <div
-                  className="h-full rounded-full transition-all"
-                  style={{
-                    width: `${row.pct}%`,
-                    background: row.highlight ? "#C9A96E" : "#D4CFC6",
-                  }}
+              <div className="h-2 rounded-full bg-[#FAF8F3] border border-[#E8E3D9] overflow-hidden">
+                <div 
+                  className="h-full rounded-full transition-all duration-1000" 
+                  style={{ width: `${row.pct}%`, backgroundColor: row.highlight ? "#C9A96E" : "#E8E3D9" }} 
                 />
               </div>
             </div>
           ))}
         </div>
-
-        {/* Card footer */}
-        <div
-          className="px-5 py-3 flex items-center justify-between text-xs"
-          style={{ borderTop: "1px solid #E8E2D6", color: "#9B9790" }}
-        >
-          <span>trolleyroast.app</span>
-          <span>21 items compared</span>
+        <div className="px-8 py-4 bg-[#FAF8F3] border-t border-[#E8E3D9] flex justify-between text-[10px] font-bold text-[#7A7570] uppercase tracking-widest">
+          <span>trolleyroast.co.uk</span>
+          <span>Verified Price Index</span>
         </div>
       </div>
     </div>
-  );
-}
-
-// ─── Social Proof Row ─────────────────────────────────────────────────────────
-function SocialProof() {
-  const { data: count } = trpc.social.shopperCount.useQuery();
-
-  return (
-    <div
-      className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-sm"
-      style={{ color: "#6B6860" }}
-    >
-      <div className="flex items-center gap-2">
-        <Users size={16} style={{ color: "#C9A96E" }} />
-        <span>
-          Trusted by{" "}
-          <strong style={{ color: "#1C1A17" }}>
-            {count !== undefined ? count.toLocaleString() : "—"}
-          </strong>{" "}
-          shoppers this week
-        </span>
-      </div>
-      <div className="hidden sm:block w-px h-4" style={{ background: "#D4CFC6" }} />
-      <div className="flex items-center gap-1">
-        {[1, 2, 3, 4, 5].map((s) => (
-          <Star key={s} size={14} className="fill-[#C9A96E] text-[#C9A96E]" />
-        ))}
-        <span className="ml-1">Free forever</span>
-      </div>
-      <div className="hidden sm:block w-px h-4" style={{ background: "#D4CFC6" }} />
-      <div className="flex items-center gap-1.5">
-        <ShieldCheck size={14} style={{ color: "#C9A96E" }} />
-        <span>No login for first scan</span>
-      </div>
-    </div>
-  );
-}
-
-// ─── Receipt Challenge Section ────────────────────────────────────────────────
-function ReceiptChallenge() {
-  return (
-    <section
-      className="py-16 px-4"
-      style={{ background: "#FFFFFF", borderTop: "1px solid #E8E2D6", borderBottom: "1px solid #E8E2D6" }}
-    >
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-10">
-          <span
-            className="text-xs font-bold uppercase tracking-widest mb-3 block"
-            style={{ color: "#C9A96E" }}
-          >
-            The Receipt Challenge
-          </span>
-          <h2
-            className="font-display text-3xl sm:text-4xl font-semibold mb-3"
-            style={{ color: "#1B3A2D" }}
-          >
-            Do the challenge. Share the shock.
-          </h2>
-          <p
-            className="text-sm leading-relaxed max-w-lg mx-auto"
-            style={{ color: "#6B6860" }}
-          >
-            The UK's money-saving community is already talking about supermarket prices.
-            TrolleyRoast gives them the proof — in seconds, on camera.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {[
-            {
-              platform: "TikTok",
-              emoji: "🎬",
-              desc: "Scan your receipt on camera. Reveal the savings. Watch it go viral.",
-              cta: "Perfect for creators",
-            },
-            {
-              platform: "WhatsApp",
-              emoji: "💬",
-              desc: "Share your savings card with the family group chat. Start a conversation about where to shop next week.",
-              cta: "Built for sharing",
-            },
-            {
-              platform: "Instagram",
-              emoji: "📸",
-              desc: "Post your savings card to Stories. The numbers speak for themselves.",
-              cta: "Shareable by design",
-            },
-          ].map((item) => (
-            <div
-              key={item.platform}
-              className="rounded-2xl p-6 text-center"
-              style={{ background: "#FAF8F3", border: "1px solid #E8E2D6" }}
-            >
-              <div className="text-4xl mb-3">{item.emoji}</div>
-              <h3
-                className="font-semibold text-base mb-2"
-                style={{ color: "#1C1A17" }}
-              >
-                {item.platform}
-              </h3>
-              <p
-                className="text-sm leading-relaxed mb-3"
-                style={{ color: "#6B6860" }}
-              >
-                {item.desc}
-              </p>
-              <span
-                className="text-xs font-semibold uppercase tracking-widest"
-                style={{ color: "#C9A96E" }}
-              >
-                {item.cta}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Community callout */}
-        <div
-          className="mt-8 rounded-xl px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4"
-          style={{ background: "rgba(27,58,45,0.05)", border: "1px solid rgba(27,58,45,0.1)" }}
-        >
-          <p className="text-sm text-center sm:text-left" style={{ color: "#6B6860" }}>
-            <strong style={{ color: "#1B3A2D" }}>Already discussed on</strong> r/UKFrugal,
-            MoneySavingExpert forums, and UK money-saving communities.
-          </p>
-          <a
-            href="https://trolley-roast.lovable.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0"
-          >
-            <Button
-              size="sm"
-              className="h-9 px-5 text-xs font-semibold whitespace-nowrap"
-              style={{ background: "#1B3A2D", color: "#FAF8F3" }}
-            >
-              Try the Challenge
-              <ArrowRight size={14} className="ml-1.5" />
-            </Button>
-          </a>
-        </div>
-      </div>
-    </section>
   );
 }
 
 // ─── Main Landing Page ────────────────────────────────────────────────────────
 export default function LandingPage() {
-  return (
-    <div className="min-h-screen" style={{ background: "#FAF8F3" }}>
+  const { data: count } = trpc.social.shopperCount.useQuery();
 
-      {/* ── Nav ── */}
-      <nav
-        className="sticky top-0 z-20 border-b"
-        style={{
-          background: "rgba(250,248,243,0.9)",
-          backdropFilter: "blur(8px)",
-          borderColor: "#E8E2D6",
-        }}
-      >
-        <div className="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-          <span
-            className="font-display text-xl font-semibold"
-            style={{ color: "#1B3A2D" }}
-          >
-            TrolleyRoast
-          </span>
-          <div className="flex items-center gap-3">
-            <Link href="/receipt-index">
-              <span
-                className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity hidden sm:inline"
-                style={{ color: "#6B6860" }}
-              >
-                Price Index
-              </span>
-            </Link>
-            <Link href="/feedback">
-              <span
-                className="text-sm font-medium cursor-pointer hover:opacity-70 transition-opacity"
-                style={{ color: "#6B6860" }}
-              >
-                Feedback
-              </span>
-            </Link>
-            <a
-              href="https://trolley-roast.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="sm"
-                className="h-8 px-4 text-xs font-semibold"
-                style={{ background: "#1B3A2D", color: "#FAF8F3" }}
-              >
-                Try the App
+  return (
+    <div className="min-h-screen bg-[#FAF8F3] text-[#1C1A17] font-sans selection:bg-[#1B3A2D]/10 selection:text-[#1B3A2D]">
+      
+      {/* ── Navbar ── */}
+      <nav className="sticky top-0 z-50 border-b border-[#E8E3D9] bg-[#FAF8F3]/80 backdrop-blur-md">
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3 cursor-pointer group">
+            <div className="w-10 h-10 bg-[#1B3A2D] rounded-xl flex items-center justify-center shadow-lg shadow-[#1B3A2D]/10 transition-transform group-hover:scale-105">
+              <span className="text-[#FAF8F3] font-bold text-2xl tracking-tighter">T</span>
+            </div>
+            <span className="text-2xl font-semibold text-[#1B3A2D] tracking-tight font-display">TrolleyRoast</span>
+          </div>
+          <div className="hidden md:flex items-center gap-10">
+            <Link href="/receipt-index"><span className="text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
+            <Link href="/feedback"><span className="text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
+            <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#1B3A2D]/10">
+                Launch App
               </Button>
             </a>
           </div>
         </div>
       </nav>
 
-      {/* ── HERO ── */}
-      <section className="px-4 pt-14 pb-10 sm:pt-20 sm:pb-16 text-center max-w-2xl mx-auto">
-        {/* Badge */}
-        <div
-          className="inline-flex items-center gap-1.5 text-xs font-medium px-3 py-1 rounded-full mb-6"
-          style={{
-            background: "rgba(201,169,110,0.15)",
-            color: "#C9A96E",
-            border: "1px solid rgba(201,169,110,0.3)",
-          }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />
-          Free · No sign-up needed · UK supermarkets
+      {/* ── HERO SECTION ── */}
+      <section className="relative px-6 pt-24 pb-32 sm:pt-32 sm:pb-48 text-center max-w-5xl mx-auto overflow-hidden">
+        {/* Editorial Headline */}
+        <div className="space-y-8 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
+          <h1 className="font-display text-[clamp(48px,10vw,84px)] font-bold leading-[0.95] text-[#1B3A2D] tracking-[-0.03em] max-w-4xl mx-auto">
+            Scan your receipt.<br />
+            <span className="relative inline-block">
+              See where you'd 
+              <span className="absolute -bottom-2 left-0 w-full h-2 bg-[#C9A96E]/30 -skew-x-12" />
+              <span className="relative text-[#C9A96E]"> save.</span>
+            </span>
+          </h1>
+
+          <p className="text-lg sm:text-xl font-medium text-[#7A7570] leading-relaxed max-w-[560px] mx-auto font-sans">
+            TrolleyRoast compares your entire basket across the UK's biggest supermarkets instantly. No searching. Just the truth.
+          </p>
         </div>
 
-        <h1
-          className="font-display text-5xl sm:text-6xl font-bold leading-tight mb-4"
-          style={{ color: "#1B3A2D" }}
-        >
-          Scan your receipt.<br />
-          <span style={{ color: "#C9A96E" }}>See where you'd save.</span>
-          <br />
-          Every week.
-        </h1>
-
-        <p
-          className="text-base sm:text-lg leading-relaxed mb-3 max-w-md mx-auto"
-          style={{ color: "#6B6860" }}
-        >
-          TrolleyRoast compares your <em>entire basket</em> across Tesco, Asda, Sainsbury's,
-          Morrisons, Aldi and Lidl — instantly. No item-by-item searching. Just the truth.
-        </p>
-
-        {/* Loss-framing stat */}
-        <p
-          className="text-sm font-medium mb-8 max-w-sm mx-auto"
-          style={{ color: "#9B9790" }}
-        >
-          The average UK shopper overpays{" "}
-          <strong style={{ color: "#1B3A2D" }}>£1,000+ a year</strong> by not comparing
-          supermarkets. Your receipt has the answer.
-        </p>
-
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-          <a
-            href="https://trolley-roast.lovable.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button
-              size="lg"
-              className="h-13 px-8 text-base font-semibold w-full sm:w-auto"
-              style={{ background: "#1B3A2D", color: "#FAF8F3" }}
-            >
-              Start Saving Free
-              <ArrowRight size={18} className="ml-2" />
+        {/* Primary CTA Row */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20 animate-in fade-in zoom-in duration-1000 delay-200">
+          <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <Button className="h-16 px-10 text-lg font-bold bg-[#1B3A2D] text-white hover:bg-[#12261E] rounded-lg transition-all shadow-xl shadow-[#1B3A2D]/5 w-full sm:w-auto active:scale-95">
+              Scan Your Receipt
+              <ArrowRight size={20} className="ml-3" />
             </Button>
           </a>
           <Link href="/feedback">
-            <Button
-              variant="outline"
-              size="lg"
-              className="h-13 px-8 text-base font-medium w-full sm:w-auto bg-transparent"
-              style={{ borderColor: "#D4CFC6", color: "#1B3A2D" }}
-            >
-              Share Feedback
-            </Button>
+            <span className="text-base font-bold text-[#1B3A2D] hover:underline underline-offset-8 cursor-pointer transition-all flex items-center gap-1.5 px-6 py-4">
+              Share Feedback <ChevronRight size={18} />
+            </span>
           </Link>
         </div>
-      </section>
 
-      {/* ── SOCIAL PROOF (above fold) ── */}
-      <section
-        className="py-5 border-y"
-        style={{ borderColor: "#E8E2D6", background: "rgba(255,255,255,0.5)" }}
-      >
-        <div className="max-w-3xl mx-auto px-4">
-          <SocialProof />
+        {/* Supermarket Badges */}
+        <div className="flex flex-wrap justify-center gap-3 animate-in fade-in duration-1000 delay-500">
+          {SUPERMARKETS.map((s) => (
+            <div 
+              key={s.name} 
+              className="flex items-center gap-2.5 px-4 py-2 bg-white border border-[#E8E3D9] rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
+            >
+              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
+              <span className="text-[13px] font-bold text-[#1C1A17] uppercase tracking-wider">{s.name}</span>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── SUPERMARKET LOGOS STRIP ── */}
-      <section
-        className="py-8 border-b"
-        style={{ borderColor: "#E8E2D6" }}
-      >
-        <div className="max-w-3xl mx-auto px-4">
-          <p
-            className="text-center text-xs font-medium uppercase tracking-widest mb-5"
-            style={{ color: "#9B9790" }}
-          >
-            Comparing prices across
-          </p>
-          <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-            {SUPERMARKETS.map((s) => (
-              <div
-                key={s.name}
-                className="flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold"
-                style={{
-                  background: `${s.color}12`,
-                  border: `1px solid ${s.color}30`,
-                  color: s.color,
-                }}
-              >
-                <span
-                  className="w-5 h-5 rounded-full flex items-center justify-center text-xs font-bold text-white"
-                  style={{ background: s.color }}
-                >
-                  {s.letter}
-                </span>
-                {s.name}
-              </div>
-            ))}
+      {/* ── Social Proof ── */}
+      <section className="py-12 border-y border-[#E8E3D9] bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+          <div className="flex items-center gap-3">
+            <div className="flex -space-x-2">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-[#E8E3D9] overflow-hidden">
+                  <img src={`https://i.pravatar.cc/100?u=${i}`} alt="User" />
+                </div>
+              ))}
+            </div>
+            <p className="text-sm font-bold text-[#7A7570] tracking-tight uppercase">
+              Trusted by <span className="text-[#1B3A2D]">{count ? count.toLocaleString() : "1,247+"} shoppers</span> this week
+            </p>
+          </div>
+          <div className="h-px w-24 bg-[#E8E3D9] hidden md:block" />
+          <div className="flex items-center gap-1.5">
+            {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={16} className="fill-[#C9A96E] text-[#C9A96E]" />)}
+            <span className="ml-2 text-sm font-bold text-[#1B3A2D] uppercase tracking-widest">Free Forever</span>
           </div>
         </div>
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section className="py-16 px-4 max-w-4xl mx-auto">
-        <div className="text-center mb-10">
-          <h2
-            className="font-display text-3xl sm:text-4xl font-semibold mb-2"
-            style={{ color: "#1B3A2D" }}
-          >
-            How it works
-          </h2>
-          <p className="text-sm" style={{ color: "#9B9790" }}>
-            Three steps. Thirty seconds. No account needed.
-          </p>
+      <section className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
+        <div className="text-center mb-20 space-y-4">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Process</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">How it works</h2>
         </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-          {STEPS.map((step, i) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {STEPS.map((step) => {
             const Icon = step.icon;
             return (
-              <div
-                key={step.step}
-                className="relative rounded-2xl p-6"
-                style={{ background: "#FFFFFF", border: "1px solid #E8E2D6" }}
-              >
-                {i < STEPS.length - 1 && (
-                  <div
-                    className="hidden sm:block absolute top-10 -right-3 w-6 h-px z-10"
-                    style={{ background: "#C9A96E" }}
-                  />
-                )}
-                <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
-                  style={{ background: "rgba(27,58,45,0.08)" }}
-                >
-                  <Icon size={20} style={{ color: "#1B3A2D" }} />
+              <div key={step.step} className="group p-10 bg-white border border-[#E8E3D9] rounded-2xl shadow-trolley hover:shadow-trolley-hover transition-all duration-300">
+                <div className="w-14 h-14 bg-[#1B3A2D]/5 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                  <Icon size={24} className="text-[#1B3A2D]" />
                 </div>
-                <span
-                  className="text-xs font-bold uppercase tracking-widest mb-2 block"
-                  style={{ color: "#C9A96E" }}
-                >
-                  Step {step.step}
-                </span>
-                <h3
-                  className="font-semibold text-base mb-1.5"
-                  style={{ color: "#1C1A17" }}
-                >
-                  {step.title}
-                </h3>
-                <p className="text-sm leading-relaxed" style={{ color: "#6B6860" }}>
-                  {step.desc}
-                </p>
+                <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-[0.2em] mb-3 block">Step {step.step}</span>
+                <h3 className="font-display text-2xl font-bold text-[#1B3A2D] mb-4">{step.title}</h3>
+                <p className="text-[#7A7570] leading-relaxed font-medium">{step.desc}</p>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* ── WHY TROLLEYROAST WINS ── */}
-      <section
-        className="py-16 px-4 border-t"
-        style={{ borderColor: "#E8E2D6", background: "rgba(255,255,255,0.6)" }}
-      >
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-10">
-            <span
-              className="text-xs font-bold uppercase tracking-widest mb-3 block"
-              style={{ color: "#C9A96E" }}
-            >
-              The honest comparison
-            </span>
-            <h2
-              className="font-display text-3xl sm:text-4xl font-semibold mb-3"
-              style={{ color: "#1B3A2D" }}
-            >
-              The supermarket truth-teller
-            </h2>
-            <p
-              className="text-sm leading-relaxed max-w-lg mx-auto"
-              style={{ color: "#6B6860" }}
-            >
-              Supermarkets use confusing multi-buy deals and pack size tricks to hide the real
-              cost of your basket. TrolleyRoast cuts through the noise — one scan, six
-              supermarkets, the whole truth.
+      {/* ── THE CHALLENGE ── */}
+      <section className="py-24 md:py-32 bg-white border-y border-[#E8E3D9]">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-8">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Comparison</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D] leading-[1.1]">The supermarket<br />truth-teller.</h2>
+            <p className="text-lg text-[#7A7570] font-medium leading-relaxed">
+              Supermarkets use confusing multi-buy deals and pack size tricks to hide the real cost. TrolleyRoast cuts through the noise — one scan, the whole truth.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-            {DIFFERENTIATORS.map((d) => {
-              const Icon = d.icon;
-              return (
-                <div
-                  key={d.title}
-                  className="flex gap-4 rounded-2xl p-5"
-                  style={{ background: "#FAF8F3", border: "1px solid #E8E2D6" }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
-                    style={{ background: "rgba(27,58,45,0.08)" }}
-                  >
-                    <Icon size={18} style={{ color: "#1B3A2D" }} />
-                  </div>
-                  <div>
-                    <h3
-                      className="font-semibold text-sm mb-1"
-                      style={{ color: "#1C1A17" }}
-                    >
-                      {d.title}
-                    </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: "#6B6860" }}>
-                      {d.desc}
-                    </p>
-                  </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {DIFFERENTIATORS.slice(0, 2).map((d) => (
+                <div key={d.title} className="space-y-2">
+                  <h4 className="text-sm font-bold text-[#1B3A2D] uppercase tracking-tight">{d.title}</h4>
+                  <p className="text-sm text-[#7A7570] font-medium leading-snug">{d.desc}</p>
                 </div>
-              );
-            })}
+              ))}
+            </div>
+            <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
+              <Button className="h-14 px-8 bg-[#1B3A2D] text-white hover:bg-[#12261E] rounded-lg font-bold shadow-lg shadow-[#1B3A2D]/5 mt-4">
+                Try The Challenge <ArrowRight size={18} className="ml-2" />
+              </Button>
+            </a>
+          </div>
+          <div className="relative">
+            <SavingsCardMockup />
           </div>
         </div>
       </section>
 
-      {/* ── SAVINGS CARD MOCKUP ── */}
-      <section className="py-16 px-4" style={{ background: "#1B3A2D" }}>
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-center">
-            {/* Text side */}
-            <div>
-              <span
-                className="text-xs font-bold uppercase tracking-widest mb-3 block"
-                style={{ color: "#C9A96E" }}
-              >
-                Your savings card
-              </span>
-              <h2
-                className="font-display text-3xl sm:text-4xl font-semibold leading-tight mb-4"
-                style={{ color: "#FAF8F3" }}
-              >
-                Share what you saved.<br />
-                <span style={{ color: "#C9A96E" }}>Make your mates jealous.</span>
-              </h2>
-              <p
-                className="text-sm leading-relaxed mb-2"
-                style={{ color: "rgba(250,248,243,0.7)" }}
-              >
-                Every scan generates a shareable savings card. Post it to{" "}
-                <strong style={{ color: "#FAF8F3" }}>WhatsApp</strong>,{" "}
-                <strong style={{ color: "#FAF8F3" }}>Instagram Stories</strong>, or{" "}
-                <strong style={{ color: "#FAF8F3" }}>TikTok</strong> — and turn your
-                weekly shop into a conversation.
-              </p>
-              <p
-                className="text-sm leading-relaxed mb-6"
-                style={{ color: "rgba(250,248,243,0.55)" }}
-              >
-                The visual of scanning a physical receipt and revealing the savings is one
-                of the most shareable moments in the UK money-saving community right now.
-              </p>
-              <a
-                href="https://trolley-roast.lovable.app"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button
-                  size="lg"
-                  className="h-12 px-7 text-sm font-semibold"
-                  style={{ background: "#C9A96E", color: "#1B3A2D" }}
-                >
-                  Get My Savings Card
-                  <ArrowRight size={16} className="ml-2" />
-                </Button>
-              </a>
-            </div>
-            {/* Card mockup */}
-            <div className="flex justify-center">
-              <SavingsCardMockup />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── RECEIPT CHALLENGE / SOCIAL ── */}
-      <ReceiptChallenge />
-
-      {/* ── EMAIL CAPTURE ── */}
-      <section className="py-16 px-4 text-center max-w-xl mx-auto">
-        <span
-          className="text-xs font-bold uppercase tracking-widest mb-3 block"
-          style={{ color: "#C9A96E" }}
-        >
-          Stay ahead
-        </span>
-        <h2
-          className="font-display text-3xl sm:text-4xl font-semibold mb-3"
-          style={{ color: "#1B3A2D" }}
-        >
-          Get weekly price drops<br />before you shop
-        </h2>
-        <p
-          className="text-sm leading-relaxed mb-7"
-          style={{ color: "#6B6860" }}
-        >
-          We'll send you the biggest supermarket price changes every week — so you always
-          know where to go before you leave the house. Join shoppers already saving with
-          TrolleyRoast.
+      {/* ── CTA SECTION ── */}
+      <section className="py-24 md:py-48 px-6 text-center max-w-3xl mx-auto">
+        <h2 className="font-display text-5xl md:text-6xl font-bold text-[#1B3A2D] mb-8 leading-[1.1]">Stop overpaying<br />for groceries.</h2>
+        <p className="text-lg text-[#7A7570] font-medium mb-12 max-w-lg mx-auto">
+          The average UK family saves £1,000+ a year by switching supermarkets. Scan your next receipt and see your share.
         </p>
-        <EmailCapture source="landing" />
-        <p className="text-xs mt-3" style={{ color: "#9B9790" }}>
-          No spam. Unsubscribe any time.
-        </p>
-      </section>
-
-      {/* ── PRO TEASER ── */}
-      <section
-        className="py-14 px-4 text-center max-w-xl mx-auto border-t"
-        style={{ borderColor: "#E8E2D6" }}
-      >
-        <div
-          className="rounded-2xl p-7 sm:p-9"
-          style={{ background: "#FFFFFF", border: "1px solid #E8E2D6" }}
-        >
-          <span
-            className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-4"
-            style={{ background: "rgba(201,169,110,0.15)", color: "#C9A96E" }}
-          >
-            Coming soon
-          </span>
-          <h2
-            className="font-display text-2xl sm:text-3xl font-semibold mb-3"
-            style={{ color: "#1B3A2D" }}
-          >
-            TrolleyRoast Pro
-          </h2>
-          <p
-            className="text-sm leading-relaxed mb-6"
-            style={{ color: "#6B6860" }}
-          >
-            SMS alerts when your regular items drop in price. Personalised basket tracking
-            across weeks. A monthly "Receipt Index" showing which supermarket is genuinely
-            cheapest for real-world baskets — not just single items.
-          </p>
-          <Link href="/pro">
-            <Button
-              variant="outline"
-              className="h-11 px-7 text-sm font-semibold bg-transparent"
-              style={{ borderColor: "#1B3A2D", color: "#1B3A2D" }}
-            >
-              Join the Waitlist
-              <ArrowRight size={15} className="ml-2" />
-            </Button>
-          </Link>
+        <EmailCapture source="footer" />
+        <div className="mt-12 flex items-center justify-center gap-6 text-[10px] font-bold text-[#7A7570] uppercase tracking-[0.2em]">
+          <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#1B3A2D]" /> No Sign-up</span>
+          <span className="flex items-center gap-1.5"><Zap size={14} className="text-[#C9A96E]" /> Instant Analysis</span>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="border-t py-8 px-4" style={{ borderColor: "#E8E2D6" }}>
-        <div
-          className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs"
-          style={{ color: "#9B9790" }}
-        >
-          <div>
-            <span
-              className="font-display text-base font-semibold block mb-1"
-              style={{ color: "#1B3A2D" }}
-            >
-              TrolleyRoast
-            </span>
-            <span>The UK's supermarket truth-teller. Free forever.</span>
+      <footer className="border-t border-[#E8E3D9] py-16 px-6 bg-white">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-12 text-sm">
+          <div className="space-y-4 max-w-xs">
+            <span className="font-display text-2xl font-bold text-[#1B3A2D]">TrolleyRoast</span>
+            <p className="text-[#7A7570] font-medium">The UK's supermarket truth-teller. Built to help you keep more of what you earn.</p>
           </div>
+          <div className="grid grid-cols-2 gap-16">
+            <div className="space-y-6">
+              <span className="text-[10px] font-bold text-[#1B3A2D] uppercase tracking-widest">Platform</span>
+              <div className="flex flex-col gap-4 font-bold text-[#7A7570]">
+                <Link href="/receipt-index"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
+                <Link href="/feedback"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
+                <Link href="/pro"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Pro Waitlist</span></Link>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <span className="text-[10px] font-bold text-[#1B3A2D] uppercase tracking-widest">Connect</span>
+              <div className="flex flex-col gap-4 font-bold text-[#7A7570]">
+                <a href="#" className="hover:text-[#1B3A2D] transition-colors">Support</a>
+                <a href="#" className="hover:text-[#1B3A2D] transition-colors">Twitter</a>
+                <a href="#" className="hover:text-[#1B3A2D] transition-colors">TikTok</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#F3F4F6] flex justify-between items-center text-[10px] font-bold text-[#7A7570] uppercase tracking-widest">
+          <span>© 2026 TROLLEYROAST GLOBAL LTD.</span>
           <div className="flex items-center gap-4">
-            <a
-              href="https://trolley-roast.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              App
-            </a>
-            <Link href="/receipt-index">
-              <span className="hover:underline cursor-pointer">Price Index</span>
-            </Link>
-            <Link href="/feedback">
-              <span className="hover:underline cursor-pointer">Feedback</span>
-            </Link>
-            <Link href="/pro">
-              <span className="hover:underline cursor-pointer">Pro</span>
-            </Link>
+             <div className="w-1.5 h-1.5 rounded-full bg-[#1B3A2D] animate-pulse" />
+             <span>Systems Active</span>
           </div>
-          <span>© {new Date().getFullYear()} TrolleyRoast</span>
         </div>
       </footer>
-
-      {/* ── SEO text block (hidden visually, indexable) ── */}
-      <div className="sr-only">
-        <p>
-          TrolleyRoast is a free UK supermarket price comparison app. Compare your whole
-          basket across Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose and Co-op
-          by scanning your receipt. Find the cheapest supermarket for a family of four,
-          compare basket costs across UK supermarkets, and see Tesco vs Aldi vs Waitrose
-          price comparisons instantly. No item-by-item searching required.
-        </p>
-      </div>
     </div>
   );
 }
