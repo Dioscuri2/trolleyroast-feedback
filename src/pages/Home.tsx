@@ -122,150 +122,147 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
+    <div className="min-h-screen bg-[#F8F9FA] flex flex-col font-sans">
       {/* ── Header ── */}
-      <header className="border-b border-border/60 bg-card/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-lg mx-auto px-4 py-4 flex items-center gap-3">
-          {/* Wordmark */}
-          <span className="font-display text-2xl font-semibold text-primary tracking-tight leading-none">
-            TrolleyRoast
-          </span>
-          <span className="text-border">|</span>
-          <span className="text-sm text-muted-foreground font-medium">Feedback</span>
+      <header className="border-b border-gray-200 bg-white sticky top-0 z-10">
+        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            {/* Logo placeholder - mirroring the blue accent from trolley.co.uk */}
+            <div className="w-8 h-8 bg-[#0066FF] rounded-lg flex items-center justify-center">
+              <span className="text-white font-bold text-xl">T</span>
+            </div>
+            <span className="text-2xl font-bold text-[#1A1A1A] tracking-tight">
+              TrolleyRoast
+            </span>
+          </div>
+          <div className="hidden sm:flex items-center gap-6">
+            <span className="text-sm font-semibold text-gray-500 hover:text-[#0066FF] cursor-pointer">Feedback</span>
+            <span className="text-sm font-semibold text-gray-500 hover:text-[#0066FF] cursor-pointer">Prices</span>
+            <Button size="sm" className="bg-[#0066FF] text-white hover:bg-[#0052CC] font-bold rounded-lg">
+              Download App
+            </Button>
+          </div>
         </div>
       </header>
 
       {/* ── Main Content ── */}
-      <main className="flex-1 flex flex-col items-center justify-start px-4 py-8 sm:py-12">
-        <div className="w-full max-w-lg">
+      <main className="flex-1 flex flex-col items-center justify-start px-4 py-12 sm:py-20">
+        <div className="w-full max-w-2xl">
 
-          {/* ── App Context Banner ── */}
-          <div className="bg-primary text-primary-foreground rounded-xl p-5 mb-8 shadow-sm">
-            <h1 className="font-display text-xl sm:text-2xl font-semibold mb-1 leading-snug">
-              What does your shop really cost?
+          {/* ── Hero Section ── */}
+          <div className="text-center mb-12">
+            <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1A1A1A] mb-6 tracking-tight">
+              Compare Supermarket Prices
             </h1>
-            <p className="text-primary-foreground/80 text-sm leading-relaxed">
-              TrolleyRoast scans your supermarket receipt and instantly shows
-              what the same basket costs at Tesco, Asda, Sainsbury's, Morrisons,
-              Aldi, and Lidl — completely free. We're in early development and
-              your feedback shapes what we build next.
+            <p className="text-lg text-[#4A4A4A] leading-relaxed max-w-xl mx-auto font-medium">
+              We're building the fastest way to save on your weekly shop. 
+              Help us refine the experience with your feedback.
             </p>
           </div>
 
-          {/* ── Card ── */}
-          <div className="bg-card rounded-2xl border border-border shadow-sm overflow-hidden">
+          {/* ── Form Card ── */}
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] overflow-hidden">
             {submitted ? (
               <ThankYou rating={submittedRating} onReset={handleReset} />
             ) : (
               <form onSubmit={handleSubmit} noValidate>
                 {/* Star Rating Section */}
-                <div className="px-6 pt-7 pb-5 border-b border-border/60 text-center">
-                  <h2 className="font-display text-2xl font-semibold text-foreground mb-1">
-                    Share your experience
+                <div className="px-8 pt-10 pb-8 text-center bg-white">
+                  <h2 className="text-2xl font-bold text-[#1A1A1A] mb-2">
+                    Rate your experience
                   </h2>
-                  <p className="text-sm text-muted-foreground mb-5">
-                    How would you rate TrolleyRoast overall?
+                  <p className="text-[#6C757D] mb-8 font-medium">
+                    How are we doing? Your rating helps us prioritize features.
                   </p>
                   <StarRating value={rating} onChange={setRating} />
                 </div>
 
                 {/* Form Fields */}
-                <div className="px-6 py-5 flex flex-col gap-4">
+                <div className="px-8 pb-10 flex flex-col gap-6">
                   {/* Comment */}
-                  <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="comment" className="text-sm font-medium">
-                      Your thoughts{" "}
-                      <span className="text-muted-foreground font-normal">(optional)</span>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="comment" className="text-sm font-bold text-[#1A1A1A]">
+                      Your feedback
                     </Label>
                     <Textarea
                       id="comment"
-                      placeholder="What's working well? What could be better? Any features you'd love to see?"
+                      placeholder="What could we improve?"
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
                       rows={4}
-                      maxLength={5000}
-                      className="resize-none bg-background text-sm leading-relaxed placeholder:text-muted-foreground/60"
-                    />
-                    {comment.length > 4800 && (
-                      <p className="text-xs text-muted-foreground text-right">
-                        {5000 - comment.length} characters remaining
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Divider */}
-                  <div className="flex items-center gap-3 text-muted-foreground/50">
-                    <div className="flex-1 h-px bg-border" />
-                    <span className="text-xs uppercase tracking-widest">About you</span>
-                    <div className="flex-1 h-px bg-border" />
-                  </div>
-
-                  {/* Name */}
-                  <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="name" className="text-sm font-medium">
-                      Name{" "}
-                      <span className="text-muted-foreground font-normal">(optional)</span>
-                    </Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="Your name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      maxLength={255}
-                      className="bg-background text-sm"
+                      className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl text-base"
                     />
                   </div>
 
-                  {/* Email */}
-                  <div className="flex flex-col gap-1.5">
-                    <Label htmlFor="email" className="text-sm font-medium">
-                      Email{" "}
-                      <span className="text-muted-foreground font-normal">(optional)</span>
-                    </Label>
-                    <Input
-                      id="email"
-                      type="email"
-                      placeholder="you@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      maxLength={320}
-                      className="bg-background text-sm"
-                    />
-                    <p className="text-xs text-muted-foreground">
-                      Only used if we need to follow up on your feedback.
-                    </p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    {/* Name */}
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="name" className="text-sm font-bold text-[#1A1A1A]">
+                        Name (optional)
+                      </Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="e.g. John Doe"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl"
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="email" className="text-sm font-bold text-[#1A1A1A]">
+                        Email (optional)
+                      </Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className="border-gray-200 focus:border-[#0066FF] focus:ring-[#0066FF] rounded-xl"
+                      />
+                    </div>
                   </div>
 
                   {/* Submit */}
                   <Button
                     type="submit"
                     disabled={submitMutation.isPending}
-                    className="w-full mt-1 h-11 text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+                    className="w-full h-14 text-lg font-bold bg-[#0066FF] text-white hover:bg-[#0052CC] rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-[0.98]"
                   >
-                    {submitMutation.isPending ? "Submitting…" : "Submit Feedback"}
+                    {submitMutation.isPending ? "Submitting…" : "Send Feedback"}
                   </Button>
 
-                  <p className="text-center text-xs text-muted-foreground pb-1">
-                    Your feedback is anonymous unless you provide your name or email.
+                  <p className="text-center text-xs font-semibold text-gray-400 uppercase tracking-widest">
+                    SECURE & ANONYMOUS
                   </p>
                 </div>
               </form>
             )}
           </div>
 
+          {/* ── Quick Stats Section ── */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-12">
+             {[
+               { label: "Supermarkets", val: "10+" },
+               { label: "Price Checks", val: "Daily" },
+               { label: "Cost Savings", val: "Up to 30%" }
+             ].map((stat, i) => (
+               <div key={i} className="bg-white p-4 rounded-xl border border-gray-100 text-center">
+                 <div className="text-xl font-bold text-[#0066FF]">{stat.val}</div>
+                 <div className="text-xs font-bold text-gray-500 uppercase">{stat.label}</div>
+               </div>
+             ))}
+          </div>
+
           {/* ── Footer ── */}
-          <p className="text-center text-xs text-muted-foreground mt-6">
-            Built with care by the TrolleyRoast team &middot;{" "}
-            <a
-              href="https://trolley-roast.lovable.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 hover:text-foreground transition-colors"
-            >
-              Try the app
-            </a>
-          </p>
+          <footer className="mt-16 text-center border-t border-gray-200 pt-8">
+            <p className="text-sm font-semibold text-gray-500">
+              © 2026 TrolleyRoast. All rights reserved.
+            </p>
+          </footer>
         </div>
       </main>
     </div>
