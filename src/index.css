@@ -4,35 +4,45 @@
 
 @layer base {
   :root {
-    --background: 210 20% 99%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Branding Colors */
+    --color-background: #FAF8F3;
+    --color-primary: #1B3A2D;
+    --color-gold: #C9A96E;
+    --color-card: #FFFFFF;
+    --color-text: #1C1A17;
+    --color-muted: #7A7570;
+    --color-border: #E8E3D9;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Shadcn UI Variable Mapping */
+    --background: 48 44% 97%; /* #FAF8F3 */
+    --foreground: 30 10% 10%; /* #1C1A17 */
+
+    --card: 0 0% 100%; /* #FFFFFF */
+    --card-foreground: 30 10% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 30 10% 10%;
 
-    --primary: 215 100% 50%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 154 36% 17%; /* #1B3A2D */
+    --primary-foreground: 48 44% 97%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 40 48% 61%; /* #C9A96E */
+    --secondary-foreground: 154 36% 17%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 30 5% 46%; /* #7A7570 */
+    --muted-foreground: 30 5% 46%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 40 48% 61%;
+    --accent-foreground: 154 36% 17%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 215 100% 50%;
+    --border: 39 21% 88%; /* #E8E3D9 */
+    --input: 39 21% 88%;
+    --ring: 154 36% 17%;
 
-    --radius: 1rem;
+    --radius: 0.75rem;
   }
 
   * {
@@ -40,7 +50,9 @@
   }
   
   body {
-    @apply bg-[#F9FAFB] text-[#111827] antialiased selection:bg-[#0066FF]/10 selection:text-[#0066FF];
+    background-color: var(--color-background);
+    color: var(--color-text);
+    @apply antialiased selection:bg-[#1B3A2D]/10 selection:text-[#1B3A2D];
     font-family: 'Outfit', sans-serif;
   }
   
@@ -51,24 +63,30 @@
   .price-figure {
     font-family: 'Cormorant Garamond', serif !important;
     @apply tracking-tight font-medium;
+    color: var(--color-primary);
   }
-
-  h1 { @apply text-6xl font-semibold leading-[1.1]; }
-  h2 { @apply text-4xl font-semibold; }
-  h3 { @apply text-2xl font-semibold; }
 
   /* Ensure all UI elements use Outfit */
   button, nav, label, input, textarea, span, p, div:not(.font-display) {
     font-family: 'Outfit', sans-serif;
   }
+
+  /* Force light mode only */
+  .dark {
+    display: contents !important;
+  }
 }
 
 @layer components {
   .trolley-card {
-    @apply bg-white border border-gray-100 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.03)] rounded-2xl overflow-hidden transition-all duration-300;
+    background-color: var(--color-card);
+    border: 1px solid var(--color-border);
+    @apply shadow-[0_4px_20px_-10px_rgba(27,58,45,0.05)] rounded-2xl overflow-hidden transition-all duration-300;
   }
   
   .trolley-input {
-    @apply bg-gray-50/50 border-gray-200 focus:bg-white focus:border-[#0066FF] focus:ring-4 focus:ring-[#0066FF]/5 rounded-xl transition-all duration-200;
+    background-color: #FFFFFF;
+    border: 1px solid var(--color-border);
+    @apply focus:border-[#1B3A2D] focus:ring-4 focus:ring-[#1B3A2D]/5 rounded-xl transition-all duration-200;
   }
 }
