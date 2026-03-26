@@ -18,17 +18,19 @@ import {
   Globe,
 } from "lucide-react";
 
-// ─── Supermarket data ─────────────────────────────────────────────────────────
+// ─── Supermarket data (STRICT SPEC) ──────────────────────────────────────────
 const SUPERMARKETS = [
-  { name: "Tesco", color: "#00539F" },
-  { name: "Asda", color: "#78BE20" },
-  { name: "Sainsbury's", color: "#F06C00" },
-  { name: "Morrisons", color: "#FDB913" },
-  { name: "Aldi", color: "#003882" },
-  { name: "Lidl", color: "#0050AA" },
+  { name: "Tesco", color: "#00539F", letter: "T" },
+  { name: "Asda", color: "#78BE20", letter: "A" },
+  { name: "Sainsbury's", color: "#F06C00", letter: "S" },
+  { name: "Morrisons", color: "#FDB913", letter: "M" },
+  { name: "Aldi", color: "#003882", letter: "A" },
+  { name: "Lidl", color: "#0050AA", letter: "L" },
+  { name: "Waitrose", color: "#007B40", letter: "W" },
+  { name: "Co-op", color: "#00B1A9", letter: "C" },
 ];
 
-// ─── How It Works steps ───────────────────────────────────────────────────────
+// ─── How It Works steps (STRICT SPEC) ─────────────────────────────────────────
 const STEPS = [
   {
     icon: Camera,
@@ -50,7 +52,7 @@ const STEPS = [
   },
 ];
 
-// ─── Differentiators ─────────────────────────────────────────────────────────
+// ─── Differentiators (STRICT SPEC) ────────────────────────────────────────────
 const DIFFERENTIATORS = [
   {
     icon: ShieldCheck,
@@ -74,44 +76,60 @@ const DIFFERENTIATORS = [
   },
 ];
 
-// ─── Savings Card Mockup ──────────────────────────────────────────────────────
+// ─── Savings Card Mockup (STRICT SPEC) ────────────────────────────────────────
 function SavingsCardMockup() {
   return (
     <div className="relative mx-auto w-full max-w-sm transition-all duration-500 hover:scale-[1.02]">
-      <div className="absolute inset-0 translate-x-4 translate-y-4 rounded-3xl bg-[#1B3A2D]/5" />
-      <div className="relative rounded-3xl overflow-hidden border border-[#E8E3D9] bg-white shadow-[0_20px_50px_-12px_rgba(27,58,45,0.08)]">
-        <div className="px-6 py-5 bg-[#1B3A2D] flex items-center justify-between">
-          <span className="font-display text-xl font-semibold text-[#FAF8F3]">TrolleyRoast</span>
-          <span className="text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-[#C9A96E]/20 text-[#C9A96E]">Analysis</span>
+      {/* Shadow card behind (Offset 3-4px per spec) */}
+      <div className="absolute inset-0 translate-x-3 translate-y-3 rounded-2xl bg-[#1B3A2D]/12" />
+      {/* Main card */}
+      <div className="relative rounded-2xl overflow-hidden border border-[#E8E2D6] bg-[#FAF8F3] shadow-xl">
+        {/* Card header */}
+        <div className="px-5 py-4 flex items-center justify-between bg-[#1B3A2D]">
+          <span className="font-display text-xl font-semibold tracking-tight text-[#FAF8F3]">
+            TrolleyRoast
+          </span>
+          <span className="text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-[#C9A96E]/25 text-[#C9A96E]">
+            Your Savings
+          </span>
         </div>
-        <div className="px-8 py-10 text-center">
-          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-2">Total Potential Saving</p>
-          <p className="font-display text-7xl font-bold text-[#1B3A2D] leading-none mb-2 tracking-tighter">£14.30</p>
-          <p className="text-sm font-medium text-[#7A7570]">on your weekly shop</p>
+
+        {/* Savings headline */}
+        <div className="px-5 pt-8 pb-5 text-center">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-2">You overpaid by</p>
+          <p className="font-display text-6xl font-bold leading-none text-[#1B3A2D] card-headline">£14.30</p>
+          <p className="text-sm font-medium text-[#6B6860] mt-2">vs. shopping at Aldi this week</p>
         </div>
-        <div className="px-8 pb-8 space-y-4">
+
+        {/* Comparison bars (STRICT ORDER) */}
+        <div className="px-5 pb-8 space-y-3">
           {[
-            { store: "Your shop (Tesco)", amount: 68.40, pct: 100, highlight: false },
-            { store: "Aldi", amount: 54.10, pct: 79, highlight: true },
-            { store: "Lidl", amount: 56.20, pct: 82, highlight: false },
+            { store: "Waitrose", amount: 82.10, pct: 100, highlight: false },
+            { store: "Co-op", amount: 74.20, pct: 90, highlight: false },
+            { store: "Sainsbury's", amount: 70.90, pct: 86, highlight: false },
+            { store: "Tesco", amount: 68.40, pct: 83, highlight: false },
+            { store: "Morrisons", amount: 65.40, pct: 79, highlight: false },
+            { store: "Asda", amount: 61.80, pct: 75, highlight: false },
+            { store: "Lidl", amount: 56.20, pct: 68, highlight: false },
+            { store: "Aldi", amount: 54.10, pct: 66, highlight: true },
           ].map((row) => (
-            <div key={row.store} className="space-y-1.5">
-              <div className="flex justify-between items-center text-[11px] font-bold uppercase tracking-tight">
-                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#7A7570]"}>{row.store}</span>
-                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#7A7570]"}>£{row.amount.toFixed(2)}</span>
+            <div key={row.store} className="space-y-1">
+              <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-tight">
+                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#6B6860]"}>{row.store}</span>
+                <span className={row.highlight ? "text-[#1B3A2D]" : "text-[#6B6860]"}>£{row.amount.toFixed(2)}</span>
               </div>
-              <div className="h-2 rounded-full bg-[#FAF8F3] border border-[#E8E3D9] overflow-hidden">
+              <div className="h-1.5 rounded-full bg-[#EDE8DF] overflow-hidden">
                 <div 
                   className="h-full rounded-full transition-all duration-1000" 
-                  style={{ width: `${row.pct}%`, backgroundColor: row.highlight ? "#C9A96E" : "#E8E3D9" }} 
+                  style={{ width: `${row.pct}%`, backgroundColor: row.highlight ? "#C9A96E" : "#D4CFC6" }} 
                 />
               </div>
             </div>
           ))}
         </div>
-        <div className="px-8 py-4 bg-[#FAF8F3] border-t border-[#E8E3D9] flex justify-between text-[10px] font-bold text-[#7A7570] uppercase tracking-widest">
-          <span>trolleyroast.co.uk</span>
-          <span>Verified Price Index</span>
+        <div className="px-5 py-3 bg-[#FAF8F3] border-t border-[#E8E2D6] flex justify-between text-[10px] font-bold text-[#9B9790] uppercase tracking-widest">
+          <span>trolleyroast.app</span>
+          <span>21 items compared</span>
         </div>
       </div>
     </div>
@@ -123,142 +141,155 @@ export default function LandingPage() {
   const { data: count } = trpc.social.shopperCount.useQuery();
 
   return (
-    <div className="min-h-screen bg-[#FAF8F3] text-[#1C1A17] font-sans selection:bg-[#1B3A2D]/10 selection:text-[#1B3A2D]">
+    <div className="min-h-screen bg-[#FAF8F3] text-[#1C1A17] font-sans">
       
-      {/* ── Navbar ── */}
-      <nav className="sticky top-0 z-50 border-b border-[#E8E3D9] bg-[#FAF8F3]/80 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3 cursor-pointer group">
-            <div className="w-10 h-10 bg-[#1B3A2D] rounded-xl flex items-center justify-center shadow-lg shadow-[#1B3A2D]/10 transition-transform group-hover:scale-105">
-              <span className="text-[#FAF8F3] font-bold text-2xl tracking-tighter">T</span>
-            </div>
-            <span className="text-2xl font-semibold text-[#1B3A2D] tracking-tight font-display">TrolleyRoast</span>
-          </div>
-          <div className="hidden md:flex items-center gap-10">
-            <Link href="/receipt-index"><span className="text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
-            <Link href="/feedback"><span className="text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
+      {/* 1. STICKY NAV (STRICT SPEC) */}
+      <nav className="sticky top-0 z-50 h-[56px] border-b border-[#E8E2D6] bg-[#FAF8F3]/90 backdrop-blur-[8px]">
+        <div className="max-w-5xl mx-auto px-6 h-full flex items-center justify-between">
+          <span className="font-display text-xl font-semibold text-[#1B3A2D] brand-name">TrolleyRoast</span>
+          <div className="flex items-center gap-6">
+            <Link href="/receipt-index"><span className="text-sm font-semibold text-[#6B6860] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
+            <Link href="/feedback"><span className="text-sm font-semibold text-[#6B6860] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
             <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#1B3A2D]/10">
-                Launch App
+              <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-4 h-8 transition-all active:scale-95 text-xs">
+                Try the App
               </Button>
             </a>
           </div>
         </div>
       </nav>
 
-      {/* ── HERO SECTION ── */}
-      <section className="relative px-6 pt-24 pb-32 sm:pt-32 sm:pb-48 text-center max-w-5xl mx-auto overflow-hidden">
-        {/* Editorial Headline */}
-        <div className="space-y-8 mb-12 animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <h1 className="font-display text-[clamp(48px,10vw,84px)] font-bold leading-[0.95] text-[#1B3A2D] tracking-[-0.03em] max-w-4xl mx-auto">
-            Scan your receipt.<br />
-            <span className="relative inline-block">
-              See where you'd 
-              <span className="absolute -bottom-2 left-0 w-full h-2 bg-[#C9A96E]/30 -skew-x-12" />
-              <span className="relative text-[#C9A96E]"> save.</span>
-            </span>
-          </h1>
-
-          <p className="text-lg sm:text-xl font-medium text-[#7A7570] leading-relaxed max-w-[560px] mx-auto font-sans">
-            TrolleyRoast compares your entire basket across the UK's biggest supermarkets instantly. No searching. Just the truth.
-          </p>
+      {/* 2. HERO (STRICT SPEC) */}
+      <section className="px-6 py-[80px] md:py-[120px] text-center max-w-4xl mx-auto">
+        <div className="inline-flex items-center gap-2 bg-[#C9A96E]/15 text-[#C9A96E] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.2em] border border-[#C9A96E]/30 mb-8">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E] animate-pulse" />
+          Free · No sign-up needed · UK supermarkets
         </div>
-
-        {/* Primary CTA Row */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20 animate-in fade-in zoom-in duration-1000 delay-200">
+        <h1 className="font-display text-5xl md:text-7xl font-bold leading-[1.1] text-[#1B3A2D] tracking-[-0.03em] mb-8">
+          Scan your receipt.<br />
+          <span className="text-[#C9A96E]">See where you'd save.</span>
+        </h1>
+        <p className="text-lg md:text-xl font-medium text-[#6B6860] leading-relaxed max-w-[560px] mx-auto mb-4">
+          TrolleyRoast compares your <em>entire basket</em> across the UK's biggest supermarkets instantly. No searching. Just the truth.
+        </p>
+        <p className="text-sm font-bold text-[#9B9790] uppercase tracking-widest mb-12">
+          UK shoppers overpay <span className="text-[#1B3A2D]">£1,000+ a year</span> without comparing.
+        </p>
+        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
           <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
-            <Button className="h-16 px-10 text-lg font-bold bg-[#1B3A2D] text-white hover:bg-[#12261E] rounded-lg transition-all shadow-xl shadow-[#1B3A2D]/5 w-full sm:w-auto active:scale-95">
+            <Button className="h-[56px] px-10 text-base font-bold bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-lg w-full sm:w-auto active:scale-95">
               Scan Your Receipt
               <ArrowRight size={20} className="ml-3" />
             </Button>
           </a>
           <Link href="/feedback">
-            <span className="text-base font-bold text-[#1B3A2D] hover:underline underline-offset-8 cursor-pointer transition-all flex items-center gap-1.5 px-6 py-4">
-              Share Feedback <ChevronRight size={18} />
+            <span className="text-base font-bold text-[#1B3A2D] hover:underline underline-offset-8 cursor-pointer px-6">
+              Share Feedback
             </span>
           </Link>
         </div>
-
-        {/* Supermarket Badges */}
-        <div className="flex flex-wrap justify-center gap-3 animate-in fade-in duration-1000 delay-500">
-          {SUPERMARKETS.map((s) => (
-            <div 
-              key={s.name} 
-              className="flex items-center gap-2.5 px-4 py-2 bg-white border border-[#E8E3D9] rounded-full shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
-            >
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: s.color }} />
-              <span className="text-[13px] font-bold text-[#1C1A17] uppercase tracking-wider">{s.name}</span>
-            </div>
-          ))}
-        </div>
       </section>
 
-      {/* ── Social Proof ── */}
-      <section className="py-12 border-y border-[#E8E3D9] bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
+      {/* 3. SOCIAL PROOF STRIP (STRICT SPEC) */}
+      <section className="py-12 border-y border-[#E8E2D6] bg-white">
+        <div className="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-16">
           <div className="flex items-center gap-3">
-            <div className="flex -space-x-2">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-[#E8E3D9] overflow-hidden">
-                  <img src={`https://i.pravatar.cc/100?u=${i}`} alt="User" />
-                </div>
-              ))}
-            </div>
-            <p className="text-sm font-bold text-[#7A7570] tracking-tight uppercase">
-              Trusted by <span className="text-[#1B3A2D]">{count ? count.toLocaleString() : "1,247+"} shoppers</span> this week
+            <Users size={18} className="text-[#C9A96E]" />
+            <p className="text-sm font-bold text-[#6B6860] tracking-tight uppercase">
+              Trusted by <span className="text-[#1C1A17] font-black">{count ? count.toLocaleString() : "1,247+"} shoppers</span> this week
             </p>
           </div>
-          <div className="h-px w-24 bg-[#E8E3D9] hidden md:block" />
+          <div className="h-px w-24 bg-[#E8E2D6] hidden md:block" />
           <div className="flex items-center gap-1.5">
             {[1, 2, 3, 4, 5].map((s) => <Star key={s} size={16} className="fill-[#C9A96E] text-[#C9A96E]" />)}
             <span className="ml-2 text-sm font-bold text-[#1B3A2D] uppercase tracking-widest">Free Forever</span>
           </div>
+          <div className="h-px w-24 bg-[#E8E2D6] hidden md:block" />
+          <div className="flex items-center gap-3">
+            <ShieldCheck size={18} className="text-[#C9A96E]" />
+            <span className="text-sm font-bold text-[#6B6860] uppercase tracking-widest">No login required</span>
+          </div>
         </div>
       </section>
 
-      {/* ── HOW IT WORKS ── */}
-      <section className="py-24 md:py-32 px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-20 space-y-4">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Process</span>
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">How it works</h2>
+      {/* 4. SUPERMARKET LOGOS STRIP (STRICT SPEC) */}
+      <section className="py-12 border-b border-[#E8E2D6]">
+        <div className="max-w-5xl mx-auto px-6 text-center">
+          <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#9B9790] mb-8">Comparing prices across</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {SUPERMARKETS.map((s) => (
+              <div key={s.name} className="flex items-center gap-2.5 px-4 py-2 bg-white border border-[#E8E2D6] rounded-full">
+                <div className="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold text-white" style={{ backgroundColor: s.color }}>{s.letter}</div>
+                <span className="text-[11px] font-bold text-[#1C1A17] uppercase tracking-wider">{s.name}</span>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {STEPS.map((step) => {
+      </section>
+
+      {/* 5. HOW IT WORKS (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 max-w-5xl mx-auto">
+        <div className="text-center mb-20 space-y-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">How it works</h2>
+          <p className="text-[#9B9790] font-bold text-sm uppercase tracking-widest">Three steps. Thirty seconds. No account needed.</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+          {STEPS.map((step, i) => {
             const Icon = step.icon;
             return (
-              <div key={step.step} className="group p-10 bg-white border border-[#E8E3D9] rounded-2xl shadow-trolley hover:shadow-trolley-hover transition-all duration-300">
-                <div className="w-14 h-14 bg-[#1B3A2D]/5 rounded-xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+              <div key={step.step} className="relative p-10 bg-white border border-[#E8E2D6] rounded-2xl group">
+                {i < STEPS.length - 1 && (
+                  <div className="hidden md:block absolute top-[60px] -right-4 w-8 h-[1px] bg-[#C9A96E] z-10" />
+                )}
+                <div className="w-14 h-14 bg-[#1B3A2D]/8 rounded-xl flex items-center justify-center mb-8">
                   <Icon size={24} className="text-[#1B3A2D]" />
                 </div>
-                <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-[0.2em] mb-3 block">Step {step.step}</span>
-                <h3 className="font-display text-2xl font-bold text-[#1B3A2D] mb-4">{step.title}</h3>
-                <p className="text-[#7A7570] leading-relaxed font-medium">{step.desc}</p>
+                <span className="font-display text-xs font-bold text-[#C9A96E] uppercase tracking-[0.2em] mb-3 block step-number">Step {step.step}</span>
+                <h3 className="text-xl font-bold text-[#1C1A17] mb-4">{step.title}</h3>
+                <p className="text-[#6B6860] leading-relaxed font-medium">{step.desc}</p>
               </div>
             );
           })}
         </div>
       </section>
 
-      {/* ── THE CHALLENGE ── */}
-      <section className="py-24 md:py-32 bg-white border-y border-[#E8E3D9]">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-          <div className="space-y-8">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Comparison</span>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D] leading-[1.1]">The supermarket<br />truth-teller.</h2>
-            <p className="text-lg text-[#7A7570] font-medium leading-relaxed">
-              Supermarkets use confusing multi-buy deals and pack size tricks to hide the real cost. TrolleyRoast cuts through the noise — one scan, the whole truth.
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {DIFFERENTIATORS.slice(0, 2).map((d) => (
-                <div key={d.title} className="space-y-2">
-                  <h4 className="text-sm font-bold text-[#1B3A2D] uppercase tracking-tight">{d.title}</h4>
-                  <p className="text-sm text-[#7A7570] font-medium leading-snug">{d.desc}</p>
+      {/* 6. WHY TROLLEYROAST WINS (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 bg-white border-y border-[#E8E2D6]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-20 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Honest Comparison</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">The supermarket truth-teller.</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {DIFFERENTIATORS.map((d) => {
+              const Icon = d.icon;
+              return (
+                <div key={d.title} className="flex gap-6 p-8 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl">
+                  <div className="w-12 h-12 bg-[#1B3A2D]/8 rounded-xl flex items-center justify-center shrink-0">
+                    <Icon size={20} className="text-[#1B3A2D]" />
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-bold text-[#1C1A17] uppercase tracking-tight">{d.title}</h4>
+                    <p className="text-sm text-[#6B6860] font-medium leading-relaxed">{d.desc}</p>
+                  </div>
                 </div>
-              ))}
-            </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. SAVINGS CARD SECTION (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 bg-[#1B3A2D]">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          <div className="space-y-8">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Your Savings Card</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#FAF8F3] leading-[1.1]">Share what you saved.<br /><span className="text-[#C9A96E]">Make your mates jealous.</span></h2>
+            <p className="text-lg text-[#FAF8F3]/70 font-medium leading-relaxed">Every scan generates a shareable savings card. Post it to WhatsApp, Instagram Stories, or TikTok — and turn your weekly shop into a conversation.</p>
             <a href="https://trolley-roast.lovable.app" target="_blank" rel="noopener noreferrer">
-              <Button className="h-14 px-8 bg-[#1B3A2D] text-white hover:bg-[#12261E] rounded-lg font-bold shadow-lg shadow-[#1B3A2D]/5 mt-4">
-                Try The Challenge <ArrowRight size={18} className="ml-2" />
+              <Button className="h-[56px] px-10 text-base font-bold bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#C9A96E]/90 rounded-lg">
+                Get My Savings Card
+                <ArrowRight size={18} className="ml-2" />
               </Button>
             </a>
           </div>
@@ -268,53 +299,68 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── CTA SECTION ── */}
-      <section className="py-24 md:py-48 px-6 text-center max-w-3xl mx-auto">
-        <h2 className="font-display text-5xl md:text-6xl font-bold text-[#1B3A2D] mb-8 leading-[1.1]">Stop overpaying<br />for groceries.</h2>
-        <p className="text-lg text-[#7A7570] font-medium mb-12 max-w-lg mx-auto">
-          The average UK family saves £1,000+ a year by switching supermarkets. Scan your next receipt and see your share.
-        </p>
-        <EmailCapture source="footer" />
-        <div className="mt-12 flex items-center justify-center gap-6 text-[10px] font-bold text-[#7A7570] uppercase tracking-[0.2em]">
-          <span className="flex items-center gap-1.5"><ShieldCheck size={14} className="text-[#1B3A2D]" /> No Sign-up</span>
-          <span className="flex items-center gap-1.5"><Zap size={14} className="text-[#C9A96E]" /> Instant Analysis</span>
+      {/* 8. RECEIPT CHALLENGE (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 bg-white border-b border-[#E8E2D6]">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-20 space-y-4">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E]">The Receipt Challenge</span>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D]">Do the challenge. Share the shock.</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { plat: "TikTok", icon: "🎬", desc: "Scan your receipt on camera. Reveal the savings. Watch it go viral." },
+              { plat: "WhatsApp", icon: "💬", desc: "Share your savings card with the family group chat. Start a conversation." },
+              { plat: "Instagram", icon: "📸", desc: "Post your savings card to Stories. The numbers speak for themselves." },
+            ].map((s) => (
+              <div key={s.plat} className="p-10 bg-[#FAF8F3] border border-[#E8E2D6] rounded-2xl text-center space-y-4">
+                <div className="text-5xl">{s.icon}</div>
+                <h3 className="text-xl font-bold text-[#1C1A17]">{s.plat}</h3>
+                <p className="text-sm text-[#6B6860] leading-relaxed font-medium">{s.desc}</p>
+                <span className="text-[10px] font-bold text-[#C9A96E] uppercase tracking-widest block">Shareable by design</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-12 p-8 bg-[#1B3A2D]/5 border border-[#1B3A2D]/10 rounded-2xl flex flex-col md:flex-row items-center justify-between gap-6">
+            <p className="text-sm font-bold text-[#6B6860]">Discussed on <span className="text-[#1B3A2D]">r/UKFrugal</span> and <span className="text-[#1B3A2D]">MSE Forums</span>.</p>
+            <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] font-bold rounded-lg px-8">Try the Challenge</Button>
+          </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="border-t border-[#E8E3D9] py-16 px-6 bg-white">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start justify-between gap-12 text-sm">
-          <div className="space-y-4 max-w-xs">
-            <span className="font-display text-2xl font-bold text-[#1B3A2D]">TrolleyRoast</span>
-            <p className="text-[#7A7570] font-medium">The UK's supermarket truth-teller. Built to help you keep more of what you earn.</p>
-          </div>
-          <div className="grid grid-cols-2 gap-16">
-            <div className="space-y-6">
-              <span className="text-[10px] font-bold text-[#1B3A2D] uppercase tracking-widest">Platform</span>
-              <div className="flex flex-col gap-4 font-bold text-[#7A7570]">
-                <Link href="/receipt-index"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
-                <Link href="/feedback"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
-                <Link href="/pro"><span className="hover:text-[#1B3A2D] cursor-pointer transition-colors">Pro Waitlist</span></Link>
-              </div>
-            </div>
-            <div className="space-y-6">
-              <span className="text-[10px] font-bold text-[#1B3A2D] uppercase tracking-widest">Connect</span>
-              <div className="flex flex-col gap-4 font-bold text-[#7A7570]">
-                <a href="#" className="hover:text-[#1B3A2D] transition-colors">Support</a>
-                <a href="#" className="hover:text-[#1B3A2D] transition-colors">Twitter</a>
-                <a href="#" className="hover:text-[#1B3A2D] transition-colors">TikTok</a>
-              </div>
-            </div>
-          </div>
+      {/* 9. EMAIL CAPTURE (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 text-center max-w-xl mx-auto">
+        <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4">Stay Ahead</span>
+        <h2 className="font-display text-4xl font-bold text-[#1B3A2D] mb-6">Weekly price drops,<br />before you shop.</h2>
+        <p className="text-base text-[#6B6860] font-medium mb-10 leading-relaxed">We'll send you the biggest supermarket price changes every week — so you always know where to go before you leave the house.</p>
+        <EmailCapture source="footer" />
+      </section>
+
+      {/* 10. PRO TEASER (STRICT SPEC) */}
+      <section className="py-[80px] md:py-[120px] px-6 bg-[#1B3A2D]/5 border-t border-[#E8E2D6]">
+        <div className="max-w-xl mx-auto bg-white border border-[#E8E2D6] rounded-3xl p-12 text-center shadow-sm">
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] px-4 py-1.5 bg-[#C9A96E]/10 rounded-full inline-block mb-6">Coming Soon</span>
+          <h2 className="font-display text-3xl font-bold text-[#1B3A2D] mb-4">TrolleyRoast Pro</h2>
+          <p className="text-sm text-[#6B6860] font-medium leading-relaxed mb-8">SMS alerts when your regular items drop in price. Personalised basket tracking. The monthly "Receipt Index" for real-world shopping.</p>
+          <Button variant="outline" className="border-[#1B3A2D] text-[#1B3A2D] font-bold rounded-lg px-10 h-12 hover:bg-[#1B3A2D]/5">Join the Waitlist</Button>
         </div>
-        <div className="max-w-7xl mx-auto mt-20 pt-8 border-t border-[#F3F4F6] flex justify-between items-center text-[10px] font-bold text-[#7A7570] uppercase tracking-widest">
-          <span>© 2026 TROLLEYROAST GLOBAL LTD.</span>
-          <div className="flex items-center gap-4">
-             <div className="w-1.5 h-1.5 rounded-full bg-[#1B3A2D] animate-pulse" />
-             <span>Systems Active</span>
+      </section>
+
+      {/* 11. FOOTER (STRICT SPEC) */}
+      <footer className="border-t border-[#E8E2D6] py-16 px-6 bg-white">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-[#9B9790] font-bold">
+          <div className="space-y-1 text-center md:text-left">
+            <span className="font-display text-2xl font-bold text-[#1B3A2D] block brand-name">TrolleyRoast</span>
+            <p>The UK's supermarket truth-teller. Free forever.</p>
           </div>
+          <div className="flex items-center gap-8 uppercase tracking-widest text-[11px]">
+            <Link href="/receipt-index"><span className="hover:text-[#1B3A2D] cursor-pointer">Index</span></Link>
+            <Link href="/feedback"><span className="hover:text-[#1B3A2D] cursor-pointer">Feedback</span></Link>
+            <Link href="/pro"><span className="hover:text-[#1B3A2D] cursor-pointer">Pro</span></Link>
+          </div>
+          <p className="text-[11px] uppercase tracking-[0.2em]">© 2026 TROLLEYROAST</p>
         </div>
       </footer>
+
     </div>
   );
 }

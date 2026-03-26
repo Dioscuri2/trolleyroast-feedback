@@ -4,74 +4,64 @@
 
 @layer base {
   :root {
-    /* Core Branding Colors */
-    --color-background: #FAF8F3;
+    /* CSS VARIABLES (MANDATORY) */
+    --color-bg: #FAF8F3;
     --color-primary: #1B3A2D;
     --color-gold: #C9A96E;
     --color-card: #FFFFFF;
     --color-text: #1C1A17;
-    --color-muted: #7A7570;
-    --color-border: #E8E3D9;
+    --color-muted: #6B6860;
+    --color-subtle: #9B9790;
+    --color-border: #E8E2D6;
+    --color-track: #EDE8DF;
+    --color-bar-inactive: #D4CFC6;
 
-    /* Shadcn UI Variable Mapping */
+    /* Shadcn/UI Variable Mapping */
     --background: 48 44% 97%; /* #FAF8F3 */
     --foreground: 30 10% 10%; /* #1C1A17 */
-
-    --card: 0 0% 100%; /* #FFFFFF */
+    --card: 0 0% 100%;
     --card-foreground: 30 10% 10%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 30 10% 10%;
-
     --primary: 154 36% 17%; /* #1B3A2D */
     --primary-foreground: 48 44% 97%;
-
     --secondary: 40 48% 61%; /* #C9A96E */
     --secondary-foreground: 154 36% 17%;
-
-    --muted: 30 5% 46%; /* #7A7570 */
-    --muted-foreground: 30 5% 46%;
-
+    --muted: 32 6% 39%; /* #6B6860 */
+    --muted-foreground: 32 6% 39%;
     --accent: 40 48% 61%;
     --accent-foreground: 154 36% 17%;
-
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-
-    --border: 39 21% 88%; /* #E8E3D9 */
+    --border: 39 21% 88%; /* #E8E2D6 */
     --input: 39 21% 88%;
     --ring: 154 36% 17%;
-
-    --radius: 0.75rem;
+    --radius: 1rem;
   }
 
   * {
     @apply border-border;
   }
-  
+
   body {
-    background-color: var(--color-background);
+    background-color: var(--color-bg);
     color: var(--color-text);
     @apply antialiased selection:bg-[#1B3A2D]/10 selection:text-[#1B3A2D];
-    font-family: 'Outfit', sans-serif;
-  }
-  
-  h1, h2, h3, h4, h5, h6, 
-  .font-display, 
-  .font-serif,
-  [data-price],
-  .price-figure {
-    font-family: 'Cormorant Garamond', serif !important;
-    @apply tracking-tight font-medium;
-    color: var(--color-primary);
+    font-family: 'Outfit', system-ui, sans-serif;
   }
 
-  /* Ensure all UI elements use Outfit */
-  button, nav, label, input, textarea, span, p, div:not(.font-display) {
-    font-family: 'Outfit', sans-serif;
+  /* font-display applies to Hero h1, Section h2, Brand, Savings card headline, Step numbers */
+  h1, h2, .font-display, .brand-name, .card-headline, .step-number {
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+    @apply font-semibold tracking-tight;
   }
 
-  /* Force light mode only */
+  /* font-sans applies to Body, Buttons, Nav, Labels, Badges, Captions */
+  p, span, div:not(.font-display), button, nav, label, input, textarea {
+    font-family: 'Outfit', system-ui, sans-serif;
+  }
+
+  /* Strict rule: No black backgrounds, no red anywhere */
   .dark {
     display: contents !important;
   }
@@ -81,12 +71,6 @@
   .trolley-card {
     background-color: var(--color-card);
     border: 1px solid var(--color-border);
-    @apply shadow-[0_4px_20px_-10px_rgba(27,58,45,0.05)] rounded-2xl overflow-hidden transition-all duration-300;
-  }
-  
-  .trolley-input {
-    background-color: #FFFFFF;
-    border: 1px solid var(--color-border);
-    @apply focus:border-[#1B3A2D] focus:ring-4 focus:ring-[#1B3A2D]/5 rounded-xl transition-all duration-200;
+    @apply rounded-2xl shadow-sm transition-all duration-300;
   }
 }
