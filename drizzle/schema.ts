@@ -1,4 +1,5 @@
 import { integer, jsonb, pgEnum, pgTable, text, timestamp, varchar } from "drizzle-orm/pg-core";
+import { InferSelectModel, InferInsertModel } from "drizzle-orm";
 export const userRoleEnum = pgEnum("user_role", ["user", "admin"]);
 export const users = pgTable("users", {
   id: integer("id").generatedAlwaysAsIdentity().primaryKey(),
@@ -38,3 +39,12 @@ export const receiptIndex = pgTable("receipt_index", {
   publishedAt: timestamp("publishedAt", { mode: "date" }).defaultNow().notNull(),
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),
 });
+
+export type User = InferSelectModel<typeof users>;
+export type NewUser = InferInsertModel<typeof users>;
+export type Feedback = InferSelectModel<typeof feedback>;
+export type NewFeedback = InferInsertModel<typeof feedback>;
+export type EmailCapture = InferSelectModel<typeof emailCaptures>;
+export type NewEmailCapture = InferInsertModel<typeof emailCaptures>;
+export type ReceiptIndex = InferSelectModel<typeof receiptIndex>;
+export type NewReceiptIndex = InferInsertModel<typeof receiptIndex>;

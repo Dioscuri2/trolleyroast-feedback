@@ -4,6 +4,7 @@ import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import EmailCapture from "@/components/EmailCapture";
 import { ArrowRight, Trophy, TrendingDown, ShoppingCart, Calendar, ChevronDown, ChevronUp } from "lucide-react";
+import RouteSeo from "@/components/RouteSeo";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type BasketTotals = Record<string, number>;
@@ -343,6 +344,11 @@ export default function ReceiptIndexPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "#FAF8F3" }}>
+      <RouteSeo
+        title="Monthly Receipt Index | TrolleyRoast"
+        description="See TrolleyRoast's monthly supermarket Receipt Index based on real scanned receipts and whole-basket comparison methodology."
+        path="/receipt-index"
+      />
 
       {/* ── Nav ── */}
       <nav
@@ -372,7 +378,7 @@ export default function ReceiptIndexPage() {
               </span>
             </Link>
             <a
-              href="https://trolley-roast.lovable.app"
+              href="https://trolleyroast.app"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -420,7 +426,7 @@ export default function ReceiptIndexPage() {
         </p>
 
         <a
-          href="https://trolley-roast.lovable.app"
+          href="https://trolleyroast.app"
           target="_blank"
           rel="noopener noreferrer"
         >

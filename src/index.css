@@ -5,19 +5,21 @@
 @layer base {
   :root {
     /* CSS VARIABLES (MANDATORY) */
-    --color-bg: #FAF8F3;
+    --color-bg: #F5F2EA; /* Updated to Warm Stone for 2026 sentiment */
     --color-primary: #1B3A2D;
     --color-gold: #C9A96E;
     --color-card: #FFFFFF;
     --color-text: #1C1A17;
-    --color-muted: #6B6860;
+    --color-muted: #7A7570;
     --color-subtle: #9B9790;
-    --color-border: #E8E2D6;
+    --color-border: #E8E3D9;
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Outfit', system-ui, sans-serif;
     --color-track: #EDE8DF;
-    --color-bar-inactive: #D4CFC6;
+    --color-bar-inactive: #D9D2C6;
 
     /* Shadcn/UI Variable Mapping */
-    --background: 48 44% 97%; /* #FAF8F3 */
+    --background: 46 22% 94%; /* #F5F2EA - Warm Stone Update */
     --foreground: 30 10% 10%; /* #1C1A17 */
     --card: 0 0% 100%;
     --card-foreground: 30 10% 10%;
@@ -27,14 +29,14 @@
     --primary-foreground: 48 44% 97%;
     --secondary: 40 48% 61%; /* #C9A96E */
     --secondary-foreground: 154 36% 17%;
-    --muted: 32 6% 39%; /* #6B6860 */
-    --muted-foreground: 32 6% 39%;
+    --muted: 24 4% 47%; /* #7A7570 */
+    --muted-foreground: 24 4% 47%;
     --accent: 40 48% 61%;
     --accent-foreground: 154 36% 17%;
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
-    --border: 39 21% 88%; /* #E8E2D6 */
-    --input: 39 21% 88%;
+    --border: 39 24% 89%; /* #E8E3D9 */
+    --input: 39 24% 89%;
     --ring: 154 36% 17%;
     --radius: 1rem;
   }
@@ -47,18 +49,26 @@
     background-color: var(--color-bg);
     color: var(--color-text);
     @apply antialiased selection:bg-[#1B3A2D]/10 selection:text-[#1B3A2D];
-    font-family: 'Outfit', system-ui, sans-serif;
+    font-family: var(--font-body);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  body, p, span, label, input, button {
+    font-family: var(--font-body);
   }
 
   /* font-display applies to Hero h1, Section h2, Brand, Savings card headline, Step numbers */
-  h1, h2, h3, h4, h5, h6, .font-display, .brand-name, .card-headline, .step-number {
-    font-family: 'Cormorant Garamond', Georgia, serif !important;
-    @apply font-semibold tracking-tight;
+  .font-display, .brand-name, .card-headline, .step-number {
+    font-family: var(--font-heading) !important;
+    @apply tracking-tight;
   }
 
   /* font-sans applies to Body, Buttons, Nav, Labels, Badges, Captions */
-  p, span, div:not(.font-display), button, nav, label, input, textarea {
-    font-family: 'Outfit', system-ui, sans-serif;
+  div:not(.font-display), nav, textarea {
+    font-family: var(--font-body);
   }
 
   /* Strict rule: No black backgrounds, no red anywhere */
@@ -76,17 +86,17 @@
 
   /* Solid Forest Green Button */
   .btn-primary {
-    @apply bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#1B3A2D]/10;
+    @apply bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-full px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#1B3A2D]/10;
   }
 
   /* Solid Gold Button */
   .btn-gold {
-    @apply bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] font-bold rounded-lg px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#C9A96E]/10;
+    @apply bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] font-bold rounded-full px-6 h-11 transition-all active:scale-95 shadow-md shadow-[#C9A96E]/10;
   }
 
   /* Outline Button */
   .btn-outline {
-    @apply border-[#1B3A2D] text-[#1B3A2D] hover:bg-[#1B3A2D]/5 font-bold rounded-lg px-6 h-11 transition-all active:scale-95;
+    @apply border-[#1B3A2D] text-[#1B3A2D] hover:bg-[#1B3A2D]/5 font-bold rounded-full px-6 h-11 transition-all active:scale-95;
   }
 
   /* Section Gold Label */

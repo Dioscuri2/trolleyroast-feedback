@@ -91,9 +91,7 @@ export const appRouter = router({
 
   social: router({
     shopperCount: publicProcedure.query(async () => {
-      const real = await getTotalSubmissionCount();
-      // Seed with a base number so it looks credible from day one
-      return real + 247;
+      return getTotalSubmissionCount();
     }),
   }),
 

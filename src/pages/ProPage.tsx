@@ -1,12 +1,13 @@
 import { Link } from "wouter";
 import { ArrowLeft, Bell, BarChart3, ShoppingCart } from "lucide-react";
 import EmailCapture from "@/components/EmailCapture";
+import RouteSeo from "@/components/RouteSeo";
 
 const PRO_FEATURES = [
   {
     icon: Bell,
     title: "SMS price alerts",
-    desc: "Get a text the moment your regular items drop in price at any of the 6 supermarkets.",
+    desc: "Get a text the moment your regular items drop in price at any of the 8 supermarkets we compare.",
   },
   {
     icon: BarChart3,
@@ -23,6 +24,11 @@ const PRO_FEATURES = [
 export default function ProPage() {
   return (
     <div className="min-h-screen" style={{ background: "#FAF8F3" }}>
+      <RouteSeo
+        title="TrolleyRoast Pro | Join the Waitlist"
+        description="Join the waitlist for TrolleyRoast Pro — SMS price alerts, basket tracking, and personalised supermarket-switch recommendations."
+        path="/pro"
+      />
       {/* Header */}
       <header
         className="sticky top-0 z-10 border-b"

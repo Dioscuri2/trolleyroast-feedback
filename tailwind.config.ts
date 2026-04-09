@@ -27,11 +27,11 @@ export default {
         border: "#E8E3D9",
         input: "#E8E3D9",
         ring: "#1B3A2D",
-        background: "#FAF8F3",
+        background: "#F5F2EA",
         foreground: "#1C1A17",
         primary: {
           DEFAULT: "#1B3A2D",
-          foreground: "#FAF8F3",
+          foreground: "#F5F2EA",
         },
         secondary: {
           DEFAULT: "#C9A96E",

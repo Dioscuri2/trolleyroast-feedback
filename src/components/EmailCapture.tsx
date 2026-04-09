@@ -49,14 +49,14 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
       <Input
         type="email"
         required
-        placeholder="your@email.com"
+        placeholder="Your email address"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="flex-1 h-12 text-sm"
         style={
           light
             ? { background: "rgba(250,248,243,0.12)", borderColor: "rgba(250,248,243,0.25)", color: "#FAF8F3" }
-            : { background: "#FFFFFF", borderColor: "#D4CFC6" }
+            : { background: "#FFFFFF", borderColor: "#E8E3D9" }
         }
       />
       <Button

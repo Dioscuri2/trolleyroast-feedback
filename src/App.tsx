@@ -8,14 +8,22 @@ import LandingPage from "./pages/LandingPage";
 import FeedbackPage from "./pages/FeedbackPage";
 import ProPage from "./pages/ProPage";
 import ReceiptIndexPage from "./pages/ReceiptIndexPage";
+import SupermarketsPage from "./pages/SupermarketsPage";
+import CategoriesPage from "./pages/CategoriesPage";
+import BlogGuidesPage from "./pages/BlogGuidesPage";
 
 function Router() {
+  // Public trolleyroast.co.uk website routes only.
+  // The product app (trolleyroast.app) is a separate surface and should stay separate.
   return (
     <Switch>
       <Route path={"/"} component={LandingPage} />
       <Route path={"/feedback"} component={FeedbackPage} />
       <Route path={"/pro"} component={ProPage} />
       <Route path={"/receipt-index"} component={ReceiptIndexPage} />
+      <Route path={"/supermarkets"} component={SupermarketsPage} />
+      <Route path={"/categories"} component={CategoriesPage} />
+      <Route path={"/blog/guides"} component={BlogGuidesPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>

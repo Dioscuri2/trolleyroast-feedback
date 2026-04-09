@@ -1,7 +1,8 @@
 {
-  "name": "trolleyroast-feedback",
+  "name": "trolleyroast-website",
   "version": "1.0.0",
   "private": true,
+  "description": "Public marketing and acquisition website for trolleyroast.co.uk",
   "type": "module",
   "scripts": {
     "dev": "tsx server/_core/index.ts",

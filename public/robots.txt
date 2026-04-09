@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://trolleyroast.co.uk/sitemap.xml

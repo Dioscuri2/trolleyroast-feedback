@@ -1,4 +1,10 @@
-# TrolleyRoast Feedback — Project TODO
+# TrolleyRoast Website — Legacy TODO / Build Notes
+
+This file reflects earlier build work when the repo was framed more narrowly around feedback capture.
+
+Treat it as historical implementation context for the **website**, not as the current product definition.
+
+## Feedback capture foundation
 
 - [x] Update drizzle schema with feedback table (rating, name, email, comment, createdAt)
 - [x] Generate and apply DB migration SQL
@@ -11,7 +17,7 @@
 - [x] Mobile-responsive design optimized for PWA users
 - [x] Write vitest tests for feedback router
 
-## Landing Page Build
+## Website landing page build
 
 - [x] Update design system: #FAF8F3 bg, #1B3A2D primary, #C9A96E gold, #1C1A17 text, Outfit body font
 - [x] Add /pro waitlist route and page (placeholder)
@@ -27,14 +33,14 @@
 - [x] Wire landing page route (separate from /feedback form)
 - [x] Write vitest tests for emailCapture procedure
 
-## Supabase Integration
+## Supabase integration
 
 - [x] Update FeedbackPage to POST directly to Supabase endpoint (no tRPC)
 - [x] Remove tRPC feedback.submit dependency from frontend
 - [x] Keep owner notification on server side (optional, low priority)
 - [x] Verify test submission lands in Supabase
 
-## Research-Driven Landing Page Improvements (Trolley.co.uk Playbook)
+## Research-driven landing page improvements
 
 - [x] Hero: sharpen value prop to "Supermarket Truth-Teller" framing + cost-of-living angle
 - [x] Hero badge: add "No sign-up needed" + mobile-first signal
@@ -47,7 +53,7 @@
 - [x] Add SEO-friendly static text block: basket comparison keywords
 - [x] Footer: add brief mission statement ("Built to cut through supermarket noise")
 
-## Monthly Receipt Index Page
+## Monthly Receipt Index page
 
 - [x] Add receipt_index DB table (month, year, winner, basket categories with prices per supermarket)
 - [x] Generate and apply DB migration SQL
@@ -58,9 +64,10 @@
 - [x] Add Receipt Index link to LandingPage nav and footer
 - [x] Write vitest tests for index procedures
 
-## Add Waitrose & Co-op (8 supermarkets total)
+## Next cleanup / consistency pass
 
-- [ ] Update LandingPage: logos strip, how-it-works copy, savings card mockup, SEO copy
-- [ ] Update ReceiptIndexPage: SUPERMARKET_COLORS, SUPERMARKET_DISPLAY maps
-- [ ] Update Receipt Index DB seed data with Waitrose and Co-op columns
-- [ ] Update HANDOVER.md supermarket list
+- [ ] Confirm and remove unused legacy pages/components safely
+- [ ] Standardise 6-supermarket vs 8-supermarket messaging across the website
+- [ ] Replace remaining misleading feedback-only framing in docs and metadata
+- [ ] Improve per-route metadata / OG tags
+- [ ] Review generated scaffold and archive/delete what is not needed for the website

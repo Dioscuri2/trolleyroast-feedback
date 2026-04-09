@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { CheckCircle2, Star, ArrowLeft } from "lucide-react";
+import RouteSeo from "@/components/RouteSeo";
 
 const SUPABASE_ENDPOINT =
   "https://czmvyblgviwgczfzxhsr.supabase.co/functions/v1/submit-feedback";
@@ -144,6 +145,11 @@ export default function FeedbackPage() {
 
   return (
     <div className="min-h-screen" style={{ background: "#FAF8F3" }}>
+      <RouteSeo
+        title="Send Feedback | TrolleyRoast"
+        description="Share feedback on the TrolleyRoast website and app experience. Help shape a receipt-led supermarket comparison product built around whole-basket truth."
+        path="/feedback"
+      />
       {/* Header */}
       <header
         className="sticky top-0 z-10 border-b"
@@ -322,7 +328,7 @@ export default function FeedbackPage() {
           <p className="text-center text-xs mt-6" style={{ color: "#9B9790" }}>
             Built with care by the TrolleyRoast team ·{" "}
             <a
-              href="https://trolley-roast.lovable.app"
+              href="https://trolleyroast.app"
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-2 hover:opacity-70 transition-opacity"
