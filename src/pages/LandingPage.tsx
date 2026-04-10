@@ -2,6 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import EmailCapture from "@/components/EmailCapture";
 import RouteSeo from "@/components/RouteSeo";
+import SavingsEstimator from "@/components/SavingsEstimator";
 import {
   Camera,
   BarChart3,
@@ -193,6 +194,11 @@ export default function LandingPage() {
             </span>
           </Link>
         </div>
+      </section>
+
+      {/* NEW: SAVINGS ESTIMATOR WIDGET */}
+      <section className="px-6 pb-20 sm:pb-24 md:pb-36">
+        <SavingsEstimator />
       </section>
 
       {/* 3. SOCIAL PROOF STRIP (STRICT SPEC) */}
