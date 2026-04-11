@@ -12,6 +12,9 @@ import {
   TrendingDown,
   ShieldCheck,
   Smartphone,
+  Calculator,
+  PiggyBank,
+  Split,
 } from "lucide-react";
 
 // ─── Supermarket data (STRICT SPEC) ──────────────────────────────────────────
@@ -69,6 +72,27 @@ const DIFFERENTIATORS = [
     icon: Share2,
     title: "Built to go viral",
     desc: "Every scan generates a shareable card. Post it to WhatsApp, TikTok, or Instagram Stories and turn your shop into a conversation.",
+  },
+];
+
+const CALCULATOR_LINKS = [
+  {
+    icon: Calculator,
+    title: "Weekly Basket Savings",
+    href: "/calculators/weekly-basket-savings",
+    desc: "Estimate the savings gap between your current supermarket habit and a sharper weekly route.",
+  },
+  {
+    icon: PiggyBank,
+    title: "Brand vs Own-Brand",
+    href: "/calculators/brand-vs-own-brand",
+    desc: "Model what selective own-brand swaps could quietly save over the year.",
+  },
+  {
+    icon: Split,
+    title: "Split-Shop Savings",
+    href: "/calculators/split-shop-savings",
+    desc: "Work out whether shopping two stores is genuinely worth the hassle.",
   },
 ];
 
@@ -197,8 +221,50 @@ export default function LandingPage() {
       </section>
 
       {/* NEW: SAVINGS ESTIMATOR WIDGET */}
-      <section className="px-6 pb-20 sm:pb-24 md:pb-36">
+      <section className="px-6 pb-14 sm:pb-18 md:pb-20">
         <SavingsEstimator />
+      </section>
+
+      {/* HOMEPAGE CALCULATOR SECTION */}
+      <section className="px-6 pb-20 sm:pb-24 md:pb-28">
+        <div className="max-w-5xl mx-auto rounded-[32px] border border-[#E8E3D9] bg-white p-8 sm:p-10 md:p-12 shadow-sm">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Savings calculators</span>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D] leading-[1.08]">Try the calculators before you scan the real basket.</h2>
+              <p className="mt-5 text-base md:text-lg font-medium text-[#5E5953] leading-8 font-sans">
+                Premium, fast, and built to convert. Use the tools to size the opportunity, then jump into trolleyroast.app for the receipt-level truth.
+              </p>
+            </div>
+            <Link href="/calculators">
+              <span className="inline-flex cursor-pointer items-center gap-2 text-sm font-bold text-[#1B3A2D] hover:underline underline-offset-8 font-sans">
+                View all calculators
+                <ArrowRight size={16} />
+              </span>
+            </Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {CALCULATOR_LINKS.map((calculator) => {
+              const Icon = calculator.icon;
+              return (
+                <Link key={calculator.href} href={calculator.href}>
+                  <div className="cursor-pointer rounded-[24px] border border-[#E8E3D9] bg-[#FAF8F3] p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md">
+                    <div className="w-12 h-12 rounded-2xl bg-[#1B3A2D]/8 flex items-center justify-center text-[#1B3A2D] mb-5">
+                      <Icon size={20} />
+                    </div>
+                    <h3 className="font-display text-2xl font-bold text-[#1B3A2D]">{calculator.title}</h3>
+                    <p className="mt-3 text-sm font-medium leading-7 text-[#7A7570] font-sans">{calculator.desc}</p>
+                    <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#1B3A2D] font-sans">
+                      Open tool
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
       {/* 3. SOCIAL PROOF STRIP (STRICT SPEC) */}
