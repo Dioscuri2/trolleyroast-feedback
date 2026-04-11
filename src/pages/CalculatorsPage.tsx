@@ -51,7 +51,7 @@ export default function CalculatorsPage() {
             {[
               "Warm, realistic estimates",
               "Built for UK supermarket behaviour",
-              "No dark/orange redesign nonsense",
+              "Fast, mobile-friendly and easy to compare",
             ].map((item) => (
               <span key={item} className="rounded-full border border-[#E8E3D9] bg-[#F5F2EA] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#7A7570]">
                 {item}
@@ -99,14 +99,14 @@ export default function CalculatorsPage() {
               The calculators give shoppers a clean, premium entry point. The app gives them the real answer by comparing what they actually bought.
             </p>
           </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
-              <Button className="h-12 rounded-full bg-[#C9A96E] px-8 font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
-                Try trolleyroast.app
+          <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
+            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <Button className="h-12 w-full rounded-full bg-[#C9A96E] px-8 font-bold text-[#1B3A2D] hover:bg-[#B8985D] sm:w-auto">
+                Scan a real receipt in the app
               </Button>
             </a>
             <Link href="/">
-              <span className="inline-flex cursor-pointer items-center gap-2 self-center text-sm font-semibold text-[#FAF8F3]">
+              <span className="inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-[#FAF8F3]">
                 <ScanSearch className="size-4" />
                 Back to homepage
               </span>

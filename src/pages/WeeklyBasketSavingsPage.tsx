@@ -224,8 +224,8 @@ export default function WeeklyBasketSavingsPage() {
               placeholder="you@example.com"
               className="h-12 border-[#E8E3D9] bg-[#FAF8F3]"
             />
-            <p className="text-xs text-[#7A7570]">
-              UI flow is wired now. Lead capture posts safely to <code>/api/calculator-leads</code> so backend handling can be upgraded later without changing the UX.
+            <p className="text-xs leading-6 text-[#7A7570]">
+              We’ll use your email to reveal your estimate and send the result summary. You can unsubscribe any time.
             </p>
           </div>
 

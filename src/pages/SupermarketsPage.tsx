@@ -38,8 +38,8 @@ export default function SupermarketsPage() {
 
       <main className="max-w-4xl mx-auto px-4 py-14 sm:py-20">
         <div className="max-w-2xl mb-10">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-5 bg-[#C9A96E]/15 text-[#C9A96E]">
-            Verified Retailers
+          <span className="inline-block rounded-full bg-[#C9A96E]/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-5">
+            UK supermarkets
           </span>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1B3A2D] mb-4">
             Supermarkets we compare
@@ -68,14 +68,14 @@ export default function SupermarketsPage() {
 
         <div className="rounded-3xl border border-[#E8E3D9] bg-white p-8 shadow-sm">
           <h2 className="font-display text-2xl font-semibold text-[#1B3A2D] mb-3">
-            Next build phase
+            Why this page matters
           </h2>
           <p className="text-sm leading-relaxed text-[#6B6860] mb-6">
-            Expand this section into individual supermarket comparison pages, methodology content, and internal links to the Receipt Index and receipt-scanning app.
+            TrolleyRoast compares your whole basket across these major UK supermarkets, so you can see the real gap between where you shop now and where your receipt would cost less.
           </p>
           <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
             <Button className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-full">
-              Try the app
+              Scan a receipt in the app
               <ArrowRight size={16} className="ml-2" />
             </Button>
           </a>

@@ -25,7 +25,7 @@ export default function BlogGuidesPage() {
         </div>
       </header>
 
-      <main className="max-w-3xl mx-auto px-6 py-14 sm:py-20">
+      <main className="max-w-3xl mx-auto px-4 py-14 sm:px-6 sm:py-20">
         <div className="mb-12">
           <span className="inline-block text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-4">Featured Guide</span>
           <h1 className="font-display text-4xl sm:text-6xl font-bold text-[#1B3A2D] leading-[1.1] mb-6">
@@ -38,7 +38,7 @@ export default function BlogGuidesPage() {
           </div>
         </div>
 
-        <div className="prose prose-stone prose-lg max-w-none text-[#1C1A17] leading-relaxed space-y-8">
+        <div className="prose prose-stone prose-lg max-w-none break-words text-[#1C1A17] leading-relaxed space-y-8">
           <p className="text-xl font-medium text-[#6B6860] italic border-l-4 border-[#C9A96E] pl-6 py-2">
             "If you only look at the Price Match stickers, you're missing 80% of your bill. The truth is in the receipt total, not the shelf edge."
           </p>
@@ -75,15 +75,15 @@ export default function BlogGuidesPage() {
             TrolleyRoast was built to solve this by using <strong>receipt-led evidence</strong>. By scanning your whole receipt, we can see exactly what you paid—including the deals that didn't actually save you money.
           </p>
 
-          <div className="rounded-3xl bg-[#1B3A2D] p-10 text-center text-white my-16">
+          <div className="rounded-3xl bg-[#1B3A2D] p-8 text-center text-white my-16 sm:p-10">
             <div className="w-12 h-12 bg-[#C9A96E] rounded-xl flex items-center justify-center mx-auto mb-6">
               <Zap className="text-[#1B3A2D]" />
             </div>
             <h2 className="font-display text-3xl font-bold mb-4">Don't take our word for it.</h2>
             <p className="text-[#FAF8F3]/80 mb-8 max-w-md mx-auto">Scan your next Tesco or Aldi receipt and see your own personalised Roast.</p>
             <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] font-bold rounded-full px-10 h-14 text-lg">
-                Try the app free
+              <Button className="h-14 rounded-full bg-[#C9A96E] px-8 text-base font-bold text-[#1B3A2D] hover:bg-[#B8985D] sm:px-10 sm:text-lg">
+                Scan your receipt free
                 <ArrowRight className="ml-2" />
               </Button>
             </a>

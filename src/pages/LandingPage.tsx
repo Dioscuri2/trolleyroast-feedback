@@ -169,15 +169,15 @@ export default function LandingPage() {
 
       {/* 1. STICKY NAV (STRICT SPEC) */}
       {/* 9. background at 90% opacity, backdropFilter bluractive */}
-      <nav className="sticky top-0 z-50 h-[64px] border-b border-[#E8E3D9] bg-[#F5F2EA]/90 backdrop-blur-[12px]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between gap-4">
-          <span className="font-display text-xl font-medium text-[#1B3A2D] brand-name">TrolleyRoast</span>
-          <div className="flex items-center gap-3 sm:gap-5">
-            <div className="hidden md:flex items-center gap-5">
+      <nav className="sticky top-0 z-50 border-b border-[#E8E3D9] bg-[#F5F2EA]/90 backdrop-blur-[12px]">
+        <div className="mx-auto flex min-h-[64px] max-w-5xl flex-wrap items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-0">
+          <span className="font-display text-lg font-medium text-[#1B3A2D] brand-name sm:text-xl">TrolleyRoast</span>
+          <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end sm:gap-5">
+            <div className="flex items-center gap-4 sm:gap-5">
               <Link href="/receipt-index"><span className="whitespace-nowrap text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
               <Link href="/feedback"><span className="whitespace-nowrap text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
             </div>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="shrink-0">
               <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-full px-4 sm:px-5 h-9 transition-all active:scale-95 text-xs sm:text-sm font-sans whitespace-nowrap">
                 Try the App
               </Button>
@@ -188,8 +188,8 @@ export default function LandingPage() {
 
       {/* 2. HERO (STRICT SPEC) */}
       {/* 6. vertical padding py-14 mobile, py-16 sm+ */}
-      <section className="px-6 py-16 sm:py-24 md:py-36 text-center max-w-4xl mx-auto">
-        <div className="inline-flex items-center gap-2 bg-[#F0EDE6] text-[#7A7570] px-4 py-2 rounded-full text-[0.8rem] font-medium border border-[#E8E3D9] mb-8 font-sans">
+      <section className="px-4 py-16 text-center max-w-4xl mx-auto sm:px-6 sm:py-24 md:py-36">
+        <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[#E8E3D9] bg-[#F0EDE6] px-4 py-2 text-center text-[0.8rem] font-medium text-[#7A7570] mb-8 font-sans">
           <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
           Free to scan · No sign-up needed · UK supermarkets
         </div>
@@ -203,7 +203,7 @@ export default function LandingPage() {
         <p className="text-base md:text-[1rem] font-medium text-[#1C1A17] leading-8 max-w-[700px] mx-auto mb-12 font-sans">
           The average UK shopper overpays <strong>£1,000+ a year</strong> by not comparing supermarkets. Your receipt has the answer.
         </p>
-        <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
           <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
             {/* 5a. Solid #1B3A2D bg, #FAF8F3 text, Outfit 500 (handled via font-sans) */}
             <Button className="h-[56px] px-10 text-base font-bold bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-full w-full sm:w-auto active:scale-95 font-sans">
@@ -221,12 +221,12 @@ export default function LandingPage() {
       </section>
 
       {/* NEW: SAVINGS ESTIMATOR WIDGET */}
-      <section className="px-6 pb-14 sm:pb-18 md:pb-20">
+      <section className="px-4 pb-14 sm:px-6 sm:pb-18 md:pb-20">
         <SavingsEstimator />
       </section>
 
       {/* HOMEPAGE CALCULATOR SECTION */}
-      <section className="px-6 pb-20 sm:pb-24 md:pb-28">
+      <section className="px-4 pb-20 sm:px-6 sm:pb-24 md:pb-28">
         <div className="max-w-5xl mx-auto rounded-[32px] border border-[#E8E3D9] bg-white p-8 sm:p-10 md:p-12 shadow-sm">
           <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">

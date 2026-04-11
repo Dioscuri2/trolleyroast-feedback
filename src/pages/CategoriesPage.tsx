@@ -36,14 +36,14 @@ export default function CategoriesPage() {
 
       <main className="max-w-4xl mx-auto px-4 py-14 sm:py-20">
         <div className="max-w-2xl mb-10">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-5 bg-[#C9A96E]/15 text-[#C9A96E]">
-            Price Index Categories
+          <span className="inline-block rounded-full bg-[#C9A96E]/15 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-5">
+            Basket categories
           </span>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1B3A2D] mb-4">
             Basket categories
           </h1>
           <p className="text-base leading-relaxed text-[#6B6860]">
-            We track pricing across these essential categories to calculate your whole-basket savings. Select a category to see recent price trends and supermarket comparisons.
+            We track these categories to explain where your grocery bill really moves. Open a category to see the price trends and supermarket gaps shaping your whole-basket total.
           </p>
         </div>
 
@@ -69,7 +69,7 @@ export default function CategoriesPage() {
             Why this matters
           </h2>
           <p className="text-sm leading-relaxed text-[#6B6860] mb-6">
-            Category pages will support high-intent search traffic and help explain the difference between cherry-picked offers and the real cost of a full shop.
+            Category views help shoppers understand the difference between cherry-picked deals and the real cost of a complete weekly shop.
           </p>
           <Link href="/receipt-index">
             <span className="inline-flex cursor-pointer">
