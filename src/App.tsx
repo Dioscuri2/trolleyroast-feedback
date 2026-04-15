@@ -17,6 +17,8 @@ import CalculatorsPage from "./pages/CalculatorsPage";
 import WeeklyBasketSavingsPage from "./pages/WeeklyBasketSavingsPage";
 import BrandVsOwnBrandPage from "./pages/BrandVsOwnBrandPage";
 import SplitShopSavingsPage from "./pages/SplitShopSavingsPage";
+import ComparisonHubPage from "./pages/ComparisonHubPage";
+import ComparisonDetailPage from "./pages/ComparisonDetailPage";
 
 function Router() {
   // Public trolleyroast.co.uk website routes only.
@@ -30,6 +32,8 @@ function Router() {
       <Route path={"/calculators/weekly-basket-savings"} component={WeeklyBasketSavingsPage} />
       <Route path={"/calculators/brand-vs-own-brand"} component={BrandVsOwnBrandPage} />
       <Route path={"/calculators/split-shop-savings"} component={SplitShopSavingsPage} />
+      <Route path={"/compare"} component={ComparisonHubPage} />
+      <Route path={"/compare/:slug"} component={ComparisonDetailPage} />
       <Route path={"/receipt-index"} component={ReceiptIndexPage} />
       <Route path={"/supermarkets"} component={SupermarketsPage} />
       <Route path={"/supermarkets/:slug"} component={SupermarketDetailPage} />

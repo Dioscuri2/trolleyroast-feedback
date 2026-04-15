@@ -96,6 +96,24 @@ const CALCULATOR_LINKS = [
   },
 ];
 
+const COMPARISON_LINKS = [
+  {
+    title: "Asda vs Aldi prices",
+    href: "/compare/asda-vs-aldi-prices",
+    desc: "Which wins for a full weekly basket when simplicity meets family-shop practicality?",
+  },
+  {
+    title: "Tesco vs Aldi prices",
+    href: "/compare/tesco-vs-aldi-prices",
+    desc: "Can Clubcard convenience close the gap, or does Aldi still dominate total receipt cost?",
+  },
+  {
+    title: "Sainsbury's vs Aldi prices",
+    href: "/compare/sainsburys-vs-aldi-prices",
+    desc: "Premium feel versus a harder budget ceiling, framed for real shopping behaviour.",
+  },
+];
+
 // ─── Savings Card Mockup (STRICT SPEC) ────────────────────────────────────────
 function SavingsCardMockup() {
   return (
@@ -351,6 +369,42 @@ export default function LandingPage() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="px-4 pb-20 sm:px-6 sm:pb-24 md:pb-28">
+        <div className="max-w-5xl mx-auto rounded-[32px] border border-[#E8E3D9] bg-[#F8F6F0] p-8 sm:p-10 md:p-12 shadow-sm">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-2xl">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Programmatic comparison guides</span>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D] leading-[1.08]">Indexable supermarket comparison pages, without made-up live prices.</h2>
+              <p className="mt-5 text-base md:text-lg font-medium text-[#5E5953] leading-8 font-sans">
+                We are starting with crisp comparison pages around the supermarket decisions people already search for, then pushing readers into calculators and receipt scans for a personal answer.
+              </p>
+            </div>
+            <Link href="/compare">
+              <span className="inline-flex cursor-pointer items-center gap-2 text-sm font-bold text-[#1B3A2D] hover:underline underline-offset-8 font-sans">
+                Browse all comparison pages
+                <ArrowRight size={16} />
+              </span>
+            </Link>
+          </div>
+
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+            {COMPARISON_LINKS.map((comparison) => (
+              <Link key={comparison.href} href={comparison.href}>
+                <div className="cursor-pointer rounded-[24px] border border-[#E8E3D9] bg-white p-6 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md h-full">
+                  <span className="inline-flex rounded-full bg-[#1B3A2D]/8 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[#1B3A2D] font-sans">Comparison guide</span>
+                  <h3 className="mt-5 font-display text-2xl font-bold text-[#1B3A2D]">{comparison.title}</h3>
+                  <p className="mt-3 text-sm font-medium leading-7 text-[#7A7570] font-sans">{comparison.desc}</p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold text-[#1B3A2D] font-sans">
+                    Read guide
+                    <ArrowRight size={16} />
+                  </span>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
