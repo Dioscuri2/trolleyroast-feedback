@@ -26,7 +26,38 @@ export default function ComparisonDetailPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F2EA] text-[#1C1A17]">
-      <RouteSeo title={`${page.title} | TrolleyRoast`} description={page.metaDescription} path={`/compare/${page.slug}`} />
+      <RouteSeo
+        title={`${page.title} | TrolleyRoast`}
+        description={page.metaDescription}
+        path={`/compare/${page.slug}`}
+        jsonLd={[
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trolleyroast.co.uk" },
+              { "@type": "ListItem", "position": 2, "name": "Compare", "item": "https://trolleyroast.co.uk/compare" },
+              { "@type": "ListItem", "position": 3, "name": page.title, "item": `https://trolleyroast.co.uk/compare/${page.slug}` }
+            ]
+          },
+          {
+            "@type": "Article",
+            "headline": page.title,
+            "description": page.metaDescription,
+            "url": `https://trolleyroast.co.uk/compare/${page.slug}`,
+            "datePublished": "2026-04-01",
+            "dateModified": "2026-04-17",
+            "author": { "@type": "Organization", "name": "TrolleyRoast", "url": "https://trolleyroast.co.uk" },
+            "publisher": {
+              "@type": "Organization",
+              "name": "TrolleyRoast",
+              "url": "https://trolleyroast.co.uk",
+              "logo": { "@type": "ImageObject", "url": "https://trolleyroast.co.uk/og-default.png" }
+            },
+            "mainEntityOfPage": { "@type": "WebPage", "@id": `https://trolleyroast.co.uk/compare/${page.slug}` },
+            "inLanguage": "en-GB"
+          }
+        ]}
+      />
 
       <header className="border-b border-[#E8E3D9] bg-white/90 backdrop-blur-[8px] sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-3 flex-wrap">

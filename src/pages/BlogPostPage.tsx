@@ -26,7 +26,41 @@ export default function BlogPostPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F2EA] text-[#1C1A17]">
-      <RouteSeo title={`${post.title} | TrolleyRoast`} description={post.description} path={`/blog/${post.slug}`} ogType="article" />
+      <RouteSeo
+        title={`${post.title} | TrolleyRoast`}
+        description={post.description}
+        path={`/blog/${post.slug}`}
+        ogType="article"
+        jsonLd={[
+          {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://trolleyroast.co.uk" },
+              { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://trolleyroast.co.uk/blog" },
+              { "@type": "ListItem", "position": 3, "name": post.title, "item": `https://trolleyroast.co.uk/blog/${post.slug}` }
+            ]
+          },
+          {
+            "@type": "Article",
+            "headline": post.title,
+            "description": post.description,
+            "url": `https://trolleyroast.co.uk/blog/${post.slug}`,
+            "datePublished": "2026-04-01",
+            "dateModified": "2026-04-17",
+            "author": { "@type": "Organization", "name": "TrolleyRoast", "url": "https://trolleyroast.co.uk" },
+            "publisher": {
+              "@type": "Organization",
+              "name": "TrolleyRoast",
+              "url": "https://trolleyroast.co.uk",
+              "logo": { "@type": "ImageObject", "url": "https://trolleyroast.co.uk/og-default.png" }
+            },
+            "mainEntityOfPage": { "@type": "WebPage", "@id": `https://trolleyroast.co.uk/blog/${post.slug}` },
+            "keywords": post.keywords.join(", "),
+            "inLanguage": "en-GB",
+            "isPartOf": { "@id": "https://trolleyroast.co.uk/#website" }
+          }
+        ]}
+      />
 
       <header className="border-b border-[#E8E3D9] bg-white/90 backdrop-blur-[8px] sticky top-0 z-10">
         <div className="max-w-5xl mx-auto px-4 py-4 flex items-center gap-3 flex-wrap">

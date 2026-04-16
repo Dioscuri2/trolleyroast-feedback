@@ -183,6 +183,55 @@ export default function LandingPage() {
         title="TrolleyRoast — Scan your receipt. See where you'd save."
         description="TrolleyRoast compares your whole basket across eight UK supermarkets using receipt-led evidence. Scan a receipt and see where you'd really save."
         path="/"
+        jsonLd={[
+          {
+            "@type": "WebPage",
+            "@id": "https://trolleyroast.co.uk/#webpage",
+            "url": "https://trolleyroast.co.uk",
+            "name": "TrolleyRoast — Scan your receipt. See where you'd save.",
+            "isPartOf": { "@id": "https://trolleyroast.co.uk/#website" },
+            "about": { "@id": "https://trolleyroast.co.uk/#organization" },
+            "description": "TrolleyRoast compares your whole basket across eight UK supermarkets using receipt-led evidence.",
+            "inLanguage": "en-GB"
+          },
+          {
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Which UK supermarket is cheapest for a weekly shop?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "There is no single answer because the cheapest supermarket depends on your basket shape. Aldi and Lidl tend to be cheaper for own-brand essentials, while Tesco and Asda can be more competitive when you factor in loyalty pricing and branded products. TrolleyRoast lets you scan your own receipt to see exactly where your specific basket would have been cheaper."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does TrolleyRoast compare supermarket prices?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "TrolleyRoast uses receipt scanning to analyse your whole basket — not individual items — across Tesco, Asda, Sainsbury's, Morrisons, Aldi, Lidl, Waitrose and Co-op simultaneously. This gives a more honest comparison than cherry-picking single shelf prices."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is TrolleyRoast free to use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. Receipt scanning and the whole-basket comparison are free. TrolleyRoast Pro offers additional features for regular savers."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How accurate is the supermarket price comparison?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "TrolleyRoast uses your actual receipt data rather than manually curated price lists, which makes it more reflective of your real shopping pattern. Prices are indexed regularly to maintain accuracy across all eight major UK supermarkets."
+                }
+              }
+            ]
+          }
+        ]}
       />
 
       {/* 1. STICKY NAV (STRICT SPEC) */}
