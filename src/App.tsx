@@ -11,6 +11,8 @@ import ReceiptIndexPage from "./pages/ReceiptIndexPage";
 import SupermarketsPage from "./pages/SupermarketsPage";
 import CategoriesPage from "./pages/CategoriesPage";
 import BlogGuidesPage from "./pages/BlogGuidesPage";
+import BlogIndexPage from "./pages/BlogIndexPage";
+import BlogPostPage from "./pages/BlogPostPage";
 import SupermarketDetailPage from "./pages/SupermarketDetailPage";
 import CategoryDetailPage from "./pages/CategoryDetailPage";
 import CalculatorsPage from "./pages/CalculatorsPage";
@@ -39,7 +41,9 @@ function Router() {
       <Route path={"/supermarkets/:slug"} component={SupermarketDetailPage} />
       <Route path={"/categories"} component={CategoriesPage} />
       <Route path={"/categories/:slug"} component={CategoryDetailPage} />
+      <Route path={"/blog"} component={BlogIndexPage} />
       <Route path={"/blog/guides"} component={BlogGuidesPage} />
+      <Route path={"/blog/:slug"} component={BlogPostPage} />
       <Route path={"/404"} component={NotFound} />
       <Route component={NotFound} />
     </Switch>
