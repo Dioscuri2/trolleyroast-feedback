@@ -195,7 +195,7 @@ export const BLOG_POSTS: BlogPost[] = [
         ]
       }
     ]
-  }
+  },
   {
     slug: "how-to-reduce-grocery-bill-uk",
     title: "How to reduce your grocery bill in the UK: 9 methods that actually work",
