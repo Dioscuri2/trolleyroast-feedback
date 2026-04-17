@@ -1,8 +1,9 @@
 {
   "version": 2,
-  "framework": "vite",
+  "framework": null,
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "server/_core/index.ts" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/calculator-leads", "destination": "/api/calculator-leads" },
+    { "source": "/api/(.*)", "destination": "/api" },
+    { "source": "/((?!api/|assets/|favicon.ico|robots.txt|sitemap.xml).*)", "destination": "/index.html" }
   ]
 }
