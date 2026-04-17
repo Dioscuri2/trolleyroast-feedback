@@ -18,7 +18,7 @@ import {
   type BasketShoppingStyle,
   type StoreKey,
 } from "@/lib/calculators/engine";
-import { ArrowRight, MailCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Download, MailCheck, Sparkles } from "lucide-react";
 
 const storeOptions = Object.entries(STORE_LABELS) as Array<[StoreKey, string]>;
 const categoryOptions = Object.entries(BASKET_CATEGORY_LABELS) as Array<[BasketCategory, string]>;
@@ -298,12 +298,22 @@ export default function WeeklyBasketSavingsPage() {
             </div>
           </div>
 
-          <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
-            <Button className="h-12 w-full rounded-full bg-[#C9A96E] font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
-              Scan your real receipt in the app
-              <ArrowRight className="size-4" />
-            </Button>
-          </a>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => window.print()}
+              className="flex h-12 items-center justify-center gap-2 rounded-full border border-[#D9D2C3] text-sm font-semibold text-[#1B3A2D] hover:bg-[#F0EBE2] transition-colors"
+            >
+              <Download className="size-4" />
+              Save as PDF
+            </button>
+            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+              <Button className="h-12 w-full rounded-full bg-[#C9A96E] font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
+                Scan your real receipt
+                <ArrowRight className="size-4" />
+              </Button>
+            </a>
+          </div>
         </div>
       )}
     </CalculatorLayout>
