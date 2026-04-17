@@ -99,19 +99,18 @@ export default function BrandVsOwnBrandPage() {
             {categories.map(([category, label]) => {
               const checked = selectedCategories.includes(category);
               return (
-                <button
+                <label
                   key={category}
-                  type="button"
                   onClick={() => toggleCategory(category)}
-                  className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${
+                  className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition-all ${
                     checked
                       ? "border-[#1B3A2D] bg-[#1B3A2D]/5"
                       : "border-[#E8E3D9] bg-[#FAF8F3] hover:border-[#D5CCBC]"
                   }`}
                 >
-                  <Checkbox checked={checked} className="data-[state=checked]:bg-[#1B3A2D] data-[state=checked]:border-[#1B3A2D]" />
+                  <Checkbox checked={checked} onCheckedChange={() => toggleCategory(category)} className="data-[state=checked]:bg-[#1B3A2D] data-[state=checked]:border-[#1B3A2D]" />
                   <span className="text-sm font-medium text-[#1C1A17]">{label}</span>
-                </button>
+                </label>
               );
             })}
           </div>
