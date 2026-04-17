@@ -1,7 +1,6 @@
 import { useMemo, useState } from "react";
 import CalculatorLayout from "@/components/calculators/CalculatorLayout";
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import {
   BRAND_SWAP_LABELS,
@@ -99,18 +98,25 @@ export default function BrandVsOwnBrandPage() {
             {categories.map(([category, label]) => {
               const checked = selectedCategories.includes(category);
               return (
-                <label
+                <button
                   key={category}
+                  type="button"
                   onClick={() => toggleCategory(category)}
-                  className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 transition-all ${
+                  className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left transition-all ${
                     checked
                       ? "border-[#1B3A2D] bg-[#1B3A2D]/5"
                       : "border-[#E8E3D9] bg-[#FAF8F3] hover:border-[#D5CCBC]"
                   }`}
                 >
-                  <Checkbox checked={checked} onCheckedChange={() => toggleCategory(category)} className="data-[state=checked]:bg-[#1B3A2D] data-[state=checked]:border-[#1B3A2D]" />
+                  <span className={`inline-flex size-4 shrink-0 items-center justify-center rounded-[4px] border shadow-xs transition-colors ${checked ? "border-[#1B3A2D] bg-[#1B3A2D]" : "border-input bg-transparent"}`}>
+                    {checked && (
+                      <svg className="size-3" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    )}
+                  </span>
                   <span className="text-sm font-medium text-[#1C1A17]">{label}</span>
-                </label>
+                </button>
               );
             })}
           </div>
