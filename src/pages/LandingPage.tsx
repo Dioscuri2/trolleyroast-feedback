@@ -528,23 +528,6 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 11. FOOTER (STRICT SPEC) */}
-      <footer className="border-t border-[#E8E3D9] py-16 px-6 bg-white">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-12 text-sm text-[#9B9790] font-bold font-sans">
-          <div className="space-y-2 text-center md:text-left">
-            <a href="https://trolleyroast.co.uk" className="font-display text-2xl font-bold text-[#1B3A2D] block brand-name">TrolleyRoast</a>
-            <p>The UK's supermarket truth-teller. Free forever.</p>
-            <p className="text-[11px] uppercase tracking-[0.2em] text-[#7A7570]">Also at trolleyroast.co.uk</p>
-          </div>
-          <div className="flex items-center gap-8 uppercase tracking-widest text-[11px]">
-            <Link href="/receipt-index"><span className="hover:text-[#1B3A2D] cursor-pointer">Index</span></Link>
-            <Link href="/feedback"><span className="hover:text-[#1B3A2D] cursor-pointer">Feedback</span></Link>
-            <Link href="/pro"><span className="hover:text-[#1B3A2D] cursor-pointer">Pro</span></Link>
-          </div>
-          <p className="text-[11px] uppercase tracking-[0.2em]">© 2026 TrolleyRoast</p>
-        </div>
-      </footer>
-
     </div>
   );
 }

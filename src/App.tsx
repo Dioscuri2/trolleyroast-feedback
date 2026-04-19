@@ -22,12 +22,22 @@ import SplitShopSavingsPage from "./pages/SplitShopSavingsPage";
 import ComparisonHubPage from "./pages/ComparisonHubPage";
 import ComparisonDetailPage from "./pages/ComparisonDetailPage";
 
+import AboutPage from "./pages/legal/AboutPage";
+import TermsPage from "./pages/legal/TermsPage";
+import PrivacyPage from "./pages/legal/PrivacyPage";
+import CleanSwapGuidePage from "./pages/CleanSwapGuidePage";
+import Footer from "./components/Footer";
+
 function Router() {
   // Public trolleyroast.co.uk website routes only.
   // The product app (trolleyroast.app) is a separate surface and should stay separate.
   return (
     <Switch>
       <Route path={"/"} component={LandingPage} />
+      <Route path={"/clean-swap-guide"} component={CleanSwapGuidePage} />
+      <Route path={"/about"} component={AboutPage} />
+      <Route path={"/terms"} component={TermsPage} />
+      <Route path={"/privacy"} component={PrivacyPage} />
       <Route path={"/feedback"} component={FeedbackPage} />
       <Route path={"/pro"} component={ProPage} />
       <Route path={"/calculators"} component={CalculatorsPage} />
@@ -57,6 +67,7 @@ function App() {
         <TooltipProvider>
           <Toaster />
           <Router />
+          <Footer />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

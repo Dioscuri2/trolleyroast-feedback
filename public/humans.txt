@@ -1,0 +1,10 @@
+/* TEAM */
+Founder: Dr. Oluwatosin Taiwo, MBBS, MRCGP
+Role: Founder & General Practitioner
+Organization: Olympus Premium Health Limited
+Site: https://olympuspremiumhealth.com
+
+/* SITE */
+Mission: Making metabolic health and affordable nutrition accessible via data-driven comparison.
+Tools: FastCRW, Lightpanda, OpenClaw
+Software: Next.js, TailwindCSS

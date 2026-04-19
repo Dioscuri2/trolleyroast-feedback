@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { trpc } from "@/lib/trpc";
 import CalculatorLayout from "@/components/calculators/CalculatorLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ import {
   type StoreKey,
 } from "@/lib/calculators/engine";
 import { ArrowRight, Download, MailCheck, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 
 const storeOptions = Object.entries(STORE_LABELS) as Array<[StoreKey, string]>;
 const categoryOptions = Object.entries(BASKET_CATEGORY_LABELS) as Array<[BasketCategory, string]>;
@@ -39,6 +41,7 @@ export default function WeeklyBasketSavingsPage() {
   const [categories, setCategories] = useState<BasketCategory[]>(["fresh-produce", "cupboard", "household"]);
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState<"idle" | "saving" | "saved">("idle");
+  const captureEmail = trpc.email.capture.useMutation();
 
   const result = useMemo(
     () =>
@@ -72,17 +75,13 @@ export default function WeeklyBasketSavingsPage() {
     setEmailState("saving");
 
     try {
-      await fetch("/api/calculator-leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          calculator: "weekly-basket-savings",
-          email,
-          payload: { householdSize, weeklySpend: Number(weeklySpend) || 0, currentStore, shoppingStyle, categories },
-        }),
+      await captureEmail.mutateAsync({
+        email,
+        source: "landing",
       });
       setEmailState("saved");
     } catch {
+      toast.error("We couldn't save your email just now, but your result is ready.");
       setEmailState("saved");
     }
 

@@ -79,12 +79,12 @@ export const SHOPPING_GOAL_LABELS: Record<ShoppingGoal, string> = {
 const STORE_INDEX: Record<StoreKey, number> = {
   aldi: 0.79,
   lidl: 0.81,
-  asda: 0.88,
-  tesco: 0.93,
-  morrisons: 0.95,
+  asda: 0.9333,
+  tesco: 0.9982,
+  morrisons: 0.9447,
   sainsburys: 1,
-  waitrose: 1.13,
-  coop: 1.09,
+  waitrose: 1.1227,
+  coop: 1.0097,
 };
 
 const CATEGORY_SAVING_WEIGHT: Record<BasketCategory, number> = {
@@ -144,8 +144,10 @@ function categoryAverageWeight<T extends string>(categories: T[], map: Record<T,
 
 function rankAlternativeStores(currentStore: StoreKey) {
   const currentIndex = STORE_INDEX[currentStore];
+  if (currentIndex === undefined) return [];
+
   return Object.entries(STORE_INDEX)
-    .filter(([store]) => store !== currentStore)
+    .filter(([store, index]) => store !== currentStore && index < currentIndex)
     .map(([store, index]) => ({
       store: store as StoreKey,
       deltaPct: Math.max(0, (currentIndex - index) / currentIndex),
@@ -177,9 +179,9 @@ export function calculateBasketSavings(input: BasketSavingsInput): BasketSavings
   const styleFactor = STYLE_FACTOR[input.shoppingStyle];
   const householdFactor = HOUSEHOLD_FACTOR[input.householdSize];
   const primaryCandidate = baseRank[0];
-  const currentIndex = STORE_INDEX[input.currentStore];
-
-  const realisticGap = Math.max(0.04, primaryCandidate ? primaryCandidate.deltaPct : 0.08);
+  const currentIndex = STORE_INDEX[input.currentStore] ?? 1;
+  const bestGap = primaryCandidate ? primaryCandidate.deltaPct : 0;
+  const realisticGap = bestGap > 0 ? Math.max(0.04, bestGap) : 0;
   const normalized = realisticGap * 0.62 * categoryFactor * styleFactor * householdFactor;
   const cappedRate = Math.min(0.3, normalized);
   const weeklySavings = roundCurrency(input.weeklySpend * cappedRate);
@@ -215,7 +217,13 @@ export function calculateBasketSavings(input: BasketSavingsInput): BasketSavings
     };
   });
 
-  const topStore = suggestedStores[0]?.label ?? "Aldi";
+  const topStore = suggestedStores[0]?.label;
+  const teaser = topStore
+    ? `Your basket looks cheaper at ${topStore} - unlock the full yearly saving and category breakdown.`
+    : `Your current store already looks close to the floor price for this basket - we’ll show the full yearly picture anyway.`;
+  const summary = topStore
+    ? `Compared with ${STORE_LABELS[input.currentStore] ?? "your current store"}, a more value-led weekly route could save around £${weeklySavings.toFixed(2)} per week for this basket style. Current store index: ${currentIndex.toFixed(2)}.`
+    : `${STORE_LABELS[input.currentStore] ?? "Your current store"} already prices near the low end for this basket style, so the bigger wins are likely to come from selective swaps rather than switching stores. Current store index: ${currentIndex.toFixed(2)}.`;
 
   return {
     weeklySavings,
@@ -223,8 +231,8 @@ export function calculateBasketSavings(input: BasketSavingsInput): BasketSavings
     annualSavings: annualise(weeklySavings),
     suggestedStores,
     categoryInsights,
-    teaser: `Your basket looks cheaper at ${topStore} — unlock the full yearly saving and category breakdown.`,
-    summary: `Compared with ${STORE_LABELS[input.currentStore]}, a more value-led weekly route could save around £${weeklySavings.toFixed(2)} per week for this basket style. Current store index: ${currentIndex.toFixed(2)}.`,
+    teaser,
+    summary,
   };
 }
 

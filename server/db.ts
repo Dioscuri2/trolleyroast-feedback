@@ -1,8 +1,8 @@
 import { desc, eq, sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { emailCaptures, feedback, receiptIndex, users } from "../drizzle/schema";
-import { ENV } from './_core/env';
+import { emailCaptures, feedback, receiptIndex, users } from "../drizzle/schema.js";
+import { ENV } from "./_core/env.js";
 
 let _db: ReturnType<typeof drizzle> | null = null;
 let _client: ReturnType<typeof postgres> | null = null;

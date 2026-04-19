@@ -1,3 +1,13 @@
+# Welcome to TrolleyRoast.co.uk
+# Consumer advocacy for metabolic health and affordable pricing.
+
 User-agent: *
 Allow: /
+Allow: /aldi
+Allow: /lidl
+Allow: /asda
+Allow: /tesco
+Allow: /calculators
+Disallow: /api/
+
 Sitemap: https://trolleyroast.co.uk/sitemap.xml

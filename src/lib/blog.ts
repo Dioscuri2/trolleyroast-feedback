@@ -20,6 +20,46 @@ export type BlogPost = {
 
 export const BLOG_POSTS: BlogPost[] = [
   {
+    slug: "zombie-foods-supermarket-clean-eating",
+    title: "Zombie Foods: Why your 'Healthy' Supermarket Shop is Secretly Draining Your Battery",
+    description: "Learn how to spot 'Dead Foods' in UK supermarkets and why common fillers are causing metabolic fatigue despite normal blood tests.",
+    eyebrow: "Clean Eating Guide",
+    readTime: "6 min read",
+    publishedLabel: "April 2026",
+    heroSummary: "Ever feel like a 4/10 despite your GP telling you you're a 10/10? The truth is your supermarket trolley is full of 'Zombie Foods'—lifeless, shelf-stable products that look healthy but are draining your metabolic energy.",
+    keywords: ["clean eating aldi", "metabolic health", "zombie foods", "food fillers uk"],
+    ctaTitle: "Want the 100% Clean Shopping Map?",
+    ctaBody: "Download our free GP-led Supermarket Clean-Swap Guide to find the exact toxin-free products at Aldi, Lidl, and Tesco.",
+    sections: [
+      {
+        heading: "The 'Deadness' of modern supermarket products",
+        paragraphs: [
+          "We've all been there: scanning those brightly coloured packages, grabbing the 'whole grain' bread and 'healthy' oils... thinking we're doing good. But many of these are technically 'zombie foods'. They look alive, but they have zero metabolic life.",
+          "Think about it: Supermarket bread that doesn't rot for weeks? That is not food—it is an industrial achievement. Oils that are bleached and deodorized with chemicals? They are energy vampires, sucking the life out of your mitochondria without you even realizing it."
+        ]
+      },
+      {
+        heading: "Meet the Hidden Energy Vampires",
+        paragraphs: [
+          "These aren't your grandma's ingredients. They are modern additives designed for shelf-life, not human-life.",
+          "Maltodextrin, for example, is a sugar derivative that spikes your blood sugar faster than table sugar, giving you a quick burst followed by a metabolic crash that leaves you craving more while feeling depleted."
+        ],
+        bullets: [
+          "Maltodextrin: Spikes insulin and disrupts gut bacteria.",
+          "Carrageenan: Found in 'healthy' yogurts, it can trigger gut inflammation.",
+          "Industrial Seed Oils: Bleached oils that drive systemic inflammation and fatigue."
+        ]
+      },
+      {
+        heading: "Stop Comparing Prices, Start Comparing Cleanliness",
+        paragraphs: [
+          "Most comparison sites only care about the pennies. But as a consumer advocate for metabolic health, I believe price is secondary to purity. Cheap food often has a hidden cost to your health and energy levels.",
+          "When you're shopping, look beyond the price tag. Look for whole, unprocessed foods that nourish your body rather than drain it. The goal is metabolic flexibilty and sustained energy, not just a cheaper receipt."
+        ]
+      }
+    ]
+  },
+  {
     slug: "cheapest-supermarket-uk-weekly-shop",
     title: "Cheapest supermarket in the UK for a weekly shop: what actually matters",
     description:

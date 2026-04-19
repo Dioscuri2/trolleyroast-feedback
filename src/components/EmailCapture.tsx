@@ -1,29 +1,55 @@
 import { useState } from "react";
-import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Loader2 } from "lucide-react";
 
 interface EmailCaptureProps {
-  source?: "landing" | "pro";
+  source?: string;
   /** When true, renders a light variant suitable for dark backgrounds */
   light?: boolean;
 }
 
 export default function EmailCapture({ source = "landing", light = false }: EmailCaptureProps) {
   const [email, setEmail] = useState("");
+  const [isPending, setIsPending] = useState(false);
   const [done, setDone] = useState(false);
 
-  const capture = trpc.email.capture.useMutation({
-    onSuccess: () => {
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email) return;
+
+    setIsPending(true);
+    try {
+      // Direct call to our Vercel API handler (Brevo + Supabase)
+      const response = await fetch("/api/calculator-leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          calculator: source,
+          // Sending a minimal default payload since this is a simple capture
+          payload: {
+            householdSize: "1",
+            weeklySpend: 100,
+            currentStore: "tesco",
+            shoppingStyle: "balanced",
+            categories: ["fresh-produce"]
+          }
+        }),
+      });
+
+      if (!response.ok) throw new Error("Failed to capture email");
+
       setDone(true);
       toast.success("You're on the list!");
-    },
-    onError: () => {
+    } catch (error) {
+      console.error("Email capture error:", error);
       toast.error("Something went wrong. Please try again.");
-    },
-  });
+    } finally {
+      setIsPending(false);
+    }
+  }
 
   if (done) {
     return (
@@ -39,11 +65,7 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
 
   return (
     <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        if (!email) return;
-        capture.mutate({ email, source });
-      }}
+      onSubmit={handleSubmit}
       className="flex flex-col sm:flex-row gap-2 w-full max-w-md mx-auto"
     >
       <Input
@@ -53,6 +75,7 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         className="flex-1 h-12 text-sm"
+        disabled={isPending}
         style={
           light
             ? { background: "rgba(250,248,243,0.12)", borderColor: "rgba(250,248,243,0.25)", color: "#FAF8F3" }
@@ -61,7 +84,7 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
       />
       <Button
         type="submit"
-        disabled={capture.isPending}
+        disabled={isPending}
         className="h-12 px-6 text-sm font-semibold whitespace-nowrap"
         style={
           light
@@ -69,7 +92,8 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
             : { background: "#1B3A2D", color: "#FAF8F3" }
         }
       >
-        {capture.isPending ? "Joining…" : "Get Early Access"}
+        {isPending ? <Loader2 className="animate-spin mr-2" size={16} /> : null}
+        {isPending ? "Joining…" : "Get Early Access"}
       </Button>
     </form>
   );
