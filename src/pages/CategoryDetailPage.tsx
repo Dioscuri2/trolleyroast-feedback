@@ -72,7 +72,7 @@ export default function CategoryDetailPage() {
         <div className="rounded-3xl border border-[#E8E3D9] bg-white p-10 shadow-sm">
           <h2 className="font-display text-2xl font-bold text-[#1B3A2D] mb-4 text-center">Stop guessing. Start scanning.</h2>
           <div className="flex justify-center">
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               <Button className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-full px-8 h-12">
                 Scan your receipt free
                 <ArrowRight size={18} className="ml-2" />

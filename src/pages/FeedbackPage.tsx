@@ -328,7 +328,7 @@ export default function FeedbackPage() {
           <p className="text-center text-xs mt-6" style={{ color: "#9B9790" }}>
             Built with care by the TrolleyRoast team ·{" "}
             <a
-              href="https://trolleyroast.app"
+              href="https://www.trolleyroast.app"
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-2 hover:opacity-70 transition-opacity"

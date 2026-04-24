@@ -105,7 +105,7 @@ export default function BlogIndexPage() {
                 Try the calculator
               </Button>
             </Link>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 rounded-full px-6">
                 Open the app
               </Button>

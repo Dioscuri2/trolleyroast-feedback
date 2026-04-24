@@ -58,7 +58,7 @@ export default function SavingsEstimator() {
             Based on current index data, you could be spending <strong>£{(estimatedLoss * 52).toFixed(0)} more per year</strong> than necessary.
           </p>
           <div className="flex flex-col gap-4">
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               <Button className="w-full h-12 bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] rounded-full font-bold">
                 Get the real truth (Scan Free)
                 <ArrowRight size={18} className="ml-2" />

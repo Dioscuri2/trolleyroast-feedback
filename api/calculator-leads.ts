@@ -1,6 +1,10 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 const BREVO_API_KEY = process.env.BREVO_API_KEY ?? "";
+const BREVO_CLEAN_SWAP_LIST_ID = Number(process.env.BREVO_CLEAN_SWAP_LIST_ID ?? "");
+const BREVO_GENERAL_LIST_ID = Number(process.env.BREVO_GENERAL_LIST_ID ?? "");
+const BREVO_CLEAN_SWAP_TEMPLATE_ID = Number(process.env.BREVO_CLEAN_SWAP_TEMPLATE_ID ?? "");
+const CLEAN_SWAP_GUIDE_URL = process.env.CLEAN_SWAP_GUIDE_URL ?? "";
 const SUPABASE_URL = process.env.SUPABASE_URL ?? "https://oyqtywxocmqjtobkmoxj.supabase.co";
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_KEY ?? "";
 
@@ -32,8 +36,8 @@ interface CalcResult {
 // Re-run the calculation server-side so the email contains the real numbers
 function computeResult(p: LeadPayload): CalcResult {
   const STORE_INDEX: Record<string, number> = {
-    aldi: 0.79, lidl: 0.81, asda: 0.88, tesco: 0.93,
-    morrisons: 0.95, sainsburys: 1, waitrose: 1.13, coop: 1.09,
+    aldi: 0.79, lidl: 0.81, asda: 0.9333, tesco: 0.9982,
+    morrisons: 0.9447, sainsburys: 1, waitrose: 1.1227, coop: 1.0097,
   };
   const CATEGORY_WEIGHT: Record<string, number> = {
     "fresh-produce": 1.15, "meat-fish": 1.08, "dairy-eggs": 0.95,
@@ -95,6 +99,24 @@ function computeResult(p: LeadPayload): CalcResult {
   }));
 
   return { weeklySavings: weekly, monthlySavings: monthly, annualSavings: annual, suggestedStores, categoryInsights, teaser: suggestedStores[0]?.label ?? "Aldi" };
+}
+
+function isPositiveId(value: number) {
+  return Number.isFinite(value) && value > 0;
+}
+
+function getBrevoListIds(calculator: string) {
+  const listIds: number[] = [];
+
+  if (calculator === "clean-swap-guide" && isPositiveId(BREVO_CLEAN_SWAP_LIST_ID)) {
+    listIds.push(BREVO_CLEAN_SWAP_LIST_ID);
+  }
+
+  if (isPositiveId(BREVO_GENERAL_LIST_ID)) {
+    listIds.push(BREVO_GENERAL_LIST_ID);
+  }
+
+  return [...new Set(listIds)];
 }
 
 function buildEmailHtml(email: string, payload: LeadPayload, r: CalcResult): string {
@@ -234,20 +256,58 @@ async function saveToSupabase(email: string, calculator: string, payload: LeadPa
   });
 }
 
-async function sendBrevoEmail(toEmail: string, payload: LeadPayload, result: CalcResult): Promise<void> {
+async function syncBrevoContact(email: string, calculator: string): Promise<void> {
+  if (!BREVO_API_KEY) return;
+
+  const listIds = getBrevoListIds(calculator);
+  if (!listIds.length) return;
+
+  await fetch("https://api.brevo.com/v3/contacts", {
+    method: "POST",
+    headers: {
+      "api-key": BREVO_API_KEY,
+      "Content-Type": "application/json",
+      "accept": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      listIds,
+      updateEnabled: true,
+    }),
+  });
+}
+
+async function sendBrevoEmail(toEmail: string, calculator: string, payload: LeadPayload, result: CalcResult): Promise<void> {
   if (!BREVO_API_KEY) return;
   const storeLabel = STORE_LABELS[payload.currentStore] ?? payload.currentStore;
+  const isCleanSwapLead = calculator === "clean-swap-guide";
+  const emailBody = isCleanSwapLead && BREVO_CLEAN_SWAP_TEMPLATE_ID
+    ? {
+        templateId: BREVO_CLEAN_SWAP_TEMPLATE_ID,
+        params: {
+          guideUrl: CLEAN_SWAP_GUIDE_URL,
+          calculator,
+          currentStore: storeLabel,
+          weeklySavings: result.weeklySavings.toFixed(2),
+          annualSavings: result.annualSavings.toFixed(2),
+        },
+      }
+    : {
+        subject: `Your TrolleyRoast savings estimate — £${result.weeklySavings.toFixed(2)}/week vs ${storeLabel}`,
+        htmlContent: buildEmailHtml(toEmail, payload, result),
+      };
+
   await fetch("https://api.brevo.com/v3/smtp/email", {
     method: "POST",
     headers: {
       "api-key": BREVO_API_KEY,
       "Content-Type": "application/json",
+      "accept": "application/json",
     },
     body: JSON.stringify({
       sender: { name: "TrolleyRoast", email: "hello@trolleyroast.co.uk" },
       to: [{ email: toEmail }],
-      subject: `Your TrolleyRoast savings estimate — £${result.weeklySavings.toFixed(2)}/week vs ${storeLabel}`,
-      htmlContent: buildEmailHtml(toEmail, payload, result),
+      ...emailBody,
     }),
   });
 }
@@ -265,10 +325,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   const result = computeResult(payload as LeadPayload);
+  const calculatorName = calculator ?? "unknown";
 
   await Promise.allSettled([
-    saveToSupabase(email, calculator ?? "unknown", payload as LeadPayload, result),
-    sendBrevoEmail(email, payload as LeadPayload, result),
+    saveToSupabase(email, calculatorName, payload as LeadPayload, result),
+    syncBrevoContact(email, calculatorName),
+    sendBrevoEmail(email, calculatorName, payload as LeadPayload, result),
   ]);
 
   return res.status(200).json({
@@ -276,5 +338,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     weeklySavings: result.weeklySavings,
     annualSavings: result.annualSavings,
     topStore: result.suggestedStores[0]?.label ?? null,
+    downloadUrl: calculatorName === "clean-swap-guide" ? CLEAN_SWAP_GUIDE_URL || null : null,
   });
 }

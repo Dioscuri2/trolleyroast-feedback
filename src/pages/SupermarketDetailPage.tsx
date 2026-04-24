@@ -79,7 +79,7 @@ export default function SupermarketDetailPage() {
 
         <div className="rounded-3xl bg-[#1B3A2D] p-10 text-center text-white">
           <h2 className="font-display text-3xl font-bold mb-6">Ready to see the truth?</h2>
-          <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] font-bold rounded-full px-10 h-14">
               Try the app now
               <ArrowRight className="ml-2" />

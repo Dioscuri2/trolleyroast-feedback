@@ -3,11 +3,10 @@
 
 User-agent: *
 Allow: /
-Allow: /aldi
-Allow: /lidl
-Allow: /asda
-Allow: /tesco
+Allow: /blog
+Allow: /clean-swap-guide
 Allow: /calculators
+Allow: /compare
 Disallow: /api/
 
 Sitemap: https://trolleyroast.co.uk/sitemap.xml

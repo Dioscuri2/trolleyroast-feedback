@@ -137,6 +137,10 @@ function monthlyise(weekly: number) {
   return roundCurrency((weekly * 52) / 12);
 }
 
+function clamp(value: number, min: number, max: number) {
+  return Math.min(max, Math.max(min, value));
+}
+
 function categoryAverageWeight<T extends string>(categories: T[], map: Record<T, number>, fallback = 1) {
   if (!categories.length) return fallback;
   return categories.reduce((sum, item) => sum + map[item], 0) / categories.length;
@@ -174,23 +178,23 @@ export interface BasketSavingsResult {
 }
 
 export function calculateBasketSavings(input: BasketSavingsInput): BasketSavingsResult {
+  const weeklySpend = Math.max(0, input.weeklySpend);
   const baseRank = rankAlternativeStores(input.currentStore);
   const categoryFactor = categoryAverageWeight(input.topCategories, CATEGORY_SAVING_WEIGHT);
-  const styleFactor = STYLE_FACTOR[input.shoppingStyle];
-  const householdFactor = HOUSEHOLD_FACTOR[input.householdSize];
+  const styleFactor = STYLE_FACTOR[input.shoppingStyle] ?? 1;
+  const householdFactor = HOUSEHOLD_FACTOR[input.householdSize] ?? 1;
   const primaryCandidate = baseRank[0];
   const currentIndex = STORE_INDEX[input.currentStore] ?? 1;
   const bestGap = primaryCandidate ? primaryCandidate.deltaPct : 0;
-  const realisticGap = bestGap > 0 ? Math.max(0.04, bestGap) : 0;
-  const normalized = realisticGap * 0.62 * categoryFactor * styleFactor * householdFactor;
-  const cappedRate = Math.min(0.3, normalized);
-  const weeklySavings = roundCurrency(input.weeklySpend * cappedRate);
+
+  const estimatedRate = clamp(bestGap * 0.78 * categoryFactor * styleFactor * householdFactor, 0, 0.3);
+  const weeklySavings = roundCurrency(weeklySpend * estimatedRate);
 
   const suggestedStores = baseRank.slice(0, 3).map(({ store, deltaPct }, idx) => ({
     store,
     label: STORE_LABELS[store],
     estimatedWeeklySavings: roundCurrency(
-      input.weeklySpend * Math.min(0.28, deltaPct * (idx === 0 ? 0.62 : idx === 1 ? 0.48 : 0.36) * categoryFactor * styleFactor),
+      weeklySpend * clamp(deltaPct * (idx === 0 ? 0.78 : idx === 1 ? 0.66 : 0.54) * categoryFactor * styleFactor * householdFactor, 0, 0.3),
     ),
   }));
 
@@ -254,11 +258,13 @@ export interface BrandSwapResult {
 
 export function calculateBrandSwap(input: BrandSwapInput): BrandSwapResult {
   const willingness = Math.min(1, Math.max(0, input.swapWillingnessPct / 100));
-  const swappableItems = input.brandedItemsPerWeek * willingness;
+  const brandedItemsPerWeek = Math.max(0, input.brandedItemsPerWeek);
+  const averagePricePerItem = Math.max(0, input.averagePricePerItem);
+  const swappableItems = brandedItemsPerWeek * willingness;
   const selected = input.categoriesToSwap.length ? input.categoriesToSwap : ["cereal", "pasta-rice", "tins-sauces"];
   const avgSavingRate = categoryAverageWeight(selected, BRAND_SWAP_RATE, 0.27);
   const effectiveSavingRate = Math.min(0.42, avgSavingRate * (0.9 + willingness * 0.35));
-  const weeklySavings = roundCurrency(swappableItems * input.averagePricePerItem * effectiveSavingRate);
+  const weeklySavings = roundCurrency(swappableItems * averagePricePerItem * effectiveSavingRate);
 
   const perCategoryItems = swappableItems / selected.length;
   const topSwapCategories = [...selected]
@@ -267,7 +273,7 @@ export function calculateBrandSwap(input: BrandSwapInput): BrandSwapResult {
     .map((category) => ({
       category,
       label: BRAND_SWAP_LABELS[category],
-      weeklySavings: roundCurrency(perCategoryItems * input.averagePricePerItem * BRAND_SWAP_RATE[category]),
+      weeklySavings: roundCurrency(perCategoryItems * averagePricePerItem * BRAND_SWAP_RATE[category]),
     }));
 
   let verdict = "A few deliberate own-brand swaps would trim your basket without changing how you shop.";

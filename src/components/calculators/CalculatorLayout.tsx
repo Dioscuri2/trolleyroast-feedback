@@ -23,7 +23,7 @@ export default function CalculatorLayout({
   eyebrow,
   trustPoints = ["Rules-based estimate", "Built for UK supermarket shoppers", "Designed to point you back into the app"],
   children,
-  ctaHref = "https://trolleyroast.app",
+  ctaHref = "https://www.trolleyroast.app",
   ctaLabel = "Try the app",
 }: CalculatorLayoutProps) {
   return (
@@ -42,6 +42,11 @@ export default function CalculatorLayout({
             </Badge>
           </div>
           <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end">
+            <Link href="/blog">
+              <span className="cursor-pointer text-sm font-semibold text-[#7A7570] transition-colors hover:text-[#1B3A2D] sm:inline-flex mr-4">
+                Blogs
+              </span>
+            </Link>
             <Link href="/calculators">
               <span className="cursor-pointer text-sm font-semibold text-[#7A7570] transition-colors hover:text-[#1B3A2D] sm:inline-flex">
                 All calculators

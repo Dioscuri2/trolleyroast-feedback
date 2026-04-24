@@ -100,7 +100,7 @@ export default function CalculatorsPage() {
             </p>
           </div>
           <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
               <Button className="h-12 w-full rounded-full bg-[#C9A96E] px-8 font-bold text-[#1B3A2D] hover:bg-[#B8985D] sm:w-auto">
                 Scan a real receipt in the app
               </Button>

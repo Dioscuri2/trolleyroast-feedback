@@ -34,7 +34,10 @@ export default function BrandVsOwnBrandPage() {
 
   const toggleCategory = (category: BrandSwapCategory) => {
     setSelectedCategories((current) => {
-      if (current.includes(category)) return current.filter((item) => item !== category);
+      if (current.includes(category)) {
+        if (current.length === 1) return current;
+        return current.filter((item) => item !== category);
+      }
       if (current.length >= 5) return current;
       return [...current, category];
     });
@@ -156,7 +159,7 @@ export default function BrandVsOwnBrandPage() {
           </div>
         </div>
 
-        <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
           <Button className="h-12 w-full rounded-full bg-[#C9A96E] font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
             Compare your real basket in the app
             <ArrowRight className="size-4" />

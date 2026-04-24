@@ -378,7 +378,7 @@ export default function ReceiptIndexPage() {
               </span>
             </Link>
             <a
-              href="https://trolleyroast.app"
+              href="https://www.trolleyroast.app"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -426,7 +426,7 @@ export default function ReceiptIndexPage() {
         </p>
 
         <a
-          href="https://trolleyroast.app"
+          href="https://www.trolleyroast.app"
           target="_blank"
           rel="noopener noreferrer"
         >

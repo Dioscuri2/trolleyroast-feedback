@@ -133,6 +133,24 @@ export default function BlogPostPage() {
               </ul>
             </div>
 
+            {(post.socialHook || post.socialCaption) && (
+              <div className="rounded-3xl border border-[#E8E3D9] bg-white p-6 shadow-sm">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-3">Social angles</p>
+                {post.socialHook && (
+                  <>
+                    <h2 className="font-display text-2xl font-semibold text-[#1B3A2D] mb-3">TikTok hook</h2>
+                    <p className="text-sm leading-relaxed text-[#5D564E]">{post.socialHook}</p>
+                  </>
+                )}
+                {post.socialCaption && (
+                  <>
+                    <h3 className="font-display text-xl font-semibold text-[#1B3A2D] mt-5 mb-3">Instagram caption</h3>
+                    <p className="text-sm leading-relaxed text-[#5D564E]">{post.socialCaption}</p>
+                  </>
+                )}
+              </div>
+            )}
+
             <div className="rounded-3xl bg-[#1B3A2D] p-6 text-white shadow-sm">
               <h2 className="font-display text-2xl font-semibold mb-3">{post.ctaTitle}</h2>
               <p className="text-sm leading-relaxed text-white/80 mb-5">{post.ctaBody}</p>
@@ -142,7 +160,7 @@ export default function BlogPostPage() {
                     Try the calculator
                   </Button>
                 </Link>
-                <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="block">
+                <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer" className="block">
                   <Button variant="outline" className="w-full border-white/30 text-white hover:bg-white/10 rounded-full">
                     Scan a receipt
                   </Button>

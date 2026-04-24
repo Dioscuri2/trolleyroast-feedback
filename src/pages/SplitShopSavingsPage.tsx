@@ -128,7 +128,7 @@ export default function SplitShopSavingsPage() {
           </p>
         </div>
 
-        <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+        <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
           <Button className="h-12 w-full rounded-full bg-[#C9A96E] font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
             Check your actual basket in trolleyroast.app
             <ArrowRight className="size-4" />

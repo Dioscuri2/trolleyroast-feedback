@@ -17,6 +17,8 @@ import {
   Split,
 } from "lucide-react";
 
+import { BLOG_POSTS } from "@/lib/blog";
+
 // ─── Supermarket data (STRICT SPEC) ──────────────────────────────────────────
 const SUPERMARKETS = [
   { name: "Tesco", color: "#00539F", letter: "T" },
@@ -241,10 +243,11 @@ export default function LandingPage() {
           <span className="font-display text-lg font-medium text-[#1B3A2D] brand-name sm:text-xl">TrolleyRoast</span>
           <div className="flex w-full items-center justify-between gap-3 sm:w-auto sm:justify-end sm:gap-5">
             <div className="flex items-center gap-4 sm:gap-5">
+              <Link href="/blog"><span className="whitespace-nowrap text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Blogs</span></Link>
               <Link href="/receipt-index"><span className="whitespace-nowrap text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Price Index</span></Link>
               <Link href="/feedback"><span className="whitespace-nowrap text-sm font-semibold text-[#7A7570] hover:text-[#1B3A2D] cursor-pointer transition-colors">Feedback</span></Link>
             </div>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="shrink-0">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer" className="shrink-0">
               <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] font-bold rounded-full px-4 sm:px-5 h-9 transition-all active:scale-95 text-xs sm:text-sm font-sans whitespace-nowrap">
                 Try the App
               </Button>
@@ -256,9 +259,15 @@ export default function LandingPage() {
       {/* 2. HERO (STRICT SPEC) */}
       {/* 6. vertical padding py-14 mobile, py-16 sm+ */}
       <section className="px-4 py-16 text-center max-w-4xl mx-auto sm:px-6 sm:py-24 md:py-36">
-        <div className="inline-flex max-w-full flex-wrap items-center justify-center gap-2 rounded-full border border-[#E8E3D9] bg-[#F0EDE6] px-4 py-2 text-center text-[0.8rem] font-medium text-[#7A7570] mb-8 font-sans">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
-          Free to scan · No sign-up needed · UK supermarkets
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-8">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#E8E3D9] bg-[#F0EDE6] px-4 py-2 text-center text-[0.8rem] font-medium text-[#7A7570] font-sans">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#C9A96E]" />
+            Free to scan · No sign-up needed · UK supermarkets
+          </div>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#1B3A2D]/20 bg-[#1B3A2D]/5 px-4 py-2 text-center text-[0.8rem] font-bold text-[#1B3A2D] font-sans">
+            <ShieldCheck size={14} className="text-[#1B3A2D]" />
+            Verified by GMC-Registered Doctors
+          </div>
         </div>
         <h1 className="font-display text-[clamp(2.8rem,9vw,5rem)] font-semibold leading-[1.04] tracking-[-0.03em] mb-8">
           <span className="block text-[#1B3A2D]">Scan your receipt.</span>
@@ -271,7 +280,7 @@ export default function LandingPage() {
           The average UK shopper overpays <strong>£1,000+ a year</strong> by not comparing supermarkets. Your receipt has the answer.
         </p>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6">
-          <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+          <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
             {/* 5a. Solid #1B3A2D bg, #FAF8F3 text, Outfit 500 (handled via font-sans) */}
             <Button className="h-[56px] px-10 text-base font-bold bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-full w-full sm:w-auto active:scale-95 font-sans">
               Start Saving Free
@@ -396,6 +405,43 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* FEATURED BLOGS / CLINICAL INSIGHTS */}
+      <section className="py-20 sm:py-24 md:py-36 px-6 bg-white border-y border-[#E8E3D9]">
+        <div className="max-w-5xl mx-auto">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between mb-16">
+            <div className="max-w-2xl">
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] block mb-4 font-sans">Clinical Insights</span>
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-[#1B3A2D] leading-[1.08]">Evidence-led guidance for metabolic health and longevity.</h2>
+            </div>
+            <Link href="/blog">
+              <span className="inline-flex cursor-pointer items-center gap-2 text-sm font-bold text-[#1B3A2D] hover:underline underline-offset-8 font-sans">
+                Browse all articles
+                <ArrowRight size={16} />
+              </span>
+            </Link>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {BLOG_POSTS.slice(0, 3).map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`}>
+                <article className="cursor-pointer group flex flex-col h-full rounded-[32px] border border-[#E8E3D9] bg-[#FAF8F3] p-8 transition-all hover:-translate-y-1 hover:shadow-lg">
+                  <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E] mb-6 block font-sans">{post.eyebrow}</span>
+                  <h3 className="font-display text-2xl font-bold text-[#1B3A2D] group-hover:text-[#C9A96E] transition-colors mb-4">{post.title}</h3>
+                  <p className="text-sm font-medium leading-7 text-[#7A7570] font-sans mb-8 flex-grow">{post.description}</p>
+                  <div className="flex items-center justify-between pt-6 border-t border-[#E8E3D9]">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-[#9B9790]">{post.readTime}</span>
+                    <span className="inline-flex items-center gap-2 text-xs font-bold text-[#1B3A2D] group-hover:gap-3 transition-all font-sans">
+                      Read more
+                      <ArrowRight size={14} />
+                    </span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* 6. WHY TROLLEYROAST WINS (STRICT SPEC) */}
       <section className="py-20 sm:py-24 md:py-36 px-6 bg-white border-y border-[#E8E3D9]">
         <div className="max-w-5xl mx-auto">
@@ -466,7 +512,7 @@ export default function LandingPage() {
             <h2 className="font-display text-4xl md:text-5xl font-bold text-[#FAF8F3] leading-[1.1]">Share what you saved.<br /><span className="text-[#C9A96E]">Make your mates jealous.</span></h2>
             <p className="text-lg text-[#FAF8F3]/72 font-medium leading-8 font-sans max-w-xl">Every scan generates a beautiful savings card you can post to TikTok, share on WhatsApp, or send to the group chat.</p>
             <p className="text-lg text-[#FAF8F3]/72 font-medium leading-8 font-sans max-w-xl">Show your mates what you saved.</p>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               {/* 5b. Solid #C9A96E bg + #1B3A2D text */}
               <Button className="h-[56px] px-10 text-base font-bold bg-[#C9A96E] text-[#1B3A2D] hover:bg-[#B8985D] rounded-lg active:scale-95 transition-all font-sans">
                 Get My Savings Card

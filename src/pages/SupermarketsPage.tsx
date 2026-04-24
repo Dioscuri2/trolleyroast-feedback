@@ -73,7 +73,7 @@ export default function SupermarketsPage() {
           <p className="text-sm leading-relaxed text-[#6B6860] mb-6">
             TrolleyRoast compares your whole basket across these major UK supermarkets, so you can see the real gap between where you shop now and where your receipt would cost less.
           </p>
-          <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+          <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
             <Button className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-full">
               Scan a receipt in the app
               <ArrowRight size={16} className="ml-2" />

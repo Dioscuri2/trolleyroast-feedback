@@ -1,5 +1,4 @@
 import { useMemo, useState } from "react";
-import { trpc } from "@/lib/trpc";
 import CalculatorLayout from "@/components/calculators/CalculatorLayout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,7 +40,6 @@ export default function WeeklyBasketSavingsPage() {
   const [categories, setCategories] = useState<BasketCategory[]>(["fresh-produce", "cupboard", "household"]);
   const [email, setEmail] = useState("");
   const [emailState, setEmailState] = useState<"idle" | "saving" | "saved">("idle");
-  const captureEmail = trpc.email.capture.useMutation();
 
   const result = useMemo(
     () =>
@@ -58,6 +56,7 @@ export default function WeeklyBasketSavingsPage() {
   const toggleCategory = (category: BasketCategory) => {
     setCategories((current) => {
       if (current.includes(category)) {
+        if (current.length === 1) return current;
         return current.filter((item) => item !== category);
       }
       if (current.length >= 5) return current;
@@ -75,10 +74,28 @@ export default function WeeklyBasketSavingsPage() {
     setEmailState("saving");
 
     try {
-      await captureEmail.mutateAsync({
-        email,
-        source: "landing",
+      const response = await fetch("/api/calculator-leads", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          calculator: "weekly-basket-savings",
+          payload: {
+            householdSize,
+            weeklySpend: Number(weeklySpend) || 0,
+            currentStore,
+            shoppingStyle,
+            categories,
+          },
+        }),
       });
+
+      if (!response.ok) {
+        throw new Error("Failed to capture calculator lead");
+      }
+
       setEmailState("saved");
     } catch {
       toast.error("We couldn't save your email just now, but your result is ready.");
@@ -258,44 +275,62 @@ export default function WeeklyBasketSavingsPage() {
             ))}
           </div>
 
-          <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
-            <div className="flex items-start gap-3">
-              <div className="mt-1 inline-flex size-10 items-center justify-center rounded-2xl bg-[#1B3A2D]/7 text-[#1B3A2D]">
-                <Sparkles className="size-5" />
-              </div>
-              <div>
-                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Better store suggestions</p>
-                <div className="mt-4 space-y-3">
-                  {result.suggestedStores.map((store) => (
-                    <div key={store.store} className="flex items-center justify-between gap-4 rounded-2xl border border-[#E8E3D9] bg-[#FAF8F3] px-4 py-3">
-                      <div>
-                        <p className="font-semibold text-[#1C1A17]">{store.label}</p>
-                        <p className="text-sm text-[#7A7570]">Estimated weekly gap versus your current habit</p>
+          {result.suggestedStores.length > 0 ? (
+            <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 inline-flex size-10 items-center justify-center rounded-2xl bg-[#1B3A2D]/7 text-[#1B3A2D]">
+                  <Sparkles className="size-5" />
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Better store suggestions</p>
+                  <div className="mt-4 space-y-3">
+                    {result.suggestedStores.map((store) => (
+                      <div key={store.store} className="flex items-center justify-between gap-4 rounded-2xl border border-[#E8E3D9] bg-[#FAF8F3] px-4 py-3">
+                        <div>
+                          <p className="font-semibold text-[#1C1A17]">{store.label}</p>
+                          <p className="text-sm text-[#7A7570]">Estimated weekly gap versus your current habit</p>
+                        </div>
+                        <p className="font-display text-2xl text-[#1B3A2D]">£{store.estimatedWeeklySavings.toFixed(2)}</p>
                       </div>
-                      <p className="font-display text-2xl text-[#1B3A2D]">£{store.estimatedWeeklySavings.toFixed(2)}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
-            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Category insights</p>
-            <div className="mt-4 space-y-4">
-              {result.categoryInsights.map((insight) => (
-                <div key={insight.category} className="rounded-2xl border border-[#E8E3D9] bg-[#FAF8F3] p-4">
-                  <div className="flex items-center justify-between gap-4">
-                    <p className="font-semibold text-[#1C1A17]">{insight.label}</p>
-                    <span className="rounded-full bg-[#1B3A2D]/7 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#1B3A2D]">
-                      {insight.impact} impact
-                    </span>
-                  </div>
-                  <p className="mt-2 text-sm font-medium leading-7 text-[#5E5953]">{insight.note}</p>
-                </div>
-              ))}
+          ) : (
+            <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Store switching</p>
+              <p className="mt-3 text-sm font-medium leading-7 text-[#5E5953]">
+                Your current store already looks close to the floor price for this basket style, so the bigger opportunity is likely to come from selective swaps inside the basket rather than changing supermarket.
+              </p>
             </div>
-          </div>
+          )}
+
+          {result.categoryInsights.length > 0 ? (
+            <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Category insights</p>
+              <div className="mt-4 space-y-4">
+                {result.categoryInsights.map((insight) => (
+                  <div key={insight.category} className="rounded-2xl border border-[#E8E3D9] bg-[#FAF8F3] p-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="font-semibold text-[#1C1A17]">{insight.label}</p>
+                      <span className="rounded-full bg-[#1B3A2D]/7 px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] text-[#1B3A2D]">
+                        {insight.impact} impact
+                      </span>
+                    </div>
+                    <p className="mt-2 text-sm font-medium leading-7 text-[#5E5953]">{insight.note}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <div className="rounded-[28px] border border-[#E8E3D9] bg-white p-6">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#C9A96E]">Category insights</p>
+              <p className="mt-3 text-sm font-medium leading-7 text-[#5E5953]">
+                Add one or two dominant basket categories next time and we’ll show which parts of the shop are likely driving the gap.
+              </p>
+            </div>
+          )}
 
           <div className="grid gap-3 sm:grid-cols-2">
             <button
@@ -306,7 +341,7 @@ export default function WeeklyBasketSavingsPage() {
               <Download className="size-4" />
               Save as PDF
             </button>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               <Button className="h-12 w-full rounded-full bg-[#C9A96E] font-bold text-[#1B3A2D] hover:bg-[#B8985D]">
                 Scan your real receipt
                 <ArrowRight className="size-4" />

@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://trolleyroast.co.uk/</loc><priority>1.0</priority></url>
-  <url><loc>https://trolleyroast.co.uk/aldi</loc><priority>0.8</priority></url>
-  <url><loc>https://trolleyroast.co.uk/lidl</loc><priority>0.8</priority></url>
-  <url><loc>https://trolleyroast.co.uk/asda</loc><priority>0.8</priority></url>
-  <url><loc>https://trolleyroast.co.uk/tesco</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/clean-swap-guide</loc><priority>0.9</priority></url>
   <url><loc>https://trolleyroast.co.uk/calculators</loc><priority>0.9</priority></url>
+  <url><loc>https://trolleyroast.co.uk/calculators/weekly-basket-savings</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/calculators/brand-vs-own-brand</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/calculators/split-shop-savings</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog</loc><priority>0.9</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/zombie-foods-supermarket-clean-eating</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/cheapest-supermarket-uk-weekly-shop</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/is-aldi-really-cheaper-than-tesco-full-basket</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/how-to-compare-supermarket-prices-without-checking-every-item</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/how-to-reduce-grocery-bill-uk</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/split-shop-two-supermarkets-uk</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/best-value-supermarket-uk-families-2026</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/blog/supermarket-loyalty-schemes-worth-it-uk</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare</loc><priority>0.8</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare/asda-vs-aldi-prices</loc><priority>0.7</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare/tesco-vs-aldi-prices</loc><priority>0.7</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare/sainsburys-vs-aldi-prices</loc><priority>0.7</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare/lidl-vs-asda-prices</loc><priority>0.7</priority></url>
+  <url><loc>https://trolleyroast.co.uk/compare/morrisons-vs-aldi-prices</loc><priority>0.7</priority></url>
+  <url><loc>https://trolleyroast.co.uk/about</loc><priority>0.6</priority></url>
+  <url><loc>https://trolleyroast.co.uk/privacy</loc><priority>0.4</priority></url>
+  <url><loc>https://trolleyroast.co.uk/terms</loc><priority>0.4</priority></url>
 </urlset>

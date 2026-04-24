@@ -14,6 +14,7 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
   const [email, setEmail] = useState("");
   const [isPending, setIsPending] = useState(false);
   const [done, setDone] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -28,21 +29,22 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
         body: JSON.stringify({
           email,
           calculator: source,
-          // Sending a minimal default payload since this is a simple capture
           payload: {
             householdSize: "1",
             weeklySpend: 100,
             currentStore: "tesco",
             shoppingStyle: "balanced",
-            categories: ["fresh-produce"]
+            categories: ["fresh-produce"],
           }
         }),
       });
 
       if (!response.ok) throw new Error("Failed to capture email");
+      const data = await response.json();
 
       setDone(true);
-      toast.success("You're on the list!");
+      setDownloadUrl(data.downloadUrl ?? null);
+      toast.success(data.downloadUrl ? "Guide ready." : "You're on the list!");
     } catch (error) {
       console.error("Email capture error:", error);
       toast.error("Something went wrong. Please try again.");
@@ -58,7 +60,17 @@ export default function EmailCapture({ source = "landing", light = false }: Emai
         style={{ color: light ? "#C9A96E" : "#1B3A2D" }}
       >
         <CheckCircle2 size={18} />
-        <span>You're on the list — we'll be in touch!</span>
+        <span>{downloadUrl ? "Your guide is ready." : "You're on the list — we'll be in touch!"}</span>
+        {downloadUrl ? (
+          <a
+            href={downloadUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4"
+          >
+            Download it
+          </a>
+        ) : null}
       </div>
     );
   }

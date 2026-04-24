@@ -129,7 +129,7 @@ export default function ComparisonDetailPage() {
             <Link href="/calculators/weekly-basket-savings">
               <Button className="w-full bg-[#1B3A2D] text-white hover:bg-[#12261E] rounded-full mb-3">Estimate my weekly saving</Button>
             </Link>
-            <a href="https://trolleyroast.app" target="_blank" rel="noopener noreferrer">
+            <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
               <Button variant="outline" className="w-full rounded-full border-[#D9D2C3] text-[#1B3A2D]">Scan a real receipt</Button>
             </a>
           </aside>
