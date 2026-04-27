@@ -4,7 +4,7 @@ import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
-import LandingPage from "./pages/LandingPage";
+import GrocefullyLanding from "./pages/GrocefullyLanding";
 import FeedbackPage from "./pages/FeedbackPage";
 import ProPage from "./pages/ProPage";
 import ReceiptIndexPage from "./pages/ReceiptIndexPage";
@@ -26,12 +26,9 @@ import AboutPage from "./pages/legal/AboutPage";
 import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
 import CleanSwapGuidePage from "./pages/CleanSwapGuidePage";
-import GrocefullyLanding from "./pages/GrocefullyLanding";
-import FeedbackPage from "./pages/FeedbackPage";
-...
+import Footer from "./components/Footer";
+
 function Router() {
-  // Public trolleyroast.co.uk website routes only.
-  // The product app (trolleyroast.app) is a separate surface and should stay separate.
   return (
     <Switch>
       <Route path={"/"} component={GrocefullyLanding} />
