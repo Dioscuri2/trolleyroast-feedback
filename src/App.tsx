@@ -26,14 +26,15 @@ import AboutPage from "./pages/legal/AboutPage";
 import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
 import CleanSwapGuidePage from "./pages/CleanSwapGuidePage";
-import Footer from "./components/Footer";
-
+import GrocefullyLanding from "./pages/GrocefullyLanding";
+import FeedbackPage from "./pages/FeedbackPage";
+...
 function Router() {
   // Public trolleyroast.co.uk website routes only.
   // The product app (trolleyroast.app) is a separate surface and should stay separate.
   return (
     <Switch>
-      <Route path={"/"} component={LandingPage} />
+      <Route path={"/"} component={GrocefullyLanding} />
       <Route path={"/clean-swap-guide"} component={CleanSwapGuidePage} />
       <Route path={"/about"} component={AboutPage} />
       <Route path={"/terms"} component={TermsPage} />
