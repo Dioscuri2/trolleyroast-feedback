@@ -1,155 +1,179 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import SavingsEstimator from "@/components/SavingsEstimator";
 import { 
-  Search, 
   TrendingDown, 
   ArrowRight, 
   Zap, 
-  ShieldCheck, 
   Camera,
-  Share2
+  Share2,
+  AlertTriangle,
+  History,
+  Scan,
+  Maximize2
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const GrocefullyLanding: FC = () => {
+  const [isHovered, setIsHovered] = useState<string | null>(null);
+
   return (
-    <div className="min-h-screen bg-[#FAF8F3] text-[#1B3A2D] font-sans selection:bg-[#C9A96E]/30">
+    <div className="min-h-screen bg-[#FAF8F3] text-[#1B3A2D] font-sans selection:bg-[#C9A96E]/30 selection:text-[#1B3A2D] overflow-x-hidden">
       
-      {/* 1. NAVIGATION */}
-      <nav className="fixed top-0 z-50 w-full border-b border-[#E8E3D9] bg-[#FAF8F3]/90 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#1B3A2D] font-bold text-[#FAF8F3]">TR</div>
-            <span className="text-xl font-bold tracking-tight text-[#1B3A2D]">TrolleyRoast</span>
+      {/* 1. TOP TICKER - LIVE PRICE GAPS */}
+      <div className="bg-[#1B3A2D] text-[#FAF8F3] py-2 overflow-hidden whitespace-nowrap border-b border-[#C9A96E]/20">
+        <motion.div 
+          animate={{ x: [0, -1000] }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          className="inline-block text-[11px] font-bold uppercase tracking-[0.2em]"
+        >
+          LIVE PRICE GAPS: Anchor Butter £1.20 difference (Waitrose vs Aldi) • 
+          Mounjaro 5mg £42.00 difference (Boots vs Medino) • 
+          Sainsbury's Nectar Gap: 22% average saving today • 
+          Shrinkflation Alert: Warburtons Toastie size reduced 4% •&nbsp;
+        </motion.div>
+      </div>
+
+      {/* 2. NAVIGATION */}
+      <nav className="sticky top-0 z-50 w-full border-b border-[#E8E3D9] bg-[#FAF8F3]/80 backdrop-blur-xl">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-2 group cursor-pointer">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#1B3A2D] font-black text-[#FAF8F3] group-hover:rotate-12 transition-transform">TR</div>
+            <span className="text-2xl font-black tracking-tighter text-[#1B3A2D]">TrolleyRoast</span>
           </div>
-          <div className="hidden md:flex items-center gap-8 text-sm font-semibold text-[#7A7570]">
-            <Link href="/receipt-index" className="hover:text-[#1B3A2D] transition-colors">Price Index</Link>
-            <Link href="/blog" className="hover:text-[#1B3A2D] transition-colors">Guides</Link>
+          <div className="hidden md:flex items-center gap-10 text-sm font-bold uppercase tracking-widest text-[#7A7570]">
+            <Link href="/receipt-index" className="hover:text-[#1B3A2D] transition-colors">The Index</Link>
+            <Link href="/blog" className="hover:text-[#1B3A2D] transition-colors">Deal Guides</Link>
             <Link href="/feedback" className="hover:text-[#1B3A2D] transition-colors">Community</Link>
           </div>
           <a href="https://www.trolleyroast.app" target="_blank" rel="noopener noreferrer">
-            <Button size="sm" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#12261E] rounded-full font-bold px-6">
-              Open App
+            <Button size="lg" className="bg-[#1B3A2D] text-[#FAF8F3] hover:bg-[#C9A96E] hover:text-[#1B3A2D] rounded-full font-black px-8 shadow-lg transition-all active:scale-95">
+              ROAST MY RECEIPT
             </Button>
           </a>
         </div>
       </nav>
 
-      {/* 2. HERO SECTION + RESTORED CALCULATOR */}
-      <section className="relative pt-32 pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden text-center">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-[#C9A96E]/10 blur-[120px] rounded-full pointer-events-none" />
+      {/* 3. HERO: THE AUDITOR UI */}
+      <section className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-[#C9A96E]/5 blur-[120px] rounded-full pointer-events-none" />
         
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto text-center relative z-10">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
           >
-            <Badge variant="outline" className="mb-6 border-[#C9A96E]/30 bg-[#C9A96E]/5 text-[#C9A96E] px-4 py-1.5 rounded-full font-bold tracking-wide uppercase text-[10px]">
-              🔥 Compare Your Entire Basket Instantly
+            <Badge className="mb-8 border-[#C9A96E] text-[#1B3A2D] bg-[#C9A96E]/20 px-6 py-2 rounded-full font-black text-xs tracking-tighter uppercase">
+              UK's Independent Price & Shrinkflation Auditor
             </Badge>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-8 text-[#1B3A2D] leading-[1.05]">
-              Don't just shop.<br /><span className="text-[#C9A96E]">Roast the receipt.</span>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-8 text-[#1B3A2D] leading-[0.9]">
+              STOP PAYING THE<br /><span className="italic text-[#C9A96E]">CONVENIENCE TAX.</span>
             </h1>
-            <p className="text-lg md:text-xl text-[#5E5953] mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
-              Pick your regulars below to see what you're overpaying, or snap a receipt to compare your entire shop across 8 major UK supermarkets.
+            <p className="text-xl md:text-2xl text-[#5E5953] mb-16 max-w-3xl mx-auto font-bold leading-tight">
+              We audit your entire weekly shop to find the "Loyalty Gaps" and "Stealth Reductions" the big supermarkets don't want you to notice.
             </p>
           </motion.div>
 
-          {/* THE RESTORED INTERACTIVE BASKET CALCULATOR */}
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.98 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            className="mb-10"
-          >
-            <SavingsEstimator />
-          </motion.div>
+          {/* INTERACTIVE COMPONENT: BASKET BUILDER */}
+          <div className="relative group max-w-4xl mx-auto">
+            <div className="absolute -inset-4 bg-gradient-to-r from-[#1B3A2D]/5 to-[#C9A96E]/5 rounded-[40px] blur-2xl opacity-50" />
+            <div className="relative bg-white border-2 border-[#1B3A2D] rounded-[32px] p-2 shadow-2xl overflow-hidden">
+               <div className="bg-[#FAF8F3] rounded-[24px] p-8 border border-[#E8E3D9]">
+                 <div className="flex items-center gap-4 mb-8">
+                    <div className="h-12 w-12 rounded-full bg-[#1B3A2D] flex items-center justify-center text-white"><Zap size={24} fill="currentColor" /></div>
+                    <div className="text-left">
+                      <h3 className="font-black text-xl leading-none">Instant Basket Audit</h3>
+                      <p className="text-sm text-[#7A7570] font-bold">Pick your items to see the current price war.</p>
+                    </div>
+                 </div>
+                 <SavingsEstimator />
+               </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* 4. BENTO GRID (Functionally Wired) */}
-      <section className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[240px]">
+      {/* 4. THE UTILITY BENTO (Functional Use Cases) */}
+      <section className="max-w-7xl mx-auto px-4 py-16 sm:px-6 lg:px-8 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[280px]">
           
-          {/* Main Bento: FUNCTIONAL SNAP UPLOAD */}
-          <a 
-            href="https://www.trolleyroast.app" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="md:col-span-2 md:row-span-2 relative overflow-hidden rounded-[32px] bg-white border border-[#E8E3D9] p-8 group shadow-sm hover:shadow-md hover:border-[#1B3A2D]/20 transition-all cursor-pointer"
-          >
-            <div className="absolute top-0 right-0 p-8 text-[#1B3A2D] opacity-[0.03] group-hover:scale-110 transition-transform duration-700">
-              <Camera size={140} strokeWidth={1} />
+          {/* Card 1: THE SCANNER (Primary Lead) */}
+          <div className="md:col-span-8 md:row-span-2 relative overflow-hidden rounded-[40px] bg-[#1B3A2D] text-[#FAF8F3] p-12 group cursor-pointer shadow-2xl">
+            <div className="absolute -right-20 -bottom-20 p-8 text-[#FAF8F3] opacity-10 group-hover:scale-110 group-hover:-rotate-12 transition-all duration-700">
+              <Scan size={400} strokeWidth={0.5} />
             </div>
-            <div className="relative h-full flex flex-col justify-end">
-              <Badge className="w-fit mb-4 bg-[#1B3A2D]/5 text-[#1B3A2D] border-[#1B3A2D]/10 font-bold uppercase tracking-widest text-[10px]">Instant Compare</Badge>
-              <h2 className="text-3xl font-bold mb-4 leading-tight">Snap, Upload, Save.<br />The Honest Comparison.</h2>
-              <p className="text-[#5E5953] max-w-xs font-medium mb-6">Scan any UK receipt. No manual searching. We price your whole basket at once.</p>
-              <Button className="w-fit bg-[#1B3A2D] text-white rounded-full font-bold px-8 group-hover:bg-[#12261E]">
-                Upload Receipt <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </div>
-          </a>
-
-          {/* Bento: LIVE DEALS (Similar to Trolley.co.uk) */}
-          <div className="md:col-span-2 rounded-[32px] bg-white border border-[#C9A96E]/20 p-8 relative overflow-hidden shadow-sm">
-             <div className="absolute inset-0 bg-[#C9A96E]/5 pointer-events-none" />
-             <div className="flex justify-between items-start mb-4 relative z-10">
-                <div className="p-3 bg-[#1B3A2D] rounded-2xl text-white shadow-lg"><TrendingDown size={24} /></div>
-                <Badge variant="outline" className="border-[#C9A96E] text-[#C9A96E] font-bold uppercase tracking-widest text-[9px]">Live Alert</Badge>
-             </div>
-             <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-2 text-[#1B3A2D]">Cheapest Mounjaro</h3>
-                <p className="text-[#7A7570] font-medium text-sm mb-4">Market-wide price drop detected across 3 pharmacies.</p>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm font-bold border-b border-[#E8E3D9] pb-2">
-                    <span>Medino</span>
-                    <span className="text-[#1B3A2D]">£124.98</span>
-                  </div>
-                  <div className="flex justify-between text-sm font-bold border-b border-[#E8E3D9] pb-2 text-[#7A7570]">
-                    <span>Curely</span>
-                    <span>£129.82</span>
-                  </div>
-                </div>
-             </div>
-          </div>
-
-          {/* Bento: VIRAL SHARING */}
-          <div className="rounded-[32px] bg-white border border-[#E8E3D9] p-6 flex flex-col justify-between group shadow-sm hover:border-[#1B3A2D]/30 transition-colors">
-            <div className="text-[#1B3A2D]/20 group-hover:text-[#1B3A2D] transition-colors"><Share2 size={32} /></div>
-            <div>
-              <h4 className="font-bold text-lg mb-2 text-[#1B3A2D]">Share the Shock</h4>
-              <p className="text-sm text-[#7A7570] font-medium leading-relaxed">Turn your weekly shop into a viral savings card for WhatsApp.</p>
+            <div className="relative h-full flex flex-col justify-between items-start">
+              <div>
+                <Badge className="mb-6 bg-[#C9A96E] text-[#1B3A2D] font-black uppercase text-[10px]">Real-Time Auditor</Badge>
+                <h2 className="text-5xl md:text-6xl font-black tracking-tighter mb-6 leading-[0.95]">Snap Your Receipt.<br />Expose the Truth.</h2>
+                <p className="text-xl text-[#FAF8F3]/60 max-w-lg font-bold leading-tight">Our AI extracts every line item from your physical or digital receipt and prices it across all major UK stores in under 5 seconds.</p>
+              </div>
+              <a href="https://www.trolleyroast.app" target="_blank" className="inline-flex items-center gap-4 bg-[#C9A96E] text-[#1B3A2D] px-10 py-5 rounded-full font-black text-lg hover:bg-white transition-all">
+                LAUNCH RECEIPT ROASTER <Camera size={24} />
+              </a>
             </div>
           </div>
 
-          {/* Bento: MEDICAL VERIFICATION */}
-          <div className="rounded-[32px] bg-white border border-[#E8E3D9] p-6 flex flex-col justify-between group shadow-sm hover:border-[#C9A96E]/30 transition-colors">
-            <div className="text-[#1B3A2D]/20 group-hover:text-[#C9A96E] transition-colors"><ShieldCheck size={32} /></div>
+          {/* Card 2: SHRINKFLATION ALERT */}
+          <div className="md:col-span-4 rounded-[40px] bg-white border-2 border-[#1B3A2D]/5 p-8 relative overflow-hidden shadow-xl hover:border-[#C9A96E]/50 transition-all">
+             <div className="flex justify-between items-start mb-6">
+                <div className="p-4 bg-[#C9A96E] rounded-2xl text-[#1B3A2D]"><AlertTriangle size={28} /></div>
+                <Badge variant="outline" className="border-[#1B3A2D] text-[#1B3A2D] font-black text-[9px] uppercase">Alert</Badge>
+             </div>
+             <h3 className="text-2xl font-black mb-2 tracking-tighter">Shrinkflation Audit</h3>
+             <p className="text-[#5E5953] font-bold text-sm leading-snug">Tracked: 400g bread loaves are now 380g. Click to see the "Stealth List" of items reducing in size this month.</p>
+             <button className="mt-8 text-sm font-black underline decoration-2 underline-offset-4 hover:text-[#C9A96E] transition-colors uppercase">View Stealth List</button>
+          </div>
+
+          {/* Card 3: LOYALTY GAP */}
+          <div className="md:col-span-4 rounded-[40px] bg-[#FAF8F3] border-2 border-[#1B3A2D] p-8 relative overflow-hidden shadow-xl group cursor-pointer hover:bg-white transition-all">
+             <div className="flex justify-between items-start mb-6">
+                <div className="p-4 bg-[#1B3A2D] rounded-2xl text-white"><TrendingDown size={28} /></div>
+                <Badge variant="outline" className="border-[#1B3A2D] text-[#1B3A2D] font-black text-[9px] uppercase tracking-widest">Savings</Badge>
+             </div>
+             <h3 className="text-2xl font-black mb-2 tracking-tighter">The Loyalty Gap</h3>
+             <p className="text-[#1B3A2D] font-bold text-sm leading-snug">Average UK household pays **£14.20 more per week** just for not having the right app open. See your gap.</p>
+             <div className="mt-6 flex gap-2">
+                {['Tesco', 'Sainsburys', 'Asda'].map(s => <div key={s} className="h-2 flex-1 bg-[#1B3A2D]/10 rounded-full overflow-hidden"><div className="h-full bg-[#1B3A2D] w-3/4"></div></div>)}
+             </div>
+          </div>
+
+          {/* Card 4: PRICE HISTORY */}
+          <div className="md:col-span-4 rounded-[40px] bg-white border-2 border-[#1B3A2D]/5 p-8 flex flex-col justify-between group shadow-xl hover:border-[#1B3A2D]/30 transition-all">
+            <div className="text-[#1B3A2D]/20 group-hover:text-[#1B3A2D] transition-colors"><History size={40} /></div>
             <div>
-              <h4 className="font-bold text-lg mb-2 text-[#1B3A2D]">GPhC Verified</h4>
-              <p className="text-sm text-[#7A7570] font-medium leading-relaxed">All medical pricing is verified against current pharmacy stock.</p>
+              <h4 className="font-black text-2xl mb-2 tracking-tighter uppercase">Historical Audit</h4>
+              <p className="text-sm text-[#7A7570] font-bold leading-tight italic">"Was it cheaper last Tuesday?"</p>
+              <p className="text-xs text-[#1B3A2D] mt-2 font-bold uppercase tracking-widest">6 Million Price Points Tracked</p>
             </div>
           </div>
 
         </div>
       </section>
 
-      {/* 5. FOOTER */}
-      <footer className="border-t border-[#E8E3D9] py-16 bg-[#1B3A2D] text-[#FAF8F3]">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <p className="text-[#FAF8F3]/60 text-sm mb-6 font-medium tracking-wide">UK's First Receipt-Led Comparison Platform.</p>
-          <div className="flex justify-center gap-8 text-sm font-bold uppercase tracking-widest mb-10">
-            <Link href="/privacy" className="hover:text-[#C9A96E] transition-colors">Privacy</Link>
-            <Link href="/terms" className="hover:text-[#C9A96E] transition-colors">Terms</Link>
-            <Link href="/feedback" className="hover:text-[#C9A96E] transition-colors">Contact</Link>
+      {/* 5. FOOTER (Total Trust, GMC moved here) */}
+      <footer className="border-t border-[#E8E3D9] py-20 bg-[#FAF8F3] text-[#1B3A2D]">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 text-left">
+          <div>
+            <h5 className="font-black text-2xl mb-6 tracking-tighter">About TrolleyRoast</h5>
+            <p className="text-[#5E5953] font-medium leading-relaxed max-w-sm">
+              We are an independent shopping intelligence collective. Our mission is to end price opacity in the UK grocery market through data, AI, and community transparency.
+            </p>
+            <div className="mt-8 flex items-center gap-4 text-xs font-black text-[#1B3A2D]/40 uppercase tracking-widest">
+                <ShieldCheck size={20} className="text-[#1B3A2D]" /> Data Audited by GMC-Registered Professionals
+            </div>
           </div>
-          <div className="h-px w-20 bg-[#C9A96E]/30 mx-auto mb-8" />
-          <p className="text-[10px] font-bold text-[#FAF8F3]/40 uppercase tracking-[0.4em]">© 2026 TrolleyRoast Labs</p>
+          <div className="flex flex-col md:items-end justify-between">
+            <div className="flex flex-wrap gap-8 text-sm font-black uppercase tracking-widest">
+              <Link href="/privacy" className="hover:text-[#C9A96E] transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-[#C9A96E] transition-colors">Terms of Use</Link>
+              <Link href="/feedback" className="hover:text-[#C9A96E] transition-colors">Contact Labs</Link>
+            </div>
+            <p className="text-[10px] font-black text-[#1B3A2D]/20 uppercase tracking-[0.5em] mt-12">© 2026 TrolleyRoast Labs • Built for the Shopper</p>
+          </div>
         </div>
       </footer>
 
