@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
 import SavingsEstimator from "@/components/SavingsEstimator";
 import { 
   TrendingDown, 
@@ -13,13 +12,11 @@ import {
   AlertTriangle,
   History,
   Scan,
-  Maximize2
+  ShieldCheck
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
-const GrocefullyLanding: FC = () => {
-  const [isHovered, setIsHovered] = useState<string | null>(null);
-
+export default function GrocefullyLanding() {
   return (
     <div className="min-h-screen bg-[#FAF8F3] text-[#1B3A2D] font-sans selection:bg-[#C9A96E]/30 selection:text-[#1B3A2D] overflow-x-hidden">
       
@@ -154,7 +151,7 @@ const GrocefullyLanding: FC = () => {
         </div>
       </section>
 
-      {/* 5. FOOTER (Total Trust, GMC moved here) */}
+      {/* 5. FOOTER (Total Trust) */}
       <footer className="border-t border-[#E8E3D9] py-20 bg-[#FAF8F3] text-[#1B3A2D]">
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 text-left">
           <div>
@@ -162,9 +159,6 @@ const GrocefullyLanding: FC = () => {
             <p className="text-[#5E5953] font-medium leading-relaxed max-w-sm">
               We are an independent shopping intelligence collective. Our mission is to end price opacity in the UK grocery market through data, AI, and community transparency.
             </p>
-            <div className="mt-8 flex items-center gap-4 text-xs font-black text-[#1B3A2D]/40 uppercase tracking-widest">
-                <ShieldCheck size={20} className="text-[#1B3A2D]" /> Data Audited by GMC-Registered Professionals
-            </div>
           </div>
           <div className="flex flex-col md:items-end justify-between">
             <div className="flex flex-wrap gap-8 text-sm font-black uppercase tracking-widest">
@@ -179,6 +173,4 @@ const GrocefullyLanding: FC = () => {
 
     </div>
   );
-};
-
-export default GrocefullyLanding;
+}
