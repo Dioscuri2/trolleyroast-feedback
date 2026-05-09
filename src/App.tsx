@@ -27,6 +27,7 @@ import TermsPage from "./pages/legal/TermsPage";
 import PrivacyPage from "./pages/legal/PrivacyPage";
 import CleanSwapGuidePage from "./pages/CleanSwapGuidePage";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react";
 
 function Router() {
   return (
@@ -66,6 +67,7 @@ function App() {
           <Toaster />
           <Router />
           <Footer />
+          <Analytics />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

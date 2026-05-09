@@ -1,12 +1,3 @@
-# Welcome to TrolleyRoast.co.uk
-# Consumer advocacy for metabolic health and affordable pricing.
-
 User-agent: *
 Allow: /
-Allow: /blog
-Allow: /clean-swap-guide
-Allow: /calculators
-Allow: /compare
-Disallow: /api/
-
 Sitemap: https://trolleyroast.co.uk/sitemap.xml
