@@ -35,7 +35,7 @@ export default function BlogIndexPage() {
             Blog and guides
           </span>
           <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#1B3A2D] mb-4">
-            Practical UK grocery guides built around the full basket, not AI fluff
+            Practical UK grocery guides built around the full basket, Real Data & Insights
           </h1>
           <p className="text-base sm:text-lg leading-relaxed text-[#6B6860]">
             These are high-intent supermarket guides for people trying to spend less on a real weekly shop. We focus on basket logic, supermarket trade-offs and the next steps that actually help.

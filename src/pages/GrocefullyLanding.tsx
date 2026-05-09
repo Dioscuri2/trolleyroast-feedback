@@ -28,7 +28,7 @@ export default function GrocefullyLanding() {
           className="inline-block text-[11px] font-bold uppercase tracking-[0.2em]"
         >
           LIVE PRICE GAPS: Anchor Butter £1.20 difference (Waitrose vs Aldi) • 
-          Mounjaro 5mg £42.00 difference (Boots vs Medino) • 
+          Lurpak 500g £1.55 difference (Tesco vs Lidl) • 
           Sainsbury's Nectar Gap: 22% average saving today • 
           Shrinkflation Alert: Warburtons Toastie size reduced 4% •&nbsp;
         </motion.div>
